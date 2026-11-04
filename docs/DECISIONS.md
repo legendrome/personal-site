@@ -40,6 +40,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **No Cloudflare adapter and no Wrangler dependency.** The adapter is only for pages built on demand, and every page here is built ahead of time. Wrangler is Cloudflare's upload tool; the deploy command runs it through `npx`, so it never joins `package.json` and there is nothing extra to keep updated. Astro's guide suggests installing it, and doing so becomes worthwhile only if a deploy ever breaks because a new Wrangler version changed behaviour.
 
+**Journey chapters sort by start year, with `priority` only as a tiebreak.** Sujith proposed a priority number to settle chapters starting in the same year. Using it as the main sort was rejected because adding a chapter would mean renumbering those after it, and the numbers could disagree with the years.
+
+**No tags on posts for now.** Tags need their own pages and do little until there are many posts; they can be added later.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

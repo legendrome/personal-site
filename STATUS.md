@@ -19,7 +19,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [x] Install Node LTS and git (already installed: Node 24, git 2.55)
 - [x] GitHub account and repo (legendrome/personal-site)
 - [x] Create the repo from these starter files; Astro minimal template
-- [ ] Content collections and schemas for projects, journey, posts
+- [x] Content collections and schemas for projects, journey, posts
 - [ ] Write `src/content/README.md`
 - [x] Connect the host; a placeholder page live on the free subdomain
 - [ ] Hand test: change the placeholder text, push, see it live
@@ -58,3 +58,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-04 - GitHub repo created and connected, commits use the GitHub private email, project rules renamed to CLAUDE.md, first push done. Next: connect Cloudflare, then content collections.
 2026-11-04 - Cloudflare settings added (Workers with static assets, see `docs/DECISIONS.md`). Not connected yet.
 2026-11-04 - Cloudflare connected to GitHub; placeholder live and checked. Next: content collections and `src/content/README.md`, then the hand test.
+2026-11-04 - Content collections built and tested. Next: `src/content/README.md`, then the hand test.
