@@ -1,0 +1,154 @@
+# Adding and editing content
+
+Every post, project and journey chapter is one Markdown file in this folder. You can do everything here with a text editor and a terminal, with no AI and no code.
+
+| I want to... | Do this |
+|---|---|
+| Add a blog post | Add a file to `posts/` (example below) |
+| Add a project | Add a file to `projects/` (example below) |
+| Add a journey chapter | Add a file to `journey/` (example below) |
+| Fix a typo or change some words | Edit the file, then follow "Check and publish" |
+| Remove something from the site | Delete its file, then follow "Check and publish" |
+
+Pages that display this content are still being built (Phase 3 in `STATUS.md`). Until then, files you add here are checked by the build but do not appear on the site.
+
+## How a file works
+
+Each file has two parts. The block between the two `---` lines is the frontmatter, a short list of facts about the piece. Everything below it is your writing, in normal text.
+
+Name the file in lowercase with hyphens and no spaces, such as `my-first-post.md`, because the name is planned to become part of the page's web address.
+
+Put double quotes around any text in the frontmatter, because a character such as a colon can otherwise break it. Dates and numbers need no quotes.
+
+Keep unfinished writing in Obsidian until it is ready. This repo is public and its history is permanent, so anyone can read a file once it is pushed, even if it is marked `draft: true` or deleted later. `draft: true` only keeps a finished piece off the site's pages.
+
+## Add a blog post
+
+Create a file in `posts/` and copy this in:
+
+```markdown
+---
+title: "Your title"
+date: 2026-11-04
+description: "One sentence saying what this post is about."
+---
+
+Your writing starts here.
+```
+
+All three fields are required. Add `draft: true` to keep the post off the site.
+
+## Add a project
+
+Create a file in `projects/` and copy this in:
+
+```markdown
+---
+title: "Project name"
+summary: "One sentence saying what it is."
+date: 2026-11-04
+---
+
+## The problem
+
+## What I built
+
+## What broke
+
+## What changed
+```
+
+`date` is when you started it. The headings are a suggestion, so change them if a project does not fit.
+
+There are three optional fields, each on its own line in the frontmatter:
+
+- `featured: true` shows it on the home page.
+- `link: "https://example.com"` adds a web address, which must start with `https://`.
+- `draft: true` keeps it off the site.
+
+## Add a journey chapter
+
+Create a file in `journey/` and copy this in:
+
+```markdown
+---
+title: "Chapter title"
+place: "City or place"
+start: 2019
+end: 2022
+---
+
+Your writing starts here.
+```
+
+`start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter.
+
+There are two optional fields:
+
+- `priority: 1` settles the order when two chapters start in the same year, with the lower number first. You can ignore it otherwise.
+- `draft: true` keeps it off the site.
+
+## Add an image
+
+Put the image in `src/assets/`, creating that folder if it does not exist yet, so Astro can optimise it. Then add this line where you want it in your writing, from a file in `posts/`, `projects/` or `journey/`:
+
+```text
+![A short description of the image](../../assets/your-image.jpg)
+```
+
+The description is what people using screen readers hear, so say what the image shows.
+
+## Check and publish
+
+Open a terminal in the project folder (in VS Code, Terminal then New Terminal). Run each command on its own.
+
+To preview your work, run this and open http://localhost:4321 in your browser. It updates each time you save. Press Ctrl+C in the terminal to stop it.
+
+```bash
+npm run dev
+```
+
+Before publishing, run the same check the host runs. It must end with `Complete!`.
+
+```bash
+npm run build
+```
+
+Save your work to git, replacing the words in quotes with a short description of your change:
+
+```bash
+git add -A
+```
+
+```bash
+git commit -m "Add post about my first project"
+```
+
+Then publish it. Pushing to `main` puts it on the live site, and it usually appears within a couple of minutes.
+
+```bash
+git push
+```
+
+## When the build fails
+
+The error names the file and the field. For example:
+
+```text
+[InvalidContentEntryDataError] posts → my-first-post data does not match collection schema.
+  date: Needs a date written like 2026-11-04
+```
+
+That means `posts/my-first-post.md` has a missing or badly written `date`. Fix the file and run `npm run build` again. A failed build on your machine changes nothing on the live site.
+
+| The message says | What it means | The fix |
+|---|---|---|
+| `Required` | A required field is missing | Add the field, spelled as in the examples above |
+| `Needs a date written like 2026-11-04` | The date is missing or not year-month-day | Write it like the example, with no quotes needed |
+| `Expected type "number", received "string"` | A year or number has quotes or words in it | Write just the number, such as `start: 2019` |
+| `Expected type "boolean"` | `draft` or `featured` is not true or false | Write `true` or `false` with no quotes |
+| `Invalid URL` | The link is not a full web address | Start it with `https://` |
+
+The warning `No files found matching` only means a folder has no content yet, so you can ignore it.
+
+The rules behind these messages are in `src/content.config.ts`, if you ever need to add or change a field.

@@ -14,6 +14,8 @@ This README describes the target structure. Until Phase 1 is done, some of these
 | Change colours, fonts or spacing across the site | `src/styles/tokens.css` |
 | Change the navigation or footer | `src/layouts/BaseLayout.astro` |
 | Replace my CV or favicon | `public/` |
+| Change the placeholder home page text (until Phase 3 replaces it) | `src/pages/index.astro` |
+| Preview, check and publish my changes | "Check and publish" in `src/content/README.md` |
 | See why something was built the way it was | `docs/DECISIONS.md` |
 | See what phase the build is in | `STATUS.md` |
 

@@ -20,7 +20,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [x] GitHub account and repo (legendrome/personal-site)
 - [x] Create the repo from these starter files; Astro minimal template
 - [x] Content collections and schemas for projects, journey, posts
-- [ ] Write `src/content/README.md`
+- [x] Write `src/content/README.md`
 - [x] Connect the host; a placeholder page live on the free subdomain
 - [ ] Hand test: change the placeholder text, push, see it live
 
@@ -59,3 +59,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-04 - Cloudflare settings added (Workers with static assets, see `docs/DECISIONS.md`). Not connected yet.
 2026-11-04 - Cloudflare connected to GitHub; placeholder live and checked. Next: content collections and `src/content/README.md`, then the hand test.
 2026-11-04 - Content collections built and tested. Next: `src/content/README.md`, then the hand test.
+2026-11-04 - Content README written and its examples tested. Next: the Phase 1 hand test, done by Sujith with no AI.
