@@ -39,6 +39,17 @@ Pages in `src/pages/` read those files and render them through shared layouts an
 
 There is no JavaScript framework and no CSS framework. Anyone who knows HTML and CSS can read every file.
 
+## Working with someone else
+
+Working alone, committing to `main` and pushing is fine. Anyone else should make changes on a branch instead, because pushing to `main` publishes the site, and a branch lets the change be reviewed first. They need to be added as a collaborator on GitHub, or to send the change from their own copy of the repo.
+
+1. Create a branch: `git switch -c short-description`
+2. Make the change, run `npm run build`, then commit it
+3. Push the branch: `git push -u origin short-description`
+4. Open a pull request on GitHub, using the link git prints after the push
+5. Merge it once it has been reviewed, which publishes the site
+6. Go back to `main` and update it: `git switch main`, then `git pull`
+
 ## For developers
 
 Standard Astro project. Output is fully static. Hosting and domain details are in `docs/DECISIONS.md`. If you change how something works, update this README and add a dated entry to `docs/DECISIONS.md`.
