@@ -7,5 +7,7 @@
 	// No Worker code on purpose: the site is plain files, and "dist" is where Astro builds them.
 	"assets": {
 		"directory": "./dist"
-	}
+	},
+	// Empty on purpose: Cloudflare will not build branch previews without this block.
+	"previews": {}
 }

@@ -100,7 +100,7 @@ The description is what people using screen readers hear, so say what the image 
 
 ## Check and publish
 
-Open a terminal in the project folder (in VS Code, Terminal then New Terminal). Run each command on its own.
+Open the project in VS Code with File then Open Folder, choosing `personal-site`, because the commands only work from that folder. Then open a terminal with Terminal then New Terminal. Its prompt should end in `personal-site`; if it does not, run `cd C:\Users\kumar\Projects\personal-site`. Run each command on its own.
 
 To preview your work, run this and open http://localhost:4321 in your browser. It updates each time you save. Press Ctrl+C in the terminal to stop it.
 
@@ -152,3 +152,15 @@ That means `posts/my-first-post.md` has a missing or badly written `date`. Fix t
 The warning `No files found matching` only means a folder has no content yet, so you can ignore it.
 
 The rules behind these messages are in `src/content.config.ts`, if you ever need to add or change a field.
+
+## When a command will not run
+
+If `npm` fails with `running scripts is disabled on this system`, Windows PowerShell is blocking the script that starts it. Run this once, which lets PowerShell run scripts made on your computer and signed ones from the internet, for your Windows account only:
+
+```bash
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
+
+If a command is `not recognized`, or git says `not a git repository`, the terminal is in the wrong folder. Run the `cd` command from "Check and publish".
+
+If git says `nothing to commit`, your edit was not saved. Press Ctrl+S in the file and try again.
