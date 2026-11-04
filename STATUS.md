@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 1, skeleton and pipeline (running alongside Phase 0 writing). Astro project created and committed locally; on GitHub, not live yet.
+Current phase: 1, skeleton and pipeline (running alongside Phase 0 writing). Astro project created and committed locally; on GitHub and live on the test address, https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -21,7 +21,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [x] Create the repo from these starter files; Astro minimal template
 - [ ] Content collections and schemas for projects, journey, posts
 - [ ] Write `src/content/README.md`
-- [ ] Connect the host; a placeholder page live on the free subdomain
+- [x] Connect the host; a placeholder page live on the free subdomain
 - [ ] Hand test: change the placeholder text, push, see it live
 
 ## Phase 2: design direction
@@ -57,3 +57,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-03 - Phase 1 started. Astro 7 minimal template in place, placeholder home page builds, first local commit made.
 2026-11-04 - GitHub repo created and connected, commits use the GitHub private email, project rules renamed to CLAUDE.md, first push done. Next: connect Cloudflare, then content collections.
 2026-11-04 - Cloudflare settings added (Workers with static assets, see `docs/DECISIONS.md`). Not connected yet.
+2026-11-04 - Cloudflare connected to GitHub; placeholder live and checked. Next: content collections and `src/content/README.md`, then the hand test.
