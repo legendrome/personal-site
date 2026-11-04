@@ -34,6 +34,12 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Line endings fixed to LF with `.gitattributes`.** Windows and Mac/Linux write line breaks differently; without this rule, a developer on another system would see every line changed.
 
+## 2026-11-04
+
+**Cloudflare product: Workers with static assets, not Pages.** This settles the check the host entry asked for at Phase 1. Cloudflare's own Astro guide now deploys through Workers, and requests for static files are free and unlimited there. Pages still works but independent guides describe new features going to Workers first, so starting here avoids a later move. The site stays plain files, so the "any static host" escape route still holds.
+
+**No Cloudflare adapter and no Wrangler dependency.** The adapter is only for pages built on demand, and every page here is built ahead of time. Wrangler is Cloudflare's upload tool; the deploy command runs it through `npx`, so it never joins `package.json` and there is nothing extra to keep updated. Astro's guide suggests installing it, and doing so becomes worthwhile only if a deploy ever breaks because a new Wrangler version changed behaviour.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

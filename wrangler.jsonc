@@ -1,0 +1,11 @@
+// Tells Cloudflare how to serve this site. See docs/DECISIONS.md for why Workers.
+{
+	// Also sets the free test address: personal-site.<account>.workers.dev
+	"name": "personal-site",
+	// Fixes Cloudflare's runtime behaviour to this date, so their later changes cannot alter the site.
+	"compatibility_date": "2026-11-04",
+	// No Worker code on purpose: the site is plain files, and "dist" is where Astro builds them.
+	"assets": {
+		"directory": "./dist"
+	}
+}
