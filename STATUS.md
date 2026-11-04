@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 1, skeleton and pipeline (running alongside Phase 0 writing). Astro project created and committed locally; on GitHub and live on the test address, https://personal-site.bsujith-pro.workers.dev/
+Current phase: 2, design direction (Phase 0 writing continues alongside). Phase 1 is finished: the site is on GitHub and live on the test address, https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -22,7 +22,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [x] Content collections and schemas for projects, journey, posts
 - [x] Write `src/content/README.md`
 - [x] Connect the host; a placeholder page live on the free subdomain
-- [ ] Hand test: change the placeholder text, push, see it live
+- [x] Hand test: change the placeholder text, push, see it live
 
 ## Phase 2: design direction
 
@@ -60,3 +60,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-04 - Cloudflare connected to GitHub; placeholder live and checked. Next: content collections and `src/content/README.md`, then the hand test.
 2026-11-04 - Content collections built and tested. Next: `src/content/README.md`, then the hand test.
 2026-11-04 - Content README written and its examples tested. Next: the Phase 1 hand test, done by Sujith with no AI.
+2026-11-04 - Phase 1 hand test passed: Sujith changed the placeholder and published it with no AI. The two gaps it exposed (opening the right folder, the PowerShell script block) are now in `src/content/README.md`. Next: Phase 2 mocks.
