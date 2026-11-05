@@ -110,7 +110,10 @@ const { title } = Astro.props;
 		position: relative;
 		background: var(--colour-sky);
 		color: var(--colour-on-sky);
+		padding-top: var(--header-height);
 		padding-bottom: var(--surface-bottom);
+		/* Limits this area's fixed header to this area. See SiteHeader.astro. */
+		clip-path: inset(0);
 	}
 
 	.boat {
@@ -141,6 +144,8 @@ const { title } = Astro.props;
 			var(--colour-water-deep) 62%,
 			var(--colour-water-floor)
 		);
+		/* Limits this area's fixed header to this area. See SiteHeader.astro. */
+		clip-path: inset(0);
 	}
 
 	footer {

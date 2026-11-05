@@ -1,7 +1,8 @@
 ---
-// The layout places one of these above the water and one below. Each sticks only
-// within its own part of the page, so scrolling past the waterline hands over from
-// the sky header to the water header without any JavaScript.
+// Looks like one header that never moves. There are really two, one placed inside the
+// sky and one inside the water, both fixed to the same spot. The clip-path on those two
+// areas in BaseLayout.astro shows each copy only over its own area, so the text changes
+// colour exactly at the waterline as you scroll. No JavaScript is involved.
 interface Props {
 	tone: 'sky' | 'water';
 }
@@ -17,16 +18,23 @@ const { tone } = Astro.props;
 
 <style>
 	.site-header {
-		position: sticky;
+		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
 		z-index: 5;
-		padding-block: var(--space-small);
+		height: var(--header-height);
+		display: flex;
+		align-items: center;
 		padding-inline: var(--space-small);
 		font-weight: 500;
+		/* See-through with a blur, so there is no visible bar and text passing behind stays out of the way. */
+		backdrop-filter: blur(var(--header-blur));
 	}
 
 	.inner {
 		max-width: var(--page-width);
+		width: 100%;
 		margin-inline: auto;
 	}
 
@@ -36,12 +44,10 @@ const { tone } = Astro.props;
 	}
 
 	.sky {
-		background: var(--colour-sky);
 		color: var(--colour-on-sky);
 	}
 
 	.water {
-		background: var(--colour-water-deep);
 		color: var(--colour-on-water);
 	}
 </style>

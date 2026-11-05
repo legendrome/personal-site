@@ -33,6 +33,10 @@
 	--page-width: 75rem;
 	--line-length: 34em;
 
+	/* The header */
+	--header-height: 3.5rem;
+	--header-blur: 12px;
+
 	/* The size of the waves and boat at the waterline */
 	--wave-height: 5.5rem;
 	--boat-width: clamp(6rem, 13vw, 10.5rem);

@@ -54,6 +54,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Two sticky headers, handed over at the waterline.** One sits above the water and one below, each sticking only within its own part of the page, so the colour changes without JavaScript. A single header would not stay readable over both sky and water.
 
+**One fixed header in place of the handed-over sticky ones.** Sujith wanted a header that stays put with no visible bar, like the one on Josh Comeau's blog. Both copies are now fixed to the same spot, and a clip-path on the sky and the water shows each only over its own area. That blog hides content behind solid strips, but those cannot match a gradient, so a blur does that job here. This replaces the earlier entry about two sticky headers.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
