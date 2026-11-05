@@ -1,19 +1,35 @@
 ---
-// Placeholder for Phase 1, so the deploy pipeline has something real to show.
-// Replaced by the proper home page in Phase 3.
+// Still a placeholder: it shows the look on a real page. The proper home page,
+// with words from src/content/, replaces it in Phase 3.
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Sujith Bandaru</title>
-	</head>
-	<body>
+<BaseLayout title="Sujith Bandaru">
+	<div slot="surface" class="hello">
 		<h1>Sujith Bandaru</h1>
-		<p>THIS SITE IS GOING TO ROCK</p>
-	</body>
-</html>
+		<p class="intro">Welcome to my boat. Let's dive down and explore my life, of sorts.</p>
+	</div>
+
+	<div class="dive">
+		<h2>THIS SITE IS GOING TO ROCK</h2>
+	</div>
+</BaseLayout>
+
+<style>
+	.hello {
+		display: grid;
+		gap: var(--space-medium);
+		padding-block: var(--space-huge) 0;
+	}
+
+	.intro {
+		font-size: var(--size-intro);
+		line-height: 1.35;
+	}
+
+	/* The page has little on it yet, so this gives the dive room to scroll. */
+	.dive {
+		min-height: 150svh;
+		padding-block: var(--space-huge);
+	}
+</style>

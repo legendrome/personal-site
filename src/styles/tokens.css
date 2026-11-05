@@ -1,0 +1,40 @@
+/*
+  The whole look of the site lives here. Change a value and it changes everywhere,
+  because every other file uses these names instead of raw colours or sizes.
+  To swap a font itself, see the "fonts" list in astro.config.mjs.
+*/
+:root {
+	/* Above the water */
+	--colour-sky: #bfe1f0;
+	--colour-on-sky: #0b2a57;
+
+	/* Below the water, from the surface down to the sea floor */
+	--colour-water-shallow: #1c6ca3;
+	--colour-water-mid: #114a80;
+	--colour-water-deep: #0b2a57;
+	--colour-water-floor: #060c1c;
+	--colour-on-water: #eaf6fc;
+
+	/* Fonts */
+	--font-title: var(--font-unbounded), 'Arial Black', sans-serif;
+	--font-text: var(--font-karla), system-ui, sans-serif;
+
+	/* Text sizes. The middle value grows with the screen, between the two limits. */
+	--size-title: clamp(2.25rem, 8.6vw, 7.75rem);
+	--size-chapter: clamp(1.9rem, 5.6vw, 4.75rem);
+	--size-intro: clamp(1.25rem, 2.4vw, 1.75rem);
+	--size-text: 1.125rem;
+
+	/* Spacing */
+	--space-small: 1rem;
+	--space-medium: 1.5rem;
+	--space-large: 3rem;
+	--space-huge: 6rem;
+	--page-width: 75rem;
+	--line-length: 34em;
+
+	/* The size of the waves and boat at the waterline */
+	--wave-height: 5.5rem;
+	--boat-width: clamp(6rem, 13vw, 10.5rem);
+	--surface-bottom: clamp(9.5rem, 16vw, 12rem);
+}

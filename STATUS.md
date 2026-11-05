@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 2, design direction (Phase 0 writing continues alongside). Phase 1 is finished: the site is on GitHub and live on the test address, https://personal-site.bsujith-pro.workers.dev/
+Current phase: 2, design direction (Phase 0 writing continues alongside). The ocean look is built locally, not pushed, and waiting for the hand test. Live test address: https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -26,8 +26,8 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 
 ## Phase 2: design direction
 
-- [ ] Two or three static mocks of the home page; pick one
-- [ ] Encode it in `src/styles/tokens.css`
+- [x] Two or three static mocks of the home page; pick one
+- [x] Encode it in `src/styles/tokens.css`
 - [ ] Hand test: change one colour in tokens.css and see it everywhere
 
 ## Phase 3: pages, one at a time
@@ -62,3 +62,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-04 - Content README written and its examples tested. Next: the Phase 1 hand test, done by Sujith with no AI.
 2026-11-04 - Phase 1 hand test passed: Sujith changed the placeholder and published it with no AI. The two gaps it exposed (opening the right folder, the PowerShell script block) are now in `src/content/README.md`. Next: Phase 2 mocks.
 2026-11-04 - Phase 2 in progress. Tried: poster stack layout, Unbounded titles, Rock Salt notes, Major Mono Display labels, deep space blue with light sky text and a rose accent. Sujith says the result still feels off, so none of this is final or built. Next: work out what feels off. Mocks are private, not in this repo; the design brief is in his vault at Website/Site brief - first version.md.
+2026-11-05 - Ocean dive direction chosen and built into tokens.css, the layout and two sticky headers. Next: Sujith does the colour hand test. Open for Phase 3: a time or age marker alongside or instead of the depth gauge, and whether to show age or years.

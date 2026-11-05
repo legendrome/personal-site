@@ -1,0 +1,173 @@
+---
+// Every page is one dive: sky and boat at the top, water that darkens as you scroll,
+// and the sea floor at the bottom. Pages fill in two slots: "surface" for what sits
+// above the water, and the default slot for everything below it.
+import { Font } from 'astro:assets';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/tokens.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<Font cssVariable="--font-unbounded" preload />
+		<Font cssVariable="--font-karla" preload />
+		<title>{title}</title>
+	</head>
+	<body id="top">
+		<div class="surface">
+			<SiteHeader tone="sky" />
+			<div class="inner">
+				<slot name="surface" />
+			</div>
+			<svg class="boat" viewBox="0 0 120 90" role="img" aria-label="A small sailing boat">
+				<path d="M58 6 V62 H18 Z"></path>
+				<path d="M64 18 V62 H98 Z"></path>
+				<path d="M6 66 H114 L98 88 H22 Z"></path>
+			</svg>
+			<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+				<path d="M0 40 C 180 10, 360 70, 540 40 S 900 10, 1080 40 S 1320 70, 1440 36 V90 H0 Z"></path>
+			</svg>
+		</div>
+
+		<div class="sea">
+			<SiteHeader tone="water" />
+			<main class="inner">
+				<slot />
+			</main>
+			<footer class="inner">
+				<a href="#top">Back up to the boat</a>
+			</footer>
+		</div>
+	</body>
+</html>
+
+<style is:global>
+	html {
+		background: var(--colour-water-floor);
+	}
+
+	body {
+		margin: 0;
+		color: var(--colour-on-water);
+		font: 400 var(--size-text) / 1.6 var(--font-text);
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin: 0;
+		font-family: var(--font-title);
+		font-weight: 800;
+		line-height: 1.05;
+		text-wrap: balance;
+	}
+
+	h1 {
+		font-size: var(--size-title);
+	}
+
+	h2 {
+		font-size: var(--size-chapter);
+	}
+
+	p {
+		margin: 0;
+		max-width: var(--line-length);
+	}
+
+	:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 3px;
+	}
+
+	/* Only people who have not asked for less motion get movement. */
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
+	}
+</style>
+
+<style>
+	.inner {
+		max-width: var(--page-width);
+		margin-inline: auto;
+		padding-inline: var(--space-small);
+	}
+
+	.surface {
+		position: relative;
+		background: var(--colour-sky);
+		color: var(--colour-on-sky);
+		padding-bottom: var(--surface-bottom);
+	}
+
+	.boat {
+		position: absolute;
+		z-index: 1;
+		left: 12%;
+		bottom: calc(var(--wave-height) * 0.7);
+		width: var(--boat-width);
+		height: auto;
+		fill: var(--colour-on-sky);
+	}
+
+	.wave {
+		position: absolute;
+		z-index: 2;
+		left: 0;
+		bottom: -1px;
+		width: 100%;
+		height: var(--wave-height);
+		fill: var(--colour-water-shallow);
+	}
+
+	/* One unbroken gradient, because lines between chapters broke the feeling of a single dive. */
+	.sea {
+		background: linear-gradient(
+			var(--colour-water-shallow),
+			var(--colour-water-mid) 32%,
+			var(--colour-water-deep) 62%,
+			var(--colour-water-floor)
+		);
+	}
+
+	footer {
+		padding-block: var(--space-huge);
+	}
+
+	footer a {
+		color: inherit;
+		font-weight: 500;
+		text-underline-offset: 4px;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.boat {
+			animation: bob 5s ease-in-out infinite;
+			transform-origin: center bottom;
+		}
+
+		@keyframes bob {
+			0%,
+			100% {
+				transform: translateY(0) rotate(-1.5deg);
+			}
+
+			50% {
+				transform: translateY(5px) rotate(1.5deg);
+			}
+		}
+	}
+</style>

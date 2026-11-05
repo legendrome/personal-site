@@ -12,7 +12,9 @@ This README describes the target structure. Until Phase 1 is done, some of these
 | Add or edit a project | `src/content/projects/` |
 | Add or edit a chapter of my journey | `src/content/journey/` |
 | Change colours, fonts or spacing across the site | `src/styles/tokens.css` |
-| Change the navigation or footer | `src/layouts/BaseLayout.astro` |
+| Change the sticky header | `src/components/SiteHeader.astro` |
+| Change the footer, boat or waves | `src/layouts/BaseLayout.astro` |
+| Swap a font | The `fonts` list in `astro.config.mjs`, then `src/styles/tokens.css` |
 | Replace my CV or favicon | `public/` |
 | Change the placeholder home page text (until Phase 3 replaces it) | `src/pages/index.astro` |
 | Preview, check and publish my changes | "Check and publish" in `src/content/README.md` |

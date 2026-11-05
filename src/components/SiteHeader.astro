@@ -1,0 +1,47 @@
+---
+// The layout places one of these above the water and one below. Each sticks only
+// within its own part of the page, so scrolling past the waterline hands over from
+// the sky header to the water header without any JavaScript.
+interface Props {
+	tone: 'sky' | 'water';
+}
+
+const { tone } = Astro.props;
+---
+
+<header class:list={['site-header', tone]}>
+	<div class="inner">
+		<a href="/">Sujith Bandaru</a>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 5;
+		padding-block: var(--space-small);
+		padding-inline: var(--space-small);
+		font-weight: 500;
+	}
+
+	.inner {
+		max-width: var(--page-width);
+		margin-inline: auto;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.sky {
+		background: var(--colour-sky);
+		color: var(--colour-on-sky);
+	}
+
+	.water {
+		background: var(--colour-water-deep);
+		color: var(--colour-on-water);
+	}
+</style>

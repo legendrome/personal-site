@@ -44,6 +44,16 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **No tags on posts for now.** Tags need their own pages and do little until there are many posts; they can be added later.
 
+## 2026-11-05
+
+**Design direction: one ocean dive.** The page opens on a boat in the sky and scrolling descends through water that darkens to the sea floor. It came from Sujith, and it gives the site one idea to hang together, after earlier mocks felt disjointed. Rejected along the way: warm off-white paper (overdone on AI-made sites), a different background per chapter and sliding posters (these broke the flow of a single dive), red and green accents (jarring on the blue), and starry decoration (gimmicky).
+
+**Two fonts: Unbounded for titles and Karla for reading.** Sujith chose Unbounded; Karla is a plain partner for long text. Using more display fonts was tried and looked messy.
+
+**Fonts served through Astro's built-in Fonts API.** Astro downloads them at build time and serves them from this site, so there is no new dependency and visitors never contact Google. The trade-off is that a build needs to reach Google Fonts.
+
+**Two sticky headers, handed over at the waterline.** One sits above the water and one below, each sticking only within its own part of the page, so the colour changes without JavaScript. A single header would not stay readable over both sky and water.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
