@@ -72,6 +72,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The pinned sentence stops pinning under 760px wide.** A phone has no room for two columns, and a sentence held above moving text would cover it.
 
+**Only the header copy in view is reachable by keyboard, switched by the script in `BaseLayout.astro`.** Two copies meant keyboard users met every link twice, and each copy is out of sight for part of the page, so permanently hiding one would leave people landing on links they cannot see. Without JavaScript both stay on, which repeats the links but loses nothing.
+
+**Contact is LinkedIn and GitHub links, with no form or email.** A form needs an outside service, and a plain-text email gets harvested by scrapers. This can change if people turn out to have no way of reaching Sujith.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

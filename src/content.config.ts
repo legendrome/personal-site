@@ -86,6 +86,9 @@ const site = defineCollection({
 		floorLine: z.string(),
 		markerStart: z.string(),
 		chapterLink: z.string(),
+		backUp: z.string(),
+		skipLink: z.string(),
+		nav: z.array(z.object({ label: z.string(), href: z.string() })),
 		// LinkedIn stays optional until Sujith gives the address, and its link is left out until then.
 		linkedin: z.url().optional(),
 		github: z.url(),

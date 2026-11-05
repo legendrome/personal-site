@@ -16,7 +16,7 @@ This README describes the target structure. Until Phase 1 is done, some of these
 | Change the footer, boat or waves | `src/layouts/BaseLayout.astro` |
 | Swap a font | The `fonts` list in `astro.config.mjs`, then `src/styles/tokens.css` |
 | Replace my CV or favicon | `public/` |
-| Change my first line, headings or links | `src/content/site.json` |
+| Change my first line, headings, links or the header menu | `src/content/site.json` |
 | Change the About page | `src/content/about.md` |
 | Change the home page layout | `src/pages/index.astro` |
 | Change the corner year marker | `src/components/YearMarker.astro` |

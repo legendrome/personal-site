@@ -9,5 +9,12 @@
 	"floorLine": "Placeholder: the last line at the bottom of the dive.",
 	"markerStart": "On the boat",
 	"chapterLink": "Read the chapter",
+	"backUp": "Back up to the boat",
+	"skipLink": "Skip to the main content",
+	"nav": [
+		{ "label": "About", "href": "/about" },
+		{ "label": "Work", "href": "/work" },
+		{ "label": "Writing", "href": "/writing" }
+	],
 	"github": "https://github.com/legendrome"
 }

@@ -40,9 +40,16 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `floorHeading`, `floorLine` | The heading and last line at the bottom of the dive |
 | `markerStart` | What the corner marker says before the first chapter |
 | `chapterLink` | The link under a chapter that has a full write-up |
-| `github`, `linkedin` | Your links, each a full address starting with `https://` |
+| `backUp` | The link at the bottom of every page that returns to the top |
+| `skipLink` | The link keyboard users meet first, which jumps past the header |
+| `nav` | The header menu, with each item's label and the page it goes to |
+| `github`, `linkedin` | Your links in the footer, each a full address starting with `https://` |
 
-`linkedin` is optional, and its link is left out until you add a line for it.
+`linkedin` is optional, and its link is left out until you add a line for it. Put it just above `github`, in the same form:
+
+```json
+"linkedin": "https://www.linkedin.com/in/your-name",
+```
 
 ## How a file works
 

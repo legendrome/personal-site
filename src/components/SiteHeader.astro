@@ -2,18 +2,31 @@
 // Looks like one header that never moves. There are really two, one placed inside the
 // sky and one inside the water, both fixed to the same spot. The clip-path on those two
 // areas in BaseLayout.astro shows each copy only over its own area, so the text changes
-// colour exactly at the waterline as you scroll. No JavaScript is involved.
+// colour exactly at the waterline as you scroll. The script in BaseLayout.astro switches
+// off whichever copy is out of sight, so keyboard users meet one set of links.
+import { getEntry } from 'astro:content';
+
 interface Props {
 	tone: 'sky' | 'water';
 }
 
 const { tone } = Astro.props;
+const { data: site } = await getEntry('site', 'site');
+const path = Astro.url.pathname;
 ---
 
 <header class:list={['site-header', tone]}>
-	<div class="inner">
-		<a href="/">Sujith Bandaru</a>
-	</div>
+	<a href="/">{site.name}</a>
+	<nav aria-label="Main">
+		{
+			site.nav.map(({ label, href }) => (
+				// A project page counts as being in Work, so Work stays marked there too.
+				<a href={href} aria-current={path === href || path.startsWith(`${href}/`) ? 'true' : undefined}>
+					{label}
+				</a>
+			))
+		}
+	</nav>
 </header>
 
 <style>
@@ -26,13 +39,29 @@ const { tone } = Astro.props;
 		height: var(--header-height);
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-small);
 		padding-inline: var(--space-small);
 		font-weight: 500;
 	}
 
+	nav {
+		display: flex;
+		gap: var(--space-small);
+	}
+
 	a {
+		/* Taller than the text, so the links are easier to tap on a phone. */
+		padding-block: var(--space-tiny);
 		color: inherit;
 		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	nav a:hover,
+	[aria-current] {
+		text-decoration: underline;
+		text-underline-offset: 4px;
 	}
 
 	.sky {
@@ -47,5 +76,16 @@ const { tone } = Astro.props;
 		background-repeat: no-repeat;
 		background-size: 100% var(--sea-height, 100vh);
 		background-position: 0 var(--sea-top, 0);
+	}
+
+	/* The smallest phones cannot fit the name and three links at the normal size. */
+	@media (max-width: 370px) {
+		.site-header {
+			font-size: var(--size-small);
+		}
+
+		nav {
+			gap: var(--space-tiny);
+		}
 	}
 </style>

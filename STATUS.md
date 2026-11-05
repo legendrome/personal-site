@@ -39,7 +39,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [ ] Work: index and one page per project, at /work
 - [ ] Writing: index, one page per post, RSS feed
 - [ ] 404 page, including the Cloudflare setting that serves it
-- [ ] Footer: LinkedIn, GitHub, contact without a plain-text email
+- [x] Header links, skip link and footer with GitHub (LinkedIn appears once its address is in `site.json`)
 - [ ] Hand test: add a post from scratch using only `src/content/README.md`
 
 ## Phase 4: domain and finish
@@ -76,3 +76,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - The journey is now the heart of the site, and the Work and Writing pages fill up over the next few years, so full journey chapters are the writing priority. See `docs/DECISIONS.md`.
 2026-11-05 - Home page dive built, committed locally with placeholder words. Its project and post rows lead to "page not found" until those pages exist. Next: header links and footer.
 2026-11-05 - Pushed the dive to the test address at Sujith's request, so a friend could see it, knowing the words are placeholders and the rows lead nowhere yet.
+2026-11-05 - Header links, skip link and footer built, committed locally. The header links lead to "page not found" until the inner pages exist. Next: a mock of the inner pages. For the Phase 4 accessibility check: the header name is low contrast for the moment it crosses the waves, which is where the skip link lands.
