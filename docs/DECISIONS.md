@@ -58,6 +58,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **A solid sky bar that stops above the boat, with the header text carrying on into the water.** Sujith specified this after trying the blurred version: the bar hides the title as it scrolls away, and leaves just before the boat so the boat stays visible. The text stays in place and changes colour part way up the waves. This replaces the blur in the sky from the entry above; the water still uses a blur, because a solid bar would show against the gradient.
 
+**The water header is solid and matches the water, using a small script.** Sujith wanted a solid bar that blends in at any depth, in place of the blur. The bar is painted with the same gradient as the water, and about ten lines of plain JavaScript in `BaseLayout.astro` keep the two lined up while scrolling. This is the first JavaScript on the site, and there is no library behind it. Without it the bar stays one shade of blue and everything still works. The gradient now lives once in `tokens.css`.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

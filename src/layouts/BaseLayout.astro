@@ -52,6 +52,22 @@ const { title } = Astro.props;
 				<a href="#top">Back up to the boat</a>
 			</footer>
 		</div>
+
+		<script>
+			// Tells the water header where the water is on screen, so its copy of the gradient
+			// lines up with the real one. Without this script it just stays one shade of blue.
+			const sea = document.querySelector('.sea');
+
+			function lineUpHeader() {
+				const { top, height } = sea.getBoundingClientRect();
+				sea.style.setProperty('--sea-top', `${top}px`);
+				sea.style.setProperty('--sea-height', `${height}px`);
+			}
+
+			addEventListener('scroll', lineUpHeader, { passive: true });
+			new ResizeObserver(lineUpHeader).observe(sea);
+			lineUpHeader();
+		</script>
 	</body>
 </html>
 
@@ -152,12 +168,7 @@ const { title } = Astro.props;
 	.sea {
 		margin-top: calc(var(--waterline-overlap) * -1);
 		padding-top: var(--waterline-overlap);
-		background: linear-gradient(
-			var(--colour-water-shallow),
-			var(--colour-water-mid) 32%,
-			var(--colour-water-deep) 62%,
-			var(--colour-water-floor)
-		);
+		background: var(--water-gradient);
 		/* Limits this area's fixed header to this area. See SiteHeader.astro. */
 		clip-path: inset(0);
 	}

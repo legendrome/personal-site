@@ -14,6 +14,12 @@
 	--colour-water-deep: #0b2a57;
 	--colour-water-floor: #060c1c;
 	--colour-on-water: #eaf6fc;
+	--water-gradient: linear-gradient(
+		var(--colour-water-shallow),
+		var(--colour-water-mid) 32%,
+		var(--colour-water-deep) 62%,
+		var(--colour-water-floor)
+	);
 
 	/* Fonts */
 	--font-title: var(--font-unbounded), 'Arial Black', sans-serif;
@@ -35,7 +41,6 @@
 
 	/* The header */
 	--header-height: 3.5rem;
-	--header-blur: 12px;
 
 	/* The size of the waves and boat at the waterline */
 	--wave-height: 5.5rem;

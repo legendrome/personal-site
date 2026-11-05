@@ -47,7 +47,11 @@ const { tone } = Astro.props;
 
 	.water {
 		color: var(--colour-on-water);
-		/* The water is a gradient, so a solid bar would show. A blur keeps passing text out of the way instead. */
-		backdrop-filter: blur(var(--header-blur));
+		/* A solid bar painted with the same gradient as the water, lined up with it by the
+		   script in BaseLayout.astro, so it hides passing text but blends into the water. */
+		background-image: var(--water-gradient);
+		background-repeat: no-repeat;
+		background-size: 100% var(--sea-height, 100vh);
+		background-position: 0 var(--sea-top, 0);
 	}
 </style>
