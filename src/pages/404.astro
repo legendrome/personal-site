@@ -9,7 +9,7 @@ const { data: site } = await getEntry('site', 'site');
 
 <BaseLayout title={`${site.lostTitle} | ${site.name}`} opening="deck" water="var(--water-deck)" adrift>
 	<Fragment slot="surface">
-		<PageHead title={site.lostTitle} intro={site.lostLine}>
+		<PageHead title={site.lostTitle} intro={site.lostLine} back={false}>
 			<p><a href="/">{site.lostLink}</a></p>
 		</PageHead>
 	</Fragment>

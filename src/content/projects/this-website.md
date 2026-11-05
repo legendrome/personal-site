@@ -1,6 +1,6 @@
 ---
 title: "This website"
-summary: "Placeholder: one sentence saying what this is."
+summary: "The site you are on right now, built one piece at a time."
 date: 2026-11-03
 featured: true
 ---

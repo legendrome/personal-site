@@ -80,6 +80,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The RSS feed is hand-written, with no package.** It is about thirty lines and `@astrojs/rss` would add a dependency to save very little. The feed carries each post's title and description, not its full text, which keeps the file simple.
 
+**"Back to the dive" returns to the exact spot left on the home page.** Sujith found going all the way back up to the boat frustrating. The browser's back button cannot do this reliably, because after reading two chapters it steps back through them first. So the home page notes its scroll position in the browser's session storage when you leave, and only this link asks to return there. Clicking the name in the header still starts at the boat, and without JavaScript the link just goes to the top.
+
+**Headings and short lines are filled in, while chapter lines and writing stay as placeholders.** Sujith found navigating through placeholders confusing and asked for titles. They come from the mock he saw and from what he has said, and he can reword them in `site.json`. Chapter lines stay out until he approves them, because they come from drafts he has not signed off and the repo is public.
+
 **The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
 
 ## Open questions

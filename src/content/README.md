@@ -46,7 +46,8 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `writingTitle`, `writingIntro`, `allWriting` | The title and sentence at the top of the Writing page, and the link back to it from a post |
 | `keepDiving`, `journeyEnd`, `backUpTo` | The words at the end of a chapter page |
 | `lostTitle`, `lostLine`, `lostLink` | The page people see at an address that does not exist |
-| `backUp` | The link at the bottom of every page that returns to the boat |
+| `backUp` | The link at the bottom of pages with a boat, which returns to the top |
+| `backToDive` | The link at the top and bottom of inner pages, which returns to the spot left on the home page |
 | `skipLink` | The link keyboard users meet first, which jumps past the header |
 | `nav` | The header menu, with each item's label and the page it goes to |
 | `github`, `linkedin` | Your links in the footer, each a full address starting with `https://` |

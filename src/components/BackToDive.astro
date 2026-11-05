@@ -1,0 +1,31 @@
+---
+// Returns to the exact spot left on the home page, not the top of it. This link only
+// leaves a note saying so, and the script in src/pages/index.astro does the returning.
+// Without JavaScript, or if the browser blocks storage, it is a normal link to the top.
+import { getEntry } from 'astro:content';
+
+const { data: site } = await getEntry('site', 'site');
+---
+
+<a href="/" data-back-to-dive>{site.backToDive}</a>
+
+<script>
+	document.querySelectorAll('[data-back-to-dive]').forEach((link) => {
+		link.addEventListener('click', () => {
+			try {
+				sessionStorage.setItem('returning-to-dive', 'yes');
+			} catch {
+				// Storage is blocked, so the link just goes to the top of the home page.
+			}
+		});
+	});
+</script>
+
+<style>
+	a {
+		justify-self: start;
+		color: inherit;
+		font-weight: 500;
+		text-underline-offset: 4px;
+	}
+</style>

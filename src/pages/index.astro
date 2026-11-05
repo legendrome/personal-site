@@ -95,6 +95,23 @@ const latestPost = (await getPosts())[0];
 	<YearMarker slot="overlay" start={site.markerStart} />
 </BaseLayout>
 
+<script>
+	// Remembers how far down the page you were when you left, and goes back there when
+	// you return with "Back to the dive". Any other way here, such as clicking the name
+	// in the header, still starts at the boat. See src/components/BackToDive.astro.
+	try {
+		if (sessionStorage.getItem('returning-to-dive')) {
+			sessionStorage.removeItem('returning-to-dive');
+			const top = Number(sessionStorage.getItem('dive-position'));
+			// Instant, because smooth scrolling would replay the whole dive to get there.
+			scrollTo({ top, behavior: 'instant' });
+		}
+		addEventListener('pagehide', () => sessionStorage.setItem('dive-position', String(scrollY)));
+	} catch {
+		// Storage is blocked, so the home page simply opens at the boat.
+	}
+</script>
+
 <style>
 	.hello {
 		display: grid;

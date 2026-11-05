@@ -88,6 +88,7 @@ const site = defineCollection({
 		markerStart: z.string(),
 		chapterLink: z.string(),
 		backUp: z.string(),
+		backToDive: z.string(),
 		skipLink: z.string(),
 		nav: z.array(z.object({ label: z.string(), href: z.string() })),
 		workTitle: z.string(),

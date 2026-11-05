@@ -79,3 +79,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - Pushed the dive to the test address at Sujith's request, so a friend could see it, knowing the words are placeholders and the rows lead nowhere yet.
 2026-11-05 - Header links, skip link and footer built, committed locally. The header links lead to "page not found" until the inner pages exist. Next: a mock of the inner pages. For the Phase 4 accessibility check: the header name is low contrast for the moment it crosses the waves, which is where the skip link lands.
 2026-11-05 - Inner pages built from the approved mock, committed locally, so every link now leads somewhere. Words are still placeholders. Next: the Phase 3 hand test, then Sujith's real words.
+2026-11-05 - Added "Back to the dive", and filled in headings so the site is easier to navigate. Still placeholders: chapter lines and text, About text, the first post and the project write-up.

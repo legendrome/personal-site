@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "Placeholder: one sentence on who you are right now, also used in link previews."
+description: "Who I am, right now."
 ---
 
 Placeholder: your About text goes here.
