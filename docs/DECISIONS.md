@@ -60,6 +60,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The water header is solid and matches the water, using a small script.** Sujith wanted a solid bar that blends in at any depth, in place of the blur. The bar is painted with the same gradient as the water, and about ten lines of plain JavaScript in `BaseLayout.astro` keep the two lined up while scrolling. This is the first JavaScript on the site, and there is no library behind it. Without it the bar stays one shade of blue and everything still works. The gradient now lives once in `tokens.css`.
 
+**The dive marks chapters by year, not age.** Showing ages beside years would let any visitor work out a birth date. Years alone, next to details such as when A-levels ended, still allow a rough guess at a birth year, so real years go in only when Sujith approves each chapter.
+
+**The journey is the heart of the site, and Work holds passion projects that build up over time.** Sujith wants the value to come from his experiences and journey, with no need for the site to prove anything. So Work and Writing launch small and grow over the next few years, and their pages must look intentional with only one or two items. This replaces the earlier target of two project write-ups at launch.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
