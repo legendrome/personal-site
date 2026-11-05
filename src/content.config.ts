@@ -64,6 +64,7 @@ const about = defineCollection({
 	loader: glob({ base: './src/content', pattern: 'about.md' }),
 	schema: z.object({
 		title: z.string(),
+		// The sentence under the title, and what link previews show.
 		description: z.string(),
 	}),
 });
@@ -89,6 +90,20 @@ const site = defineCollection({
 		backUp: z.string(),
 		skipLink: z.string(),
 		nav: z.array(z.object({ label: z.string(), href: z.string() })),
+		workTitle: z.string(),
+		workIntro: z.string(),
+		workMore: z.string(),
+		allWork: z.string(),
+		projectLink: z.string(),
+		writingTitle: z.string(),
+		writingIntro: z.string(),
+		allWriting: z.string(),
+		keepDiving: z.string(),
+		journeyEnd: z.string(),
+		backUpTo: z.string(),
+		lostTitle: z.string(),
+		lostLine: z.string(),
+		lostLink: z.string(),
 		// LinkedIn stays optional until Sujith gives the address, and its link is left out until then.
 		linkedin: z.url().optional(),
 		github: z.url(),

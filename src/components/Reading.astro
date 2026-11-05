@@ -1,0 +1,55 @@
+---
+// Written pieces at a comfortable width. The styles reach into the Markdown with :global
+// because those elements come from the file, so Astro cannot mark them as belonging here.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+	image?: { src: ImageMetadata; alt: string };
+}
+
+const { image } = Astro.props;
+---
+
+<div class="reading">
+	{image && <Image src={image.src} alt={image.alt} />}
+	<slot />
+</div>
+
+<style>
+	.reading {
+		display: grid;
+		gap: 1.1em;
+		max-width: var(--line-length);
+		min-width: 0;
+	}
+
+	.reading :global(h2) {
+		margin-top: 1em;
+		font-size: var(--size-reading-heading);
+		line-height: 1.2;
+	}
+
+	.reading :global(a) {
+		color: inherit;
+		text-underline-offset: 4px;
+	}
+
+	.reading :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: var(--radius);
+	}
+
+	.reading :global(blockquote) {
+		margin: 0;
+		padding-left: 1em;
+		font-size: var(--size-intro);
+		line-height: 1.35;
+	}
+
+	.reading :global(ul),
+	.reading :global(ol) {
+		margin: 0;
+	}
+</style>

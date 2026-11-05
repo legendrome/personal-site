@@ -1,7 +1,10 @@
 ---
-// Every page is one dive: sky and boat at the top, water that darkens as you scroll,
-// and the sea floor at the bottom. Pages fill in two slots: "surface" for what sits
-// above the water, and the default slot for everything below it.
+// The whole site is one ocean, and each page opens at its own depth. "opening" says how:
+// - dive: sky and boat fill the first screen, then the water, which is the home page.
+// - deck: the page's content is in the sky, on the boat, with only the footer in the water.
+// - water: no sky, because the page starts below the surface.
+// Pages fill in two slots: "surface" for what sits above the water, and the default slot
+// for everything below it. "water" sets the page's own gradient, to keep it at its depth.
 import { Font } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -9,9 +12,13 @@ import '../styles/tokens.css';
 
 interface Props {
 	title: string;
+	opening?: 'dive' | 'deck' | 'water';
+	water?: string;
+	// The boat small and far away, for the page-not-found page.
+	adrift?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, opening = 'dive', water, adrift = false } = Astro.props;
 const { data: site } = await getEntry('site', 'site');
 ---
 
@@ -28,31 +35,54 @@ const { data: site } = await getEntry('site', 'site');
 	</head>
 	<body id="top">
 		<a class="skip-link" href="#main">{site.skipLink}</a>
-		<div class="surface">
-			<SiteHeader tone="sky" />
-			<div class="above-boat">
-				<div class="sky-bar"></div>
-				<div class="inner">
-					<slot name="surface" />
+		{
+			opening !== 'water' && (
+				<div class="surface">
+					<SiteHeader tone="sky" />
+					<div class="above-boat">
+						<div class="sky-bar" />
+						<div class="inner">
+							{opening === 'deck' ? (
+								<main id="main" tabindex="-1">
+									<slot name="surface" />
+								</main>
+							) : (
+								<slot name="surface" />
+							)}
+						</div>
+					</div>
+					<svg
+						class:list={['boat', { adrift }]}
+						viewBox="0 0 120 90"
+						role="img"
+						aria-label="A small sailing boat"
+					>
+						<path d="M58 6 V62 H18 Z" />
+						<path d="M64 18 V62 H98 Z" />
+						<path d="M6 66 H114 L98 88 H22 Z" />
+					</svg>
+					<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+						<path d="M0 40 C 180 10, 360 70, 540 40 S 900 10, 1080 40 S 1320 70, 1440 36 V90 H0 Z" />
+					</svg>
 				</div>
-			</div>
-			<svg class="boat" viewBox="0 0 120 90" role="img" aria-label="A small sailing boat">
-				<path d="M58 6 V62 H18 Z"></path>
-				<path d="M64 18 V62 H98 Z"></path>
-				<path d="M6 66 H114 L98 88 H22 Z"></path>
-			</svg>
-			<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
-				<path d="M0 40 C 180 10, 360 70, 540 40 S 900 10, 1080 40 S 1320 70, 1440 36 V90 H0 Z"></path>
-			</svg>
-		</div>
+			)
+		}
 
-		<div class="sea">
+		<div
+			class:list={['sea', { 'no-sky': opening === 'water' }]}
+			style={water ? `--water-gradient: ${water}` : undefined}
+		>
 			<SiteHeader tone="water" />
-			<main id="main" class="inner" tabindex="-1">
-				<slot />
-			</main>
+			{
+				opening !== 'deck' && (
+					<main id="main" class="inner" tabindex="-1">
+						<slot />
+					</main>
+				)
+			}
 			<footer class="inner">
-				<a href="#top">{site.backUp}</a>
+				{/* A water page has no boat of its own, so this one goes back to the home page. */}
+				<a href={opening === 'water' ? '/' : '#top'}>{site.backUp}</a>
 				<div class="foot">
 					<span>{site.name}</span>
 					<div class="links">
@@ -83,6 +113,8 @@ const { data: site } = await getEntry('site', 'site');
 				// meet the links once, and never land on a link they cannot see. Switching one
 				// copy off for good would not work, as each is out of sight for part of the page.
 				// Without this script both stay on, which repeats the links but loses nothing.
+				// A page with no sky has only the one copy, so there is nothing to switch.
+				if (!skyHeader) return;
 				const headerInWater = top < skyHeader.offsetHeight / 2;
 				skyHeader.inert = headerInWater;
 				waterHeader.inert = !headerInWater;
@@ -120,6 +152,8 @@ const { data: site } = await getEntry('site', 'site');
 
 	h1 {
 		font-size: var(--size-title);
+		/* A long word in a wide font could otherwise push a phone screen sideways. */
+		overflow-wrap: break-word;
 	}
 
 	h2 {
@@ -190,6 +224,12 @@ const { data: site } = await getEntry('site', 'site');
 		fill: var(--colour-on-sky);
 	}
 
+	.boat.adrift {
+		left: auto;
+		right: 8%;
+		width: var(--boat-width-adrift);
+	}
+
 	.wave {
 		position: absolute;
 		z-index: 2;
@@ -207,6 +247,12 @@ const { data: site } = await getEntry('site', 'site');
 		background: var(--water-gradient);
 		/* Limits this area's fixed header to this area. See SiteHeader.astro. */
 		clip-path: inset(0);
+	}
+
+	/* With no sky above, there are no waves to tuck under, only the header to clear. */
+	.sea.no-sky {
+		margin-top: 0;
+		padding-top: var(--header-height);
 	}
 
 	/* Off screen until a keyboard user tabs to it, as the first thing on every page. It sits

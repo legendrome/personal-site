@@ -16,5 +16,19 @@
 		{ "label": "Work", "href": "/work" },
 		{ "label": "Writing", "href": "/writing" }
 	],
+	"workTitle": "Work",
+	"workIntro": "Placeholder: one sentence on what you build and why.",
+	"workMore": "Placeholder: a line saying more will surface here over the next few years.",
+	"allWork": "All work",
+	"projectLink": "See it live",
+	"writingTitle": "Writing",
+	"writingIntro": "Placeholder: one sentence on what you write about.",
+	"allWriting": "All writing",
+	"keepDiving": "Keep diving",
+	"journeyEnd": "That is as far down as it goes, for now",
+	"backUpTo": "Back up to",
+	"lostTitle": "Lost at sea.",
+	"lostLine": "This page has drifted off, or never existed. The boat is still where you left it.",
+	"lostLink": "Swim back to the boat",
 	"github": "https://github.com/legendrome"
 }

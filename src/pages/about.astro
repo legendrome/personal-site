@@ -1,0 +1,20 @@
+---
+// About sits above the water, on the boat, because it is about who Sujith is right now.
+import { getEntry, render } from 'astro:content';
+import PageHead from '../components/PageHead.astro';
+import Reading from '../components/Reading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const about = await getEntry('about', 'about');
+const { data: site } = await getEntry('site', 'site');
+const { Content } = await render(about);
+---
+
+<BaseLayout title={`${about.data.title} | ${site.name}`} opening="deck" water="var(--water-deck)">
+	<Fragment slot="surface">
+		<PageHead title={about.data.title} intro={about.data.description} />
+		<Reading>
+			<Content />
+		</Reading>
+	</Fragment>
+</BaseLayout>
