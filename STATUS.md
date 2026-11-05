@@ -32,7 +32,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 
 ## Phase 3: pages, one at a time
 
-- [ ] Content structure: site words, About text and marked placeholders
+- [x] Content structure: site words, About text and marked placeholders
 - [ ] Home: the full dive, with journey chapters, featured projects and latest post
 - [ ] About: who I am now and interests
 - [ ] Journey: one page per chapter that has a full write-up

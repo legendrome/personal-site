@@ -1,13 +1,16 @@
 ---
 // Still a placeholder: it shows the look on a real page. The proper home page,
 // with words from src/content/, replaces it in Phase 3.
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { data: site } = await getEntry('site', 'site');
 ---
 
-<BaseLayout title="Sujith Bandaru">
+<BaseLayout title={site.name}>
 	<div slot="surface" class="hello">
-		<h1>Sujith Bandaru</h1>
-		<p class="intro">I’ve never liked the phrase ‘not in the same boat’. Why can’t I just invite you onto mine?</p>
+		<h1>{site.name}</h1>
+		<p class="intro">{site.firstLine}</p>
 	</div>
 
 	<div class="dive">

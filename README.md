@@ -16,7 +16,8 @@ This README describes the target structure. Until Phase 1 is done, some of these
 | Change the footer, boat or waves | `src/layouts/BaseLayout.astro` |
 | Swap a font | The `fonts` list in `astro.config.mjs`, then `src/styles/tokens.css` |
 | Replace my CV or favicon | `public/` |
-| Change the placeholder home page text (until Phase 3 replaces it) | `src/pages/index.astro` |
+| Change my first line, headings or links | `src/content/site.json` |
+| Change the About page | `src/content/about.md` |
 | Preview, check and publish my changes | "Check and publish" in `src/content/README.md` |
 | See why something was built the way it was | `docs/DECISIONS.md` |
 | See what phase the build is in | `STATUS.md` |

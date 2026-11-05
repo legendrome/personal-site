@@ -1,16 +1,46 @@
 # Adding and editing content
 
-Every post, project and journey chapter is one Markdown file in this folder. You can do everything here with a text editor and a terminal, with no AI and no code.
+Every post, project and journey chapter is one Markdown file in this folder, and the words used across the site are in `site.json`. You can do everything here with a text editor and a terminal, with no AI and no code.
 
 | I want to... | Do this |
 |---|---|
 | Add a blog post | Add a file to `posts/` (example below) |
 | Add a project | Add a file to `projects/` (example below) |
 | Add a journey chapter | Add a file to `journey/` (example below) |
+| Change my first line, headings or links | Edit `site.json` (see "Site words" below) |
+| Change the About page | Edit `about.md` |
+| Replace a placeholder | See "Replace a placeholder" below |
 | Fix a typo or change some words | Edit the file, then follow "Check and publish" |
 | Remove something from the site | Delete its file, then follow "Check and publish" |
 
-Pages that display this content are still being built (Phase 3 in `STATUS.md`). Until then, files you add here are checked by the build but do not appear on the site.
+Pages that display this content are still being built (Phase 3 in `STATUS.md`). Until then, most of what you add here is checked by the build but does not appear on the site. The name and first line in `site.json` already do.
+
+## Replace a placeholder
+
+Anything starting with `Placeholder:` is waiting for your words. To find what is left, search the `src/content` folder for that word in VS Code with Ctrl+Shift+F.
+
+Overwrite the placeholder words with your own and keep the rest of the file. Each journey chapter also needs these changes when its real words go in, because the placeholders use 1 to 5 just to set the order:
+
+1. Change `start` and `end` to the real years, leaving out `end` for your current chapter.
+2. Delete the `showYear: false` line, unless you want this chapter's years hidden.
+
+The placeholder project and post can simply be deleted once you have real ones.
+
+## Site words
+
+`site.json` is a list of fields, each with its name and its text in double quotes. Keep the comma at the end of every line except the last, and keep the quotes, because the build fails without them. If your text needs a double quote inside it, write `\"`.
+
+| Field | Where it appears |
+|---|---|
+| `name` | Your name on the first screen and in the browser tab |
+| `firstLine` | The sentence under your name |
+| `description` | Search results and link previews |
+| `pinnedSentence` | The sentence that stays still while the journey drifts past |
+| `workHeading`, `writingHeading` | The headings above your projects and writing on the home page |
+| `floorHeading`, `floorLine` | The heading and last line at the bottom of the dive |
+| `github`, `linkedin` | Your links, each a full address starting with `https://` |
+
+`linkedin` is optional, and its link is left out until you add a line for it.
 
 ## How a file works
 
@@ -74,6 +104,7 @@ Create a file in `journey/` and copy this in:
 ---
 title: "Chapter title"
 place: "City or place"
+line: "The one line shown for this chapter on the home page."
 start: 2019
 end: 2022
 ---
@@ -81,10 +112,11 @@ end: 2022
 Your writing starts here.
 ```
 
-`start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter.
+`start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter. The writing below the second `---` is optional: a chapter without any just shows its one line on the home page.
 
-There are two optional fields:
+There are three optional fields:
 
+- `showYear: false` hides the years on the page, while `start` still sets the order. Use it if a chapter's year would give away a birth date.
 - `priority: 1` settles the order when two chapters start in the same year, with the lower number first. You can ignore it otherwise.
 - `draft: true` keeps it off the site.
 
@@ -97,6 +129,14 @@ Put the image in `src/assets/`, creating that folder if it does not exist yet, s
 ```
 
 The description is what people using screen readers hear, so say what the image shows.
+
+To give a post, project or chapter one main image, add this to its frontmatter instead. The description is required, so a missing one fails the build:
+
+```yaml
+image:
+  src: "../../assets/your-image.jpg"
+  alt: "A short description of the image"
+```
 
 ## Check and publish
 

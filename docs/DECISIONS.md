@@ -64,6 +64,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The journey is the heart of the site, and Work holds passion projects that build up over time.** Sujith wants the value to come from his experiences and journey, with no need for the site to prove anything. So Work and Writing launch small and grow over the next few years, and their pages must look intentional with only one or two items. This replaces the earlier target of two project write-ups at launch.
 
+**Words used across the site live in `src/content/site.json`, and the About text in `src/content/about.md`.** Both are checked by a schema like every other collection. This keeps the first line, headings and links out of page code, so changing them never means editing code. JSON is fussier than Markdown about commas and quotes, but these are short fields rather than prose, and a mistake fails the build with an error instead of reaching the site.
+
+**Placeholders start with the word `Placeholder:` and use 1 to 5 as chapter order, with `showYear: false`.** A search for that word finds everything still unwritten. No real years, personal facts or draft chapters are committed until Sujith approves them, because the repo is public and its history is permanent. `showYear` stays available after that for any chapter whose year would give away a birth date.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
