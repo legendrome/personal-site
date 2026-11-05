@@ -84,6 +84,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Headings and short lines are filled in, while chapter lines and writing stay as placeholders.** Sujith found navigating through placeholders confusing and asked for titles. They come from the mock he saw and from what he has said, and he can reword them in `site.json`. Chapter lines stay out until he approves them, because they come from drafts he has not signed off and the repo is public.
 
+**The site's voice is upbeat, with no negative statements.** Sujith finds that negative lines kill the vibe, so headings, labels and short lines say what is good rather than what is missing.
+
 **The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
 
 ## Open questions
