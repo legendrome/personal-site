@@ -27,8 +27,11 @@ const { title } = Astro.props;
 	<body id="top">
 		<div class="surface">
 			<SiteHeader tone="sky" />
-			<div class="inner">
-				<slot name="surface" />
+			<div class="above-boat">
+				<div class="sky-bar"></div>
+				<div class="inner">
+					<slot name="surface" />
+				</div>
 			</div>
 			<svg class="boat" viewBox="0 0 120 90" role="img" aria-label="A small sailing boat">
 				<path d="M58 6 V62 H18 Z"></path>
@@ -110,10 +113,19 @@ const { title } = Astro.props;
 		position: relative;
 		background: var(--colour-sky);
 		color: var(--colour-on-sky);
-		padding-top: var(--header-height);
 		padding-bottom: var(--surface-bottom);
-		/* Limits this area's fixed header to this area. See SiteHeader.astro. */
-		clip-path: inset(0);
+		/* Limits this area's fixed header to this area. See SiteHeader.astro. The bottom edge
+		   stops part way up the waves, so the text changes colour as it enters the water. */
+		clip-path: inset(0 0 var(--waterline-overlap) 0);
+	}
+
+	/* The solid bar sticks only inside this block, which ends just above the boat. */
+	.sky-bar {
+		position: sticky;
+		top: 0;
+		z-index: 4;
+		height: var(--header-height);
+		background: var(--colour-sky);
 	}
 
 	.boat {
@@ -138,6 +150,8 @@ const { title } = Astro.props;
 
 	/* One unbroken gradient, because lines between chapters broke the feeling of a single dive. */
 	.sea {
+		margin-top: calc(var(--waterline-overlap) * -1);
+		padding-top: var(--waterline-overlap);
 		background: linear-gradient(
 			var(--colour-water-shallow),
 			var(--colour-water-mid) 32%,

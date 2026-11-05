@@ -39,6 +39,7 @@
 
 	/* The size of the waves and boat at the waterline */
 	--wave-height: 5.5rem;
+	--waterline-overlap: calc(var(--wave-height) / 3);
 	--boat-width: clamp(6rem, 13vw, 10.5rem);
 	--surface-bottom: clamp(9.5rem, 16vw, 12rem);
 }

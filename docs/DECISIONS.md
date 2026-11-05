@@ -56,6 +56,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **One fixed header in place of the handed-over sticky ones.** Sujith wanted a header that stays put with no visible bar, like the one on Josh Comeau's blog. Both copies are now fixed to the same spot, and a clip-path on the sky and the water shows each only over its own area. That blog hides content behind solid strips, but those cannot match a gradient, so a blur does that job here. This replaces the earlier entry about two sticky headers.
 
+**A solid sky bar that stops above the boat, with the header text carrying on into the water.** Sujith specified this after trying the blurred version: the bar hides the title as it scrolls away, and leaves just before the boat so the boat stays visible. The text stays in place and changes colour part way up the waves. This replaces the blur in the sky from the entry above; the water still uses a blur, because a solid bar would show against the gradient.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

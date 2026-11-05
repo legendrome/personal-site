@@ -28,8 +28,6 @@ const { tone } = Astro.props;
 		align-items: center;
 		padding-inline: var(--space-small);
 		font-weight: 500;
-		/* See-through with a blur, so there is no visible bar and text passing behind stays out of the way. */
-		backdrop-filter: blur(var(--header-blur));
 	}
 
 	.inner {
@@ -49,5 +47,7 @@ const { tone } = Astro.props;
 
 	.water {
 		color: var(--colour-on-water);
+		/* The water is a gradient, so a solid bar would show. A blur keeps passing text out of the way instead. */
+		backdrop-filter: blur(var(--header-blur));
 	}
 </style>
