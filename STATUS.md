@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 3, pages, one at a time (Phase 0 writing continues alongside). Phase 2 is finished. The ocean look is live on the test address, with newer work committed locally until Sujith says to push: https://personal-site.bsujith-pro.workers.dev/
+Current phase: 3, pages, one at a time (Phase 0 writing continues alongside). Phase 2 is finished. The home page dive, with placeholder words, is live on the test address: https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -75,3 +75,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - Phase 3 build started from the agreed plan, with unwritten words as marked placeholders. Real chapter drafts stay in the vault until Sujith approves them.
 2026-11-05 - The journey is now the heart of the site, and the Work and Writing pages fill up over the next few years, so full journey chapters are the writing priority. See `docs/DECISIONS.md`.
 2026-11-05 - Home page dive built, committed locally with placeholder words. Its project and post rows lead to "page not found" until those pages exist. Next: header links and footer.
+2026-11-05 - Pushed the dive to the test address at Sujith's request, so a friend could see it, knowing the words are placeholders and the rows lead nowhere yet.
