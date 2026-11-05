@@ -68,6 +68,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Placeholders start with the word `Placeholder:` and use 1 to 5 as chapter order, with `showYear: false`.** A search for that word finds everything still unwritten. No real years, personal facts or draft chapters are committed until Sujith approves them, because the repo is public and its history is permanent. `showYear` stays available after that for any chapter whose year would give away a birth date.
 
+**The corner year marker uses a small script and is absent without it.** Knowing which chapter is on screen needs JavaScript, and about twenty plain lines in `YearMarker.astro` do it with no library. Without JavaScript the marker stays hidden, because a label stuck on its first text would be wrong. Years are also in the page for screen readers, hidden from sight so sighted visitors do not get them twice. It replaces the depth gauge, which Sujith rejected.
+
+**The pinned sentence stops pinning under 760px wide.** A phone has no room for two columns, and a sentence held above moving text would cover it.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

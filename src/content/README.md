@@ -13,7 +13,7 @@ Every post, project and journey chapter is one Markdown file in this folder, and
 | Fix a typo or change some words | Edit the file, then follow "Check and publish" |
 | Remove something from the site | Delete its file, then follow "Check and publish" |
 
-Pages that display this content are still being built (Phase 3 in `STATUS.md`). Until then, most of what you add here is checked by the build but does not appear on the site. The name and first line in `site.json` already do.
+The home page shows every journey chapter, every project marked `featured: true`, your latest post and the words in `site.json`. The other pages are still being built (Phase 3 in `STATUS.md`), so for now a link to a project, post or full chapter leads to a "page not found" error, and the About text is checked by the build but does not appear yet.
 
 ## Replace a placeholder
 
@@ -38,6 +38,8 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `pinnedSentence` | The sentence that stays still while the journey drifts past |
 | `workHeading`, `writingHeading` | The headings above your projects and writing on the home page |
 | `floorHeading`, `floorLine` | The heading and last line at the bottom of the dive |
+| `markerStart` | What the corner marker says before the first chapter |
+| `chapterLink` | The link under a chapter that has a full write-up |
 | `github`, `linkedin` | Your links, each a full address starting with `https://` |
 
 `linkedin` is optional, and its link is left out until you add a line for it.
@@ -112,7 +114,7 @@ end: 2022
 Your writing starts here.
 ```
 
-`start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter. The writing below the second `---` is optional: a chapter without any just shows its one line on the home page.
+`start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter. The writing below the second `---` is optional: a chapter without any just shows its one line on the home page, and adding some makes `chapterLink` appear under it. Years appear in the corner marker as `2019 to 2022`, as `2019` when `start` and `end` match, and as `2026 onwards` when there is no `end`.
 
 There are three optional fields:
 

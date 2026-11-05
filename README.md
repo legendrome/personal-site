@@ -18,6 +18,10 @@ This README describes the target structure. Until Phase 1 is done, some of these
 | Replace my CV or favicon | `public/` |
 | Change my first line, headings or links | `src/content/site.json` |
 | Change the About page | `src/content/about.md` |
+| Change the home page layout | `src/pages/index.astro` |
+| Change the corner year marker | `src/components/YearMarker.astro` |
+| Change the project and post rows, or their arrow | `src/components/ArrowRow.astro` |
+| Change what counts as published, or the order | `src/lib/content.ts` |
 | Preview, check and publish my changes | "Check and publish" in `src/content/README.md` |
 | See why something was built the way it was | `docs/DECISIONS.md` |
 | See what phase the build is in | `STATUS.md` |

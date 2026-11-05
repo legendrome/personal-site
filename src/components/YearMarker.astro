@@ -1,0 +1,49 @@
+---
+// The small label in the corner saying where in the journey you are. It reads the
+// data-when text from each chapter on the page, so there is nothing to update here.
+// It starts hidden so that without JavaScript it is absent, not stuck on its first text.
+// Screen readers skip it, because the chapters themselves already give them this.
+interface Props {
+	start: string;
+}
+
+const { start } = Astro.props;
+---
+
+<p class="year-marker" data-start={start} aria-hidden="true" hidden>{start}</p>
+
+<script>
+	const marker = document.querySelector<HTMLElement>('.year-marker');
+	const chapters = document.querySelectorAll<HTMLElement>('[data-when]');
+
+	function updateMarker() {
+		let label = marker.dataset.start;
+		chapters.forEach((chapter) => {
+			// A chapter counts as reached once it is a little over halfway up the screen.
+			if (chapter.getBoundingClientRect().top < innerHeight * 0.6) {
+				label = chapter.dataset.when;
+			}
+		});
+		marker.textContent = label;
+	}
+
+	marker.hidden = false;
+	addEventListener('scroll', updateMarker, { passive: true });
+	addEventListener('resize', updateMarker);
+	updateMarker();
+</script>
+
+<style>
+	.year-marker {
+		position: fixed;
+		z-index: 10;
+		right: var(--space-small);
+		bottom: var(--space-small);
+		padding: var(--space-tiny) var(--space-small);
+		border-radius: var(--radius);
+		background: var(--colour-water-deep);
+		color: var(--colour-on-water);
+		font-size: var(--size-small);
+		font-weight: 500;
+	}
+</style>

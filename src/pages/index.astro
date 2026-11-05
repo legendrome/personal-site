@@ -1,10 +1,24 @@
 ---
-// Still a placeholder: it shows the look on a real page. The proper home page,
-// with words from src/content/, replaces it in Phase 3.
+// The home page is the whole dive: the journey first, because it is the heart of the
+// site, then the latest work and writing, then the sea floor. All the words come from
+// src/content/.
 import { getEntry } from 'astro:content';
+import ArrowRow from '../components/ArrowRow.astro';
+import YearMarker from '../components/YearMarker.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+	chapterYears,
+	formatDate,
+	getChapters,
+	getPosts,
+	getProjects,
+	hasFullChapter,
+} from '../lib/content';
 
 const { data: site } = await getEntry('site', 'site');
+const chapters = await getChapters();
+const projects = (await getProjects()).filter((project) => project.data.featured);
+const latestPost = (await getPosts())[0];
 ---
 
 <BaseLayout title={site.name}>
@@ -13,9 +27,72 @@ const { data: site } = await getEntry('site', 'site');
 		<p class="intro">{site.firstLine}</p>
 	</div>
 
-	<div class="dive">
-		<h2>THIS SITE IS GOING TO ROCK</h2>
-	</div>
+	<section class="section journey">
+		<div class="pinned">
+			<h2>{site.pinnedSentence}</h2>
+		</div>
+		<div>
+			{
+				chapters.map((chapter) => {
+					const years = chapterYears(chapter);
+					return (
+						<div
+							class="stop"
+							data-when={years ? `${chapter.data.title}, ${years}` : chapter.data.title}
+						>
+							<h3>{chapter.data.title}</h3>
+							{years && <p class="years">{years}</p>}
+							<p>{chapter.data.line}</p>
+							{hasFullChapter(chapter) && (
+								<p>
+									<a href={`/journey/${chapter.id}`}>{site.chapterLink}</a>
+								</p>
+							)}
+						</div>
+					);
+				})
+			}
+		</div>
+	</section>
+
+	{
+		projects.length > 0 && (
+			<section class="section">
+				<h2>{site.workHeading}</h2>
+				<div class="rows">
+					{projects.map((project) => (
+						<ArrowRow
+							href={`/work/${project.id}`}
+							title={project.data.title}
+							detail={project.data.summary}
+						/>
+					))}
+				</div>
+			</section>
+		)
+	}
+
+	{
+		latestPost && (
+			<section class="section">
+				<h2>{site.writingHeading}</h2>
+				<div class="rows">
+					<ArrowRow
+						href={`/writing/${latestPost.id}`}
+						title={latestPost.data.title}
+						detail={formatDate(latestPost.data.date)}
+					/>
+				</div>
+			</section>
+		)
+	}
+
+	<section class="section floor">
+		<h2>{site.floorHeading}</h2>
+		<p>{site.floorLine}</p>
+	</section>
+
+	<YearMarker slot="overlay" start={site.markerStart} />
 </BaseLayout>
 
 <style>
@@ -30,9 +107,78 @@ const { data: site } = await getEntry('site', 'site');
 		line-height: 1.35;
 	}
 
-	/* The page has little on it yet, so this gives the dive room to scroll. */
-	.dive {
-		min-height: 150svh;
+	.section {
 		padding-block: var(--space-huge);
+	}
+
+	.journey {
+		display: grid;
+		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+		gap: var(--space-large);
+		align-items: start;
+	}
+
+	/* Holds the sentence still, just below the header, while the chapters scroll past it. */
+	.pinned {
+		position: sticky;
+		top: calc(var(--header-height) + var(--space-small));
+	}
+
+	.stop {
+		min-height: 62svh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: var(--space-tiny);
+	}
+
+	.stop h3 {
+		font-size: var(--size-stop);
+		line-height: 1.1;
+	}
+
+	.stop a {
+		color: inherit;
+		text-underline-offset: 4px;
+	}
+
+	/* Sighted visitors see the years in the corner marker, which screen readers skip,
+	   so this keeps the years in the page for them without showing them twice. */
+	.years {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	.rows {
+		display: grid;
+		gap: var(--space-medium);
+		max-width: var(--list-length);
+		margin-top: var(--space-large);
+	}
+
+	.floor {
+		display: grid;
+		gap: var(--space-medium);
+		padding-bottom: 0;
+	}
+
+	/* No room for two columns on a phone, and a sentence pinned above moving text would
+	   cover it, so the sentence just scrolls away like everything else. */
+	@media (max-width: 760px) {
+		.journey {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.pinned {
+			position: static;
+		}
+
+		.stop {
+			min-height: 12.5rem;
+		}
 	}
 </style>

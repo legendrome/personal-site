@@ -53,6 +53,10 @@ const { title } = Astro.props;
 			</footer>
 		</div>
 
+		<!-- Outside the sky and water, whose clip-paths would otherwise cut off anything fixed
+		     to the screen. The home page puts its year marker here. -->
+		<slot name="overlay" />
+
 		<script>
 			// Tells the water header where the water is on screen, so its copy of the gradient
 			// lines up with the real one. Without this script it just stays one shade of blue.

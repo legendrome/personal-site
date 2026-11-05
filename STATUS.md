@@ -33,7 +33,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 ## Phase 3: pages, one at a time
 
 - [x] Content structure: site words, About text and marked placeholders
-- [ ] Home: the full dive, with journey chapters, featured projects and latest post
+- [x] Home: the full dive, with journey chapters, featured projects and latest post
 - [ ] About: who I am now and interests
 - [ ] Journey: one page per chapter that has a full write-up
 - [ ] Work: index and one page per project, at /work
@@ -74,3 +74,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-04 - Cloudflare branch builds fixed by adding the empty `previews` block to `wrangler.jsonc`.
 2026-11-05 - Phase 3 build started from the agreed plan, with unwritten words as marked placeholders. Real chapter drafts stay in the vault until Sujith approves them.
 2026-11-05 - The journey is now the heart of the site, and the Work and Writing pages fill up over the next few years, so full journey chapters are the writing priority. See `docs/DECISIONS.md`.
+2026-11-05 - Home page dive built, committed locally with placeholder words. Its project and post rows lead to "page not found" until those pages exist. Next: header links and footer.
