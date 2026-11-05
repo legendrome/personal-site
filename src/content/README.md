@@ -8,12 +8,12 @@ Every post, project and journey chapter is one Markdown file in this folder, and
 | Add a project | Add a file to `projects/` (example below) |
 | Add a journey chapter | Add a file to `journey/` (example below) |
 | Change my first line, headings or links | Edit `site.json` (see "Site words" below) |
-| Change the About page | Edit `about.md` |
+| Change the About page | Edit `about.md`, where `description` is the sentence under the title |
 | Replace a placeholder | See "Replace a placeholder" below |
 | Fix a typo or change some words | Edit the file, then follow "Check and publish" |
 | Remove something from the site | Delete its file, then follow "Check and publish" |
 
-The home page shows every journey chapter, every project marked `featured: true`, your latest post and the words in `site.json`. The other pages are still being built (Phase 3 in `STATUS.md`), so for now a link to a project, post or full chapter leads to a "page not found" error, and the About text is checked by the build but does not appear yet.
+The home page shows every journey chapter, every project marked `featured: true`, your latest post and the words in `site.json`. Every post, project and chapter with writing also gets its own page.
 
 ## Replace a placeholder
 
@@ -23,6 +23,7 @@ Overwrite the placeholder words with your own and keep the rest of the file. Eac
 
 1. Change `start` and `end` to the real years, leaving out `end` for your current chapter.
 2. Delete the `showYear: false` line, unless you want this chapter's years hidden.
+3. Replace the placeholder line below the second `---` with the full chapter. If you delete it and write nothing, the chapter keeps its one line on the home page and has no page of its own.
 
 The placeholder project and post can simply be deleted once you have real ones.
 
@@ -40,7 +41,12 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `floorHeading`, `floorLine` | The heading and last line at the bottom of the dive |
 | `markerStart` | What the corner marker says before the first chapter |
 | `chapterLink` | The link under a chapter that has a full write-up |
-| `backUp` | The link at the bottom of every page that returns to the top |
+| `workTitle`, `workIntro`, `workMore` | The title and sentence at the top of the Work page, and the line under its list |
+| `allWork`, `projectLink` | On a project page, the link back to all projects and the link to a project's `link` address |
+| `writingTitle`, `writingIntro`, `allWriting` | The title and sentence at the top of the Writing page, and the link back to it from a post |
+| `keepDiving`, `journeyEnd`, `backUpTo` | The words at the end of a chapter page |
+| `lostTitle`, `lostLine`, `lostLink` | The page people see at an address that does not exist |
+| `backUp` | The link at the bottom of every page that returns to the boat |
 | `skipLink` | The link keyboard users meet first, which jumps past the header |
 | `nav` | The header menu, with each item's label and the page it goes to |
 | `github`, `linkedin` | Your links in the footer, each a full address starting with `https://` |

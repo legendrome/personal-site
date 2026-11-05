@@ -2,8 +2,6 @@
 
 My home on the internet: who I am, where I have been, what I am building, and what I am thinking about. Built with Astro, written in Markdown, deployed automatically when changes reach `main`.
 
-This README describes the target structure. Until Phase 1 is done, some of these paths do not exist yet; `STATUS.md` says where things stand.
-
 ## What you can do here
 
 | I want to... | Open this |
@@ -19,6 +17,10 @@ This README describes the target structure. Until Phase 1 is done, some of these
 | Change my first line, headings, links or the header menu | `src/content/site.json` |
 | Change the About page | `src/content/about.md` |
 | Change the home page layout | `src/pages/index.astro` |
+| Change the layout of another page | `src/pages/`, where each file or folder is named after its web address |
+| Change how deep a page starts | The `water` setting at the top of its page file, using the gradients in `src/styles/tokens.css` |
+| Change the shared title block or reading text | `src/components/PageHead.astro`, `src/components/Reading.astro` |
+| Change the blog feed | `src/pages/rss.xml.js` |
 | Change the corner year marker | `src/components/YearMarker.astro` |
 | Change the project and post rows, or their arrow | `src/components/ArrowRow.astro` |
 | Change what counts as published, or the order | `src/lib/content.ts` |

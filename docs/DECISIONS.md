@@ -76,6 +76,12 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Contact is LinkedIn and GitHub links, with no form or email.** A form needs an outside service, and a plain-text email gets harvested by scrapers. This can change if people turn out to have no way of reaching Sujith.
 
+**Every inner page opens at the depth it sits in the home page dive.** It keeps the one-ocean idea going across the whole site. About stays in the sky because it is about who Sujith is now, on the boat; Work starts in mid water and Writing in deep water. Chapter colours are worked out from a chapter's position, so adding a chapter needs no new colours, and the bottom of one chapter matches the top of the next. Sujith approved this from a mock, and asked for it to be creative rather than having a set vision.
+
+**The RSS feed is hand-written, with no package.** It is about thirty lines and `@astrojs/rss` would add a dependency to save very little. The feed carries each post's title and description, not its full text, which keeps the file simple.
+
+**The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

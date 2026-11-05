@@ -34,11 +34,12 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 
 - [x] Content structure: site words, About text and marked placeholders
 - [x] Home: the full dive, with journey chapters, featured projects and latest post
-- [ ] About: who I am now and interests
-- [ ] Journey: one page per chapter that has a full write-up
-- [ ] Work: index and one page per project, at /work
-- [ ] Writing: index, one page per post, RSS feed
-- [ ] 404 page, including the Cloudflare setting that serves it
+- [x] About: who I am now and interests
+- [x] Journey: one page per chapter that has a full write-up
+- [x] Work: index and one page per project, at /work
+- [x] Writing: index, one page per post, RSS feed
+- [x] 404 page, including the Cloudflare setting that serves it (check it on the live site after the next push)
+- [x] Link previews and soft page changes
 - [x] Header links, skip link and footer with GitHub (LinkedIn appears once its address is in `site.json`)
 - [ ] Hand test: add a post from scratch using only `src/content/README.md`
 
@@ -77,3 +78,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - Home page dive built, committed locally with placeholder words. Its project and post rows lead to "page not found" until those pages exist. Next: header links and footer.
 2026-11-05 - Pushed the dive to the test address at Sujith's request, so a friend could see it, knowing the words are placeholders and the rows lead nowhere yet.
 2026-11-05 - Header links, skip link and footer built, committed locally. The header links lead to "page not found" until the inner pages exist. Next: a mock of the inner pages. For the Phase 4 accessibility check: the header name is low contrast for the moment it crosses the waves, which is where the skip link lands.
+2026-11-05 - Inner pages built from the approved mock, committed locally, so every link now leads somewhere. Words are still placeholders. Next: the Phase 3 hand test, then Sujith's real words.

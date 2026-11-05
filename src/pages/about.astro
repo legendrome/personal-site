@@ -10,7 +10,12 @@ const { data: site } = await getEntry('site', 'site');
 const { Content } = await render(about);
 ---
 
-<BaseLayout title={`${about.data.title} | ${site.name}`} opening="deck" water="var(--water-deck)">
+<BaseLayout
+	title={`${about.data.title} | ${site.name}`}
+	description={about.data.description}
+	opening="deck"
+	water="var(--water-deck)"
+>
 	<Fragment slot="surface">
 		<PageHead title={about.data.title} intro={about.data.description} />
 		<Reading>

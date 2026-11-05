@@ -10,7 +10,12 @@ const { data: site } = await getEntry('site', 'site');
 const projects = await getProjects();
 ---
 
-<BaseLayout title={`${site.workTitle} | ${site.name}`} opening="water" water="var(--water-work)">
+<BaseLayout
+	title={`${site.workTitle} | ${site.name}`}
+	description={site.workIntro}
+	opening="water"
+	water="var(--water-work)"
+>
 	<PageHead title={site.workTitle} intro={site.workIntro} />
 
 	<div class="rows">

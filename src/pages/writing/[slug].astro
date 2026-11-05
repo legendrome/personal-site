@@ -15,7 +15,12 @@ const { data: site } = await getEntry('site', 'site');
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={`${post.data.title} | ${site.name}`} opening="water" water="var(--water-writing)">
+<BaseLayout
+	title={`${post.data.title} | ${site.name}`}
+	description={post.data.description}
+	opening="water"
+	water="var(--water-writing)"
+>
 	<PageHead title={post.data.title} small>
 		<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
 	</PageHead>

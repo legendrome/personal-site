@@ -12,14 +12,18 @@ import '../styles/tokens.css';
 
 interface Props {
 	title: string;
+	// What search results and link previews show. Falls back to the site's own description.
+	description?: string;
 	opening?: 'dive' | 'deck' | 'water';
 	water?: string;
 	// The boat small and far away, for the page-not-found page.
 	adrift?: boolean;
 }
 
-const { title, opening = 'dive', water, adrift = false } = Astro.props;
+const { title, description, opening = 'dive', water, adrift = false } = Astro.props;
 const { data: site } = await getEntry('site', 'site');
+const summary = description ?? site.description;
+const address = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <html lang="en">
@@ -32,6 +36,13 @@ const { data: site } = await getEntry('site', 'site');
 		<Font cssVariable="--font-unbounded" preload />
 		<Font cssVariable="--font-karla" preload />
 		<title>{title}</title>
+		<meta name="description" content={summary} />
+		<link rel="canonical" href={address} />
+		<link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={summary} />
+		<meta property="og:url" content={address} />
 	</head>
 	<body id="top">
 		<a class="skip-link" href="#main">{site.skipLink}</a>
@@ -88,6 +99,7 @@ const { data: site } = await getEntry('site', 'site');
 					<div class="links">
 						{site.linkedin && <a href={site.linkedin}>LinkedIn</a>}
 						<a href={site.github}>GitHub</a>
+						<a href="/rss.xml">RSS</a>
 					</div>
 				</div>
 			</footer>
@@ -174,6 +186,11 @@ const { data: site } = await getEntry('site', 'site');
 	@media (prefers-reduced-motion: no-preference) {
 		html {
 			scroll-behavior: smooth;
+		}
+
+		/* A soft fade between pages. Browsers without this feature just change page normally. */
+		@view-transition {
+			navigation: auto;
 		}
 	}
 </style>
