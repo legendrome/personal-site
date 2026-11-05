@@ -1,7 +1,7 @@
 ---
 title: "Malmö"
 place: "Malmö"
-line: "Placeholder: your Malmö line goes here."
+line: "Where my story starts."
 start: 1
 end: 2
 showYear: false

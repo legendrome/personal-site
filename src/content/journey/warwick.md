@@ -1,7 +1,7 @@
 ---
 title: "Warwick"
 place: "Warwick"
-line: "Placeholder: your Warwick line goes here."
+line: "I set out to become an invincible student, and learned so much along the way."
 start: 4
 end: 5
 showYear: false

@@ -1,7 +1,7 @@
 ---
 title: "Now"
 place: "Now"
-line: "Placeholder: your Now line goes here."
+line: "I’m excited to see what else I can do with AI."
 start: 5
 showYear: false
 ---

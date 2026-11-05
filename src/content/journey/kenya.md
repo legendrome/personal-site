@@ -1,7 +1,7 @@
 ---
 title: "Kenya"
 place: "Kenya"
-line: "Placeholder: your Kenya line goes here."
+line: "I went there empty handed, ready to learn, and boy did I."
 start: 3
 end: 4
 showYear: false
