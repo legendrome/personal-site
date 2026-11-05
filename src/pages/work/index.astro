@@ -1,0 +1,43 @@
+---
+// Starts in mid water, where Work sits in the home page dive.
+import { getEntry } from 'astro:content';
+import ArrowRow from '../../components/ArrowRow.astro';
+import PageHead from '../../components/PageHead.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getProjects } from '../../lib/content';
+
+const { data: site } = await getEntry('site', 'site');
+const projects = await getProjects();
+---
+
+<BaseLayout title={`${site.workTitle} | ${site.name}`} opening="water" water="var(--water-work)">
+	<PageHead title={site.workTitle} intro={site.workIntro} />
+
+	<div class="rows">
+		{
+			projects.map((project) => (
+				<ArrowRow
+					href={`/work/${project.id}`}
+					title={project.data.title}
+					detail={project.data.summary}
+					large
+					heading="h2"
+				/>
+			))
+		}
+	</div>
+
+	<p class="more">{site.workMore}</p>
+</BaseLayout>
+
+<style>
+	.rows {
+		display: grid;
+		gap: var(--space-large);
+		max-width: var(--list-length);
+	}
+
+	.more {
+		padding-block: var(--space-large);
+	}
+</style>

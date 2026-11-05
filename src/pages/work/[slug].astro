@@ -1,0 +1,50 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageHead from '../../components/PageHead.astro';
+import Reading from '../../components/Reading.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getProjects } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const projects = await getProjects();
+	return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { data: site } = await getEntry('site', 'site');
+const { Content } = await render(project);
+---
+
+<BaseLayout title={`${project.data.title} | ${site.name}`} opening="water" water="var(--water-work)">
+	<PageHead title={project.data.title} intro={project.data.summary} small>
+		<p class="meta">
+			<time datetime={project.data.date.toISOString()}>{formatDate(project.data.date)}</time>
+			{project.data.link && <a href={project.data.link}>{site.projectLink}</a>}
+		</p>
+	</PageHead>
+
+	<Reading image={project.data.image}>
+		<Content />
+	</Reading>
+
+	<p class="back"><a href="/work">{site.allWork}</a></p>
+</BaseLayout>
+
+<style>
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-small);
+		font-weight: 500;
+	}
+
+	a {
+		color: inherit;
+		font-weight: 500;
+		text-underline-offset: 4px;
+	}
+
+	.back {
+		padding-block: var(--space-large);
+	}
+</style>

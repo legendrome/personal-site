@@ -1,0 +1,161 @@
+---
+// One page per chapter with a full write-up. A chapter with only its one line gets no
+// page, so nothing links to an empty one.
+import { getEntry, render } from 'astro:content';
+import ArrowRow from '../../components/ArrowRow.astro';
+import PageHead from '../../components/PageHead.astro';
+import Reading from '../../components/Reading.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { chapterWater, getChapters, hasFullChapter } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const chapters = await getChapters();
+	return chapters
+		.filter(hasFullChapter)
+		.map((chapter) => ({ params: { slug: chapter.id }, props: { chapter } }));
+}
+
+const { chapter } = Astro.props;
+const { data: site } = await getEntry('site', 'site');
+const { Content } = await render(chapter);
+
+// Depth comes from all chapters, so a chapter's colour stays put while others are unwritten.
+const chapters = await getChapters();
+const index = chapters.findIndex(({ id }) => id === chapter.id);
+const written = chapters.filter(hasFullChapter);
+const position = written.findIndex(({ id }) => id === chapter.id);
+const previous = written[position - 1];
+const next = written[position + 1];
+---
+
+<BaseLayout
+	title={`${chapter.data.title} | ${site.name}`}
+	opening="water"
+	water={chapterWater(index, chapters.length)}
+>
+	<PageHead title={chapter.data.title} intro={chapter.data.line} />
+
+	<div class="body">
+		<Reading image={chapter.data.image}>
+			<Content />
+		</Reading>
+
+		<!-- The line a diver follows down, showing where this chapter sits in the journey. -->
+		<ol class="descent">
+			{
+				chapters.map((item) => (
+					<li class:list={{ here: item.id === chapter.id }}>
+						{hasFullChapter(item) ? (
+							<a
+								href={`/journey/${item.id}`}
+								aria-current={item.id === chapter.id ? 'page' : undefined}
+							>
+								{item.data.title}
+							</a>
+						) : (
+							item.data.title
+						)}
+					</li>
+				))
+			}
+		</ol>
+	</div>
+
+	<div class="onward">
+		<p>{next ? site.keepDiving : site.journeyEnd}</p>
+		{
+			next ? (
+				<ArrowRow href={`/journey/${next.id}`} title={next.data.title} large heading="h2" />
+			) : (
+				<ArrowRow href="/work" title={site.workHeading} large heading="h2" />
+			)
+		}
+		{previous && <a class="back" href={`/journey/${previous.id}`}>{site.backUpTo} {previous.data.title}</a>}
+	</div>
+</BaseLayout>
+
+<style>
+	.body {
+		display: grid;
+		grid-template-columns: minmax(0, var(--line-length)) minmax(0, 14em);
+		justify-content: space-between;
+		gap: var(--space-large);
+		align-items: start;
+	}
+
+	.descent {
+		position: sticky;
+		top: calc(var(--header-height) + var(--space-small));
+		display: grid;
+		gap: var(--space-medium);
+		margin: 0;
+		padding: 0 0 0 var(--space-medium);
+		border-left: 2px solid currentColor;
+		list-style: none;
+	}
+
+	.descent li {
+		position: relative;
+	}
+
+	.descent li::before {
+		content: '';
+		position: absolute;
+		/* Centres the dot on the line, which sits a fixed distance to the left. */
+		left: calc((var(--space-medium) + 1px + var(--dot) / 2) * -1);
+		top: calc(0.8em - var(--dot) / 2);
+		width: var(--dot);
+		height: var(--dot);
+		border-radius: 50%;
+		background: currentColor;
+		--dot: 0.5rem;
+	}
+
+	.descent li.here {
+		font-weight: 500;
+	}
+
+	.descent li.here::before {
+		--dot: 0.875rem;
+	}
+
+	.descent a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.descent a:hover,
+	.descent [aria-current] {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	.onward {
+		display: grid;
+		gap: var(--space-small);
+		padding-block: var(--space-huge) var(--space-large);
+	}
+
+	.onward p {
+		font-weight: 500;
+	}
+
+	.back {
+		justify-self: start;
+		margin-top: var(--space-large);
+		color: inherit;
+		font-weight: 500;
+		text-underline-offset: 4px;
+	}
+
+	/* Links to the next and previous chapters do this job on a phone, with no room for both. */
+	@media (max-width: 760px) {
+		.body {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.descent {
+			display: none;
+		}
+	}
+</style>

@@ -24,6 +24,21 @@ export function hasFullChapter(chapter: CollectionEntry<'journey'>) {
 	return Boolean(chapter.body?.trim());
 }
 
+// Each chapter page is one stretch of the descent, and the bottom of one is the exact
+// colour at the top of the next, so reading in order feels like one dive. Worked out
+// from the position, so adding a chapter needs no new colours. The last chapter goes
+// down to the sea floor. A browser without color-mix shows the page's dark background.
+export function chapterWater(index: number, total: number) {
+	const shallow = 'var(--colour-water-shallow)';
+	const deep = 'var(--colour-water-deep)';
+	const floor = 'var(--colour-water-floor)';
+	if (index === total - 1) return `linear-gradient(${deep}, ${floor})`;
+
+	const depth = (position: number) =>
+		`color-mix(in srgb, ${deep} ${(position / (total - 1)) * 100}%, ${shallow})`;
+	return `linear-gradient(${depth(index)}, ${depth(index + 1)})`;
+}
+
 // Empty for a chapter with showYear: false, whose years must not appear anywhere.
 export function chapterYears({ data }: CollectionEntry<'journey'>) {
 	if (!data.showYear) return '';

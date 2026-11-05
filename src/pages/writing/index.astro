@@ -1,0 +1,37 @@
+---
+// Starts in deep water, where Writing sits in the home page dive.
+import { getEntry } from 'astro:content';
+import ArrowRow from '../../components/ArrowRow.astro';
+import PageHead from '../../components/PageHead.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getPosts } from '../../lib/content';
+
+const { data: site } = await getEntry('site', 'site');
+const posts = await getPosts();
+---
+
+<BaseLayout title={`${site.writingTitle} | ${site.name}`} opening="water" water="var(--water-writing)">
+	<PageHead title={site.writingTitle} intro={site.writingIntro} />
+
+	<div class="rows">
+		{
+			posts.map((post) => (
+				<ArrowRow
+					href={`/writing/${post.id}`}
+					title={post.data.title}
+					date={{ label: formatDate(post.data.date), iso: post.data.date.toISOString() }}
+					heading="h2"
+				/>
+			))
+		}
+	</div>
+</BaseLayout>
+
+<style>
+	.rows {
+		display: grid;
+		gap: var(--space-medium);
+		max-width: var(--list-length);
+		padding-bottom: var(--space-large);
+	}
+</style>

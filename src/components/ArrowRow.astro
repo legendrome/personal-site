@@ -1,18 +1,24 @@
 ---
-// One line in a list of projects or posts, with an arrow that stretches on hover.
+// One line in a list, with an arrow that stretches on hover. "large" is for pages where
+// a single item has to fill the space, so one project reads as a feature and not a gap.
+// "date" puts the date in its own column, so dates line up down a list of posts.
 interface Props {
 	href: string;
 	title: string;
-	detail: string;
+	detail?: string;
+	date?: { label: string; iso: string };
+	large?: boolean;
+	heading?: 'h2' | 'h3';
 }
 
-const { href, title, detail } = Astro.props;
+const { href, title, detail, date, large = false, heading: Heading = 'h3' } = Astro.props;
 ---
 
-<a class="row" href={href}>
+<a class:list={['row', { large, dated: date }]} href={href}>
+	{date && <time datetime={date.iso}>{date.label}</time>}
 	<div>
-		<h3>{title}</h3>
-		<p>{detail}</p>
+		<Heading>{title}</Heading>
+		{detail && <p>{detail}</p>}
 	</div>
 	<svg viewBox="0 0 24 24" aria-hidden="true">
 		<path class="shaft" d="M 2,12 h 17"></path>
@@ -30,13 +36,39 @@ const { href, title, detail } = Astro.props;
 		text-decoration: none;
 	}
 
+	/* Lets long text wrap instead of pushing the arrow off a phone screen. */
+	.row > div {
+		min-width: 0;
+	}
+
+	h2,
 	h3 {
 		font-size: var(--size-row);
 		line-height: 1.2;
 	}
 
+	.large h2,
+	.large h3 {
+		font-size: var(--size-row-large);
+	}
+
+	.large p {
+		margin-top: var(--space-tiny);
+	}
+
+	.dated {
+		display: grid;
+		grid-template-columns: 11em minmax(0, 1fr) auto;
+		align-items: baseline;
+	}
+
+	time {
+		font-variant-numeric: tabular-nums;
+	}
+
 	svg {
 		flex: none;
+		align-self: center;
 		width: 1.75rem;
 		height: 1.75rem;
 		fill: none;
@@ -44,6 +76,17 @@ const { href, title, detail } = Astro.props;
 		stroke-width: 2;
 		stroke-linecap: round;
 		stroke-linejoin: round;
+	}
+
+	/* No room for a date column on a phone, so the date sits above the title. */
+	@media (max-width: 600px) {
+		.dated {
+			grid-template-columns: minmax(0, 1fr) auto;
+		}
+
+		time {
+			grid-column: 1 / -1;
+		}
 	}
 
 	/* Browsers that cannot animate a path's shape just keep the arrow still. */

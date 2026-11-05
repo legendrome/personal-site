@@ -1,0 +1,44 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageHead from '../../components/PageHead.astro';
+import Reading from '../../components/Reading.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getPosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const posts = await getPosts();
+	return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { data: site } = await getEntry('site', 'site');
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | ${site.name}`} opening="water" water="var(--water-writing)">
+	<PageHead title={post.data.title} small>
+		<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+	</PageHead>
+
+	<Reading image={post.data.image}>
+		<Content />
+	</Reading>
+
+	<p class="back"><a href="/writing">{site.allWriting}</a></p>
+</BaseLayout>
+
+<style>
+	time,
+	a {
+		font-weight: 500;
+	}
+
+	a {
+		color: inherit;
+		text-underline-offset: 4px;
+	}
+
+	.back {
+		padding-block: var(--space-large);
+	}
+</style>
