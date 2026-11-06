@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 3, pages, one at a time (Phase 0 writing continues alongside). Phase 2 is finished. The full site is live on the test address, with placeholders in the longer writing: https://personal-site.bsujith-pro.workers.dev/
+Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The domain switch waits until no placeholders remain. The full site is live on the test address, with placeholders in the longer writing: https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -41,7 +41,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [x] 404 page, including the Cloudflare setting that serves it (check it on the live site after the next push)
 - [x] Link previews and soft page changes
 - [x] Header links, skip link and footer with GitHub (LinkedIn appears once its address is in `site.json`)
-- [ ] Hand test: add a post from scratch using only `src/content/README.md`
+- [x] Hand test: add a post from scratch using only `src/content/README.md`
 
 ## Phase 4: domain and finish
 
@@ -85,3 +85,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - Chapter lines approved in upbeat wording and pushed with the full site. Cloudflare's page-not-found setting confirmed working live.
 2026-11-06 - Added the anchor line, sea floor, boat icon, link preview image, sea-coloured text selection, sky colour above the top of the page and "Come aboard". Committed locally. Next: Sujith's hand test, then chapters and small details side by side.
 2026-11-06 - First hand test attempt: Sujith wrote and added a post himself, but the build refused it because the file started with the guide's box markers and `\---`. The error named the file, but not the real cause. The guide now covers this, so the test still needs one clean run with no help.
+2026-11-06 - Phase 3 hand test passed: Sujith deleted the placeholder post, built, committed and pushed his first post with no AI, and it is live. Next: the About text and a first full chapter, then the switch to sujithbandaru.com.
