@@ -1,7 +1,7 @@
 ---
 title: "Hyderabad"
 place: "Hyderabad"
-line: "I made friends by making the effort."
+line: "Where I learned the value of culture and friendships."
 start: 2
 end: 3
 showYear: false

@@ -1,7 +1,7 @@
 ---
 title: "Now"
 place: "Now"
-line: "I’m excited to see what else I can do with AI."
+line: "Where I’m learning to become a better version of me every day."
 start: 5
 showYear: false
 ---

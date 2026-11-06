@@ -1,7 +1,7 @@
 ---
 title: "Malmö"
 place: "Malmö"
-line: "Where my story starts."
+line: "Where I learned to be creatively independent."
 start: 1
 end: 2
 showYear: false

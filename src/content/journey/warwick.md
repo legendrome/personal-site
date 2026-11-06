@@ -1,7 +1,7 @@
 ---
 title: "Warwick"
 place: "Warwick"
-line: "I set out to become an invincible student, and learned so much along the way."
+line: "Where I learned the importance of skills, knowledge and tools."
 start: 4
 end: 5
 showYear: false
