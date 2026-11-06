@@ -92,6 +92,12 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
 
+## 2026-11-06
+
+**The anchor drops as you scroll, using position: sticky.** Sujith wanted it to fall with the visitor, not wait at the bottom. It holds at the bottom edge of the screen while the rope pays out behind it, and lands on the sea floor as the page ends. Sticky positioning does this with no JavaScript. The anchor is small because it has to fit in the 16px gutter to stay clear of the text. This changes how the anchor behaves in the earlier entry about the rope.
+
+**The domain work is paused while the site itself gets finished.** Sujith wants to focus on the pages first, so the `site` address stays on the test address for now, even though sujithbandaru.com already serves the site.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
