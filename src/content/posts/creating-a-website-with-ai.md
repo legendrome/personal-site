@@ -1,17 +1,19 @@
 ---
-title: "What I learned creating a website with AI"
+title: "My learnings from creating a website with AI"
 date: 2026-11-04
-description: "What it really takes to build a website with AI, starting with no background."
+description: "To learn the secrets of what it takes to web dev with no background"
 ---
 
-Nobody tells you this about creating with AI: you still have to be the creative one. Either AI makes it and you watch, or you make it yourself with AI helping, catch where it went wrong and go again. The second way is the one worth doing.
+It's all a lie when it comes to creating with AI. It's actually either AI makes it and you're observing, or you try to make it, have AI help you, then realize it helped you wrong, and then redo it all again.
 
-I learned this trying to make a simple personal website with AI, rather than paying for a web builder. While working out what sort of website I wanted, I went through a few examples, gave them to AI and hoped it would show me something new. It did, and it felt so impersonal that I couldn't connect with it. What it was missing was me.
+What I've realized from this journey of just trying to make a very basic, simple personal website with AI, without having to pay whatever it costs for web builders and whatnot, is that you still need to engage in the creative design process yourself.
 
-Everybody says AI is a tool. What I'd add is that a tool works best when you understand your intention, and when you can picture what you would have done without it.
+When considering how or what sort of website I wanted to build, I went through a couple of examples. I gave AI the examples and hoped that it would be able to replicate or create something new and show it to me. And it did, but I found it to be so impersonal that I didn't connect with the website.
 
-That goes for research and work too. Take university. If I know what a good essay looks like, how it's structured, where the research should come from and what arguments to make, AI can help make it better. That knowledge is also how I can tell whether the result is any good.
+I mean, everybody tells you that AI isn't the solution to everything, you just have to use it as a tool. But even as a tool, the important thing is you need to have an understanding of your intention. And you should be able to visualize what you would have done without the tool in order to make the most use of the tool.
 
-So that's how I built this website. I went through other websites, picked five things I liked from each, made a list of what a good personal website should look like, and put it together slowly, one by one.
+And I think that applies to research, it applies to work as well. Take university, for example. I could use AI to write me my essay, but at the end I would not know whether it was a good essay because I wouldn't know what a good essay looked like. On the other hand, if I knew what a good essay was structured like and where the research should come from and what sort of arguments I should be making, then you can use AI to make it better.
 
-It's still growing, and I think it's coming along nicely.
+That's what I did for the website as well. I first went through the websites, picked five things that I liked from each website, built a list of, okay, what a good personal website should look like. And then I put it together slowly, one by one.
+
+This is just a prototype of my website currently as it stands. But I think it's coming along decently.
