@@ -7,7 +7,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 ## Phase 0: content and decisions (Sujith, no code)
 
 - [x] Pick a domain (see `docs/DECISIONS.md`, open questions)
-- [ ] Write the About page in Obsidian: who I am now, in my own voice
+- [x] Write the About page in Obsidian: who I am now, in my own voice
 - [ ] Write the journey chapters: Malmö, Hyderabad, Kenya, Warwick, now
 - [ ] Write up a first passion project; more follow over the years, so the section can launch small
 - [ ] Draft one blog post, so the blog launches with something in it
@@ -86,3 +86,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-06 - Added the anchor line, sea floor, boat icon, link preview image, sea-coloured text selection, sky colour above the top of the page and "Come aboard". Committed locally. Next: Sujith's hand test, then chapters and small details side by side.
 2026-11-06 - First hand test attempt: Sujith wrote and added a post himself, but the build refused it because the file started with the guide's box markers and `\---`. The error named the file, but not the real cause. The guide now covers this, so the test still needs one clean run with no help.
 2026-11-06 - Phase 3 hand test passed: Sujith deleted the placeholder post, built, committed and pushed his first post with no AI, and it is live. Next: the About text and a first full chapter, then the switch to sujithbandaru.com.
+2026-11-06 - About text approved and added, with the family company left out, and the LinkedIn link added. The domain work is paused while the pages get finished. Next: the Kenya chapter.
