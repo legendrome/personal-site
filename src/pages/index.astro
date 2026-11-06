@@ -3,6 +3,7 @@
 // site, then the latest work and writing, then the sea floor. All the words come from
 // src/content/.
 import { getEntry } from 'astro:content';
+import AnchorLine from '../components/AnchorLine.astro';
 import ArrowRow from '../components/ArrowRow.astro';
 import YearMarker from '../components/YearMarker.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -92,6 +93,8 @@ const latestPost = (await getPosts())[0];
 		<p>{site.floorLine}</p>
 	</section>
 
+	<div slot="at-waterline" class="rope-to-hull" aria-hidden="true"></div>
+	<AnchorLine slot="underwater" />
 	<YearMarker slot="overlay" start={site.markerStart} />
 </BaseLayout>
 
@@ -113,6 +116,18 @@ const latestPost = (await getPosts())[0];
 </script>
 
 <style>
+	/* The anchor line starts where the water does, which is a little below the waves. This
+	   short piece sits in the sky's part of the page and ties it up to the boat's hull. */
+	.rope-to-hull {
+		position: absolute;
+		z-index: 3;
+		left: calc(12% + var(--boat-width) / 2 - 1px);
+		bottom: var(--waterline-overlap);
+		width: 2px;
+		height: var(--space-medium);
+		background: var(--colour-rope);
+	}
+
 	.hello {
 		display: grid;
 		gap: var(--space-medium);

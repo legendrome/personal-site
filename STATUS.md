@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 3, pages, one at a time (Phase 0 writing continues alongside). Phase 2 is finished. The home page dive, with placeholder words, is live on the test address: https://personal-site.bsujith-pro.workers.dev/
+Current phase: 3, pages, one at a time (Phase 0 writing continues alongside). Phase 2 is finished. The full site is live on the test address, with placeholders in the longer writing: https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -48,7 +48,9 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [x] Register the domain (sujithbandaru.com)
 - [ ] Connect the domain and change the `site` address in `astro.config.mjs` to it
 - [ ] Redirect the test address to the domain, so two copies of the site do not exist
-- [ ] Sitemap, social preview images, favicon
+- [x] Social preview image and favicon
+- [ ] Sitemap
+- [ ] Check the phone top-of-page colour and link preview on a real iPhone
 - [ ] Accessibility check (contrast, keyboard, alt text)
 - [ ] Decide on analytics, privacy-friendly or none
 
@@ -80,3 +82,5 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - Header links, skip link and footer built, committed locally. The header links lead to "page not found" until the inner pages exist. Next: a mock of the inner pages. For the Phase 4 accessibility check: the header name is low contrast for the moment it crosses the waves, which is where the skip link lands.
 2026-11-05 - Inner pages built from the approved mock, committed locally, so every link now leads somewhere. Words are still placeholders. Next: the Phase 3 hand test, then Sujith's real words.
 2026-11-05 - Added "Back to the dive", and filled in headings so the site is easier to navigate. Still placeholders: chapter lines and text, About text, the first post and the project write-up.
+2026-11-05 - Chapter lines approved in upbeat wording and pushed with the full site. Cloudflare's page-not-found setting confirmed working live.
+2026-11-06 - Added the anchor line, sea floor, boat icon, link preview image, sea-coloured text selection, sky colour above the top of the page and "Come aboard". Committed locally. Next: Sujith's hand test, then chapters and small details side by side.

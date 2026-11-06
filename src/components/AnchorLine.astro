@@ -1,0 +1,88 @@
+---
+// A rope from the boat down the whole dive, ending at an anchor on the sea floor. It gives
+// the eye something to follow, and makes the bottom a place you arrive at. It runs down the
+// gutter left of the text, so it can never cross any words, at any screen width. It is pure
+// decoration, so screen readers skip it. Curved parts stretch to fit, which is why their
+// lines use non-scaling-stroke: it keeps the rope the same thickness all the way down.
+---
+
+<div class="anchor-line" aria-hidden="true">
+	<svg class="from-boat" viewBox="0 0 100 100" preserveAspectRatio="none">
+		<path d="M100 0 C100 55 0 45 0 100" vector-effect="non-scaling-stroke"></path>
+	</svg>
+	<div class="rope"></div>
+	<svg class="to-anchor" viewBox="0 0 100 100" preserveAspectRatio="none">
+		<path d="M0 0 C0 55 100 45 100 100" vector-effect="non-scaling-stroke"></path>
+	</svg>
+	<svg class="seabed" viewBox="0 0 1440 60" preserveAspectRatio="none">
+		<path d="M0 26 C 200 8, 420 38, 700 24 S 1180 6, 1440 30 V60 H0 Z"></path>
+	</svg>
+	<svg class="anchor" viewBox="0 0 40 48">
+		<circle cx="20" cy="5" r="3.5"></circle>
+		<path d="M20 9 V43 M12 16 H28 M3 28 C4 38 11 43 20 43 C29 43 36 38 37 28"></path>
+	</svg>
+</div>
+
+<style>
+	.anchor-line {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		/* How far the rope sits in from the edge, and how much room the anchor end takes. */
+		--rope-left: var(--space-tiny);
+		--anchor-end: calc(var(--space-huge) - var(--space-small));
+	}
+
+	svg {
+		position: absolute;
+		display: block;
+		overflow: visible;
+		fill: none;
+		stroke: var(--colour-rope);
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	/* From under the boat's hull across to the edge. Lined up with the boat in BaseLayout.astro. */
+	.from-boat {
+		top: 0;
+		left: var(--rope-left);
+		width: calc(12% + var(--boat-width) / 2 - var(--rope-left));
+		height: var(--space-huge);
+	}
+
+	.rope {
+		position: absolute;
+		top: var(--space-huge);
+		bottom: var(--anchor-end);
+		left: calc(var(--rope-left) - 1px);
+		width: 2px;
+		background: var(--colour-rope);
+	}
+
+	.to-anchor {
+		bottom: calc(var(--anchor-end) - var(--space-large));
+		left: var(--rope-left);
+		width: 2rem;
+		height: var(--space-large);
+	}
+
+	.seabed {
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: var(--space-large);
+		fill: var(--colour-water-deep);
+		stroke: none;
+	}
+
+	.anchor {
+		bottom: var(--space-tiny);
+		/* Centres the ring on the end of the rope. */
+		left: calc(var(--rope-left) + 2rem - 1.25rem);
+		width: 2.5rem;
+		height: 3rem;
+		stroke: var(--colour-on-water);
+	}
+</style>

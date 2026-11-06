@@ -86,6 +86,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The site's voice is upbeat, with no negative statements.** Sujith finds that negative lines kill the vibe, so headings, labels and short lines say what is good rather than what is missing.
 
+**A rope runs from the boat down the home page to an anchor on the sea floor.** It gives the eye something to follow and makes the bottom a place you arrive at, and it answers Sujith's point that a good site lives in its smaller details. It stays in the left gutter so it can never cross any words. Only the home page has it, because only the home page is the whole dive. The same test applies to future details: would taking it away make the site feel less like a dive?
+
+**Icons and the preview image are drawn by `scripts/make-images.mjs`.** Pictures cannot read `tokens.css`, so they hold their own copy of the colours, and the script makes them easy to redraw. It uses sharp, which already comes with Astro, so nothing new was added; if Astro ever stops including sharp, the script needs it installed first. The image has no words, because a link preview already shows the title and description.
+
 **The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
 
 ## Open questions

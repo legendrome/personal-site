@@ -3,8 +3,9 @@
 // - dive: sky and boat fill the first screen, then the water, which is the home page.
 // - deck: the page's content is in the sky, on the boat, with only the footer in the water.
 // - water: no sky, because the page starts below the surface.
-// Pages fill in two slots: "surface" for what sits above the water, and the default slot
-// for everything below it. "water" sets the page's own gradient, to keep it at its depth.
+// Pages fill in "surface" for what sits above the water, the default slot for everything
+// below it, and "underwater" for scenery behind that, such as the home page's anchor line.
+// "water" sets the page's own gradient, to keep it at its depth.
 import { Font } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import BackToDive from '../components/BackToDive.astro';
@@ -32,6 +33,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<Font cssVariable="--font-unbounded" preload />
@@ -44,6 +46,11 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={summary} />
 		<meta property="og:url" content={address} />
+		<meta property="og:image" content={new URL('/preview.png', Astro.site).href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="A small sailing boat on blue waves under a pale sky" />
+		<meta name="twitter:card" content="summary_large_image" />
 	</head>
 	<body id="top">
 		<a class="skip-link" href="#main">{site.skipLink}</a>
@@ -76,6 +83,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 					<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
 						<path d="M0 40 C 180 10, 360 70, 540 40 S 900 10, 1080 40 S 1320 70, 1440 36 V90 H0 Z" />
 					</svg>
+					<slot name="at-waterline" />
 				</div>
 			)
 		}
@@ -85,6 +93,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 			style={water ? `--water-gradient: ${water}` : undefined}
 		>
 			<SiteHeader tone="water" />
+			<slot name="underwater" />
 			{
 				opening !== 'deck' && (
 					<main id="main" class="inner" tabindex="-1">
@@ -122,6 +131,11 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 				sea.style.setProperty('--sea-top', `${top}px`);
 				sea.style.setProperty('--sea-height', `${height}px`);
 
+				// Pulling a phone past the end of a page shows the page's background colour. That
+				// is the sea floor, which suits the bottom but would look wrong above the sky.
+				const atSurface = Boolean(skyHeader) && scrollY < innerHeight / 2;
+				document.documentElement.classList.toggle('at-surface', atSurface);
+
 				// Only the copy in view stays reachable, so keyboard and screen reader users
 				// meet the links once, and never land on a link they cannot see. Switching one
 				// copy off for good would not work, as each is out of sight for part of the page.
@@ -145,6 +159,21 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 		background: var(--colour-water-floor);
 		/* Stops the fixed header covering whatever a link or the Tab key jumps to. */
 		scroll-padding-top: calc(var(--header-height) + var(--space-small));
+	}
+
+	html.at-surface {
+		background: var(--colour-sky);
+	}
+
+	/* Selected text swaps the colours of whatever is around it, so it stays part of the sea. */
+	::selection {
+		background: var(--colour-on-water);
+		color: var(--colour-water-deep);
+	}
+
+	.surface ::selection {
+		background: var(--colour-on-sky);
+		color: var(--colour-sky);
 	}
 
 	body {
@@ -260,6 +289,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 
 	/* One unbroken gradient, because lines between chapters broke the feeling of a single dive. */
 	.sea {
+		position: relative;
 		margin-top: calc(var(--waterline-overlap) * -1);
 		padding-top: var(--waterline-overlap);
 		background: var(--water-gradient);
@@ -298,6 +328,8 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 	}
 
 	footer {
+		/* Keeps the links in front of any underwater scenery. */
+		position: relative;
 		display: grid;
 		gap: var(--space-large);
 		padding-block: var(--space-large) var(--space-huge);

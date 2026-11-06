@@ -14,6 +14,7 @@
 	--colour-water-deep: #0b2a57;
 	--colour-water-floor: #060c1c;
 	--colour-on-water: #eaf6fc;
+	--colour-rope: color-mix(in srgb, var(--colour-on-water) 45%, transparent);
 	--water-gradient: linear-gradient(
 		var(--colour-water-shallow),
 		var(--colour-water-mid) 32%,
