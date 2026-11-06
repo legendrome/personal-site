@@ -84,3 +84,4 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-05 - Added "Back to the dive", and filled in headings so the site is easier to navigate. Still placeholders: chapter lines and text, About text, the first post and the project write-up.
 2026-11-05 - Chapter lines approved in upbeat wording and pushed with the full site. Cloudflare's page-not-found setting confirmed working live.
 2026-11-06 - Added the anchor line, sea floor, boat icon, link preview image, sea-coloured text selection, sky colour above the top of the page and "Come aboard". Committed locally. Next: Sujith's hand test, then chapters and small details side by side.
+2026-11-06 - First hand test attempt: Sujith wrote and added a post himself, but the build refused it because the file started with the guide's box markers and `\---`. The error named the file, but not the real cause. The guide now covers this, so the test still needs one clean run with no help.

@@ -62,7 +62,11 @@ The placeholder project and post can simply be deleted once you have real ones.
 
 Each file has two parts. The block between the two `---` lines is the frontmatter, a short list of facts about the piece. Everything below it is your writing, in normal text.
 
-Name the file in lowercase with hyphens and no spaces, such as `my-first-post.md`, because the name is planned to become part of the page's web address.
+The very first line of the file must be `---`, with nothing above it. When you copy an example from this guide, copy only the lines inside the grey box. Lines reading ` ```markdown ` or ` ``` ` mark the edges of the box and are not part of the example. Create the file in VS Code and paste it there, because Word, Notes and similar apps can change the text as it is pasted, such as turning `---` into `\---`.
+
+Name the file in lowercase with hyphens and no spaces, such as `my-first-post.md`, because the name becomes part of the page's web address.
+
+Separate paragraphs with one blank line, because a single long block of text shows on the page as one long paragraph.
 
 Put double quotes around any text in the frontmatter, because a character such as a colon can otherwise break it. Dates and numbers need no quotes.
 
@@ -82,7 +86,7 @@ description: "One sentence saying what this post is about."
 Your writing starts here.
 ```
 
-All three fields are required. Add `draft: true` to keep the post off the site.
+All three fields are required. Add `draft: true` to keep the post off the site. The post with the newest `date` is the one shown on the home page.
 
 ## Add a project
 
@@ -199,6 +203,7 @@ That means `posts/my-first-post.md` has a missing or badly written `date`. Fix t
 
 | The message says | What it means | The fix |
 |---|---|---|
+| `title`, `date` and `description` all fail at once | The build cannot find the frontmatter at all | Make `---` the very first line of the file, and remove anything above it or any `\` before it |
 | `Required` | A required field is missing | Add the field, spelled as in the examples above |
 | `Needs a date written like 2026-11-04` | The date is missing or not year-month-day | Write it like the example, with no quotes needed |
 | `Expected type "number", received "string"` | A year or number has quotes or words in it | Write just the number, such as `start: 2019` |
