@@ -92,6 +92,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
 
+## 2026-11-06
+
+**The site address is now sujithbandaru.com, and the test address stays on for now.** The domain turned out to be connected already, so the feed and link previews should use it. This replaces the earlier entry about using the test address. Each page also names the domain as its main address, so search engines should treat it as the real copy. Turning the test address off would break links already shared, so that waits until Sujith decides.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
