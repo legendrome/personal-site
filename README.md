@@ -13,7 +13,9 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Change the sticky header | `src/components/SiteHeader.astro` |
 | Change the footer, boat or waves | `src/layouts/BaseLayout.astro` |
 | Swap a font | The `fonts` list in `astro.config.mjs`, then `src/styles/tokens.css` |
-| Change the rope, anchor or sea floor | `src/components/AnchorLine.astro` |
+| Change the rope or anchor | `src/components/AnchorLine.astro` |
+| Change the sea floor scenery | `src/components/SeaFloor.astro` |
+| Change the margin down each side of every page | `--page-gutter` in `src/styles/tokens.css` |
 | Redraw the tab icons or link preview image | `scripts/make-images.mjs`, then run `node scripts/make-images.mjs` |
 | Replace my CV | `public/` |
 | Change my first line, headings, links or the header menu | `src/content/site.json` |

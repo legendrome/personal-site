@@ -98,6 +98,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The domain work is paused while the site itself gets finished.** Sujith wants to focus on the pages first, so the `site` address stays on the test address for now, even though sujithbandaru.com already serves the site.
 
+**A wider page margin, set by `--page-gutter`.** Sujith found the anchor too close to the text. Widening the margin on every page fixes that and keeps all content lined up with the header name, where moving only the rope would have left it no room. It replaces the 16px margin in the anchor entry above, so the anchor is now larger too.
+
+**The sea floor is drawn by hand in code, with no downloaded images.** Flat shapes match the boat and take their colours from `tokens.css`, so restyling the site restyles the floor. Only the home page has it, because only the home page is the whole dive.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

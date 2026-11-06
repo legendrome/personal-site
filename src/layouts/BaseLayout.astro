@@ -113,6 +113,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 					</div>
 				</div>
 			</footer>
+			<slot name="seafloor" />
 		</div>
 
 		<!-- Outside the sky and water, whose clip-paths would otherwise cut off anything fixed
@@ -228,7 +229,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 <style>
 	/* Everything starts at the same left edge as the name in the header. */
 	.inner {
-		padding-inline: var(--space-small);
+		padding-inline: var(--page-gutter);
 	}
 
 	.surface {

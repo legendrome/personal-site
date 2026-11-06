@@ -1,0 +1,115 @@
+---
+// The bottom of the dive, drawn in the same flat shapes as the boat so it looks like the
+// same world. All its colours come from tokens.css. It is scenery, so screen readers skip
+// it. "slice" crops the sides on a narrow screen instead of squashing the shapes, so
+// the things worth seeing are kept near the middle.
+---
+
+<svg class="sea-floor" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+	<path class="sand-back" d="M0 150 C 240 110, 480 170, 760 135 S 1200 105, 1440 150 V260 H0 Z"></path>
+
+	<g class="fish" transform="translate(90 -8)">
+		<path d="M930 70 C 942 60, 962 60, 974 70 C 962 80, 942 80, 930 70 Z M974 70 L990 60 V80 Z"></path>
+		<path d="M985 96 C 995 88, 1011 88, 1021 96 C 1011 104, 995 104, 985 96 Z M1021 96 L1034 88 V104 Z"></path>
+		<path d="M890 104 C 899 97, 913 97, 922 104 C 913 111, 899 111, 890 104 Z M922 104 L933 97 V111 Z"></path>
+	</g>
+
+	<g class="rocks">
+		<path d="M240 218 L262 170 L300 150 L345 165 L372 218 Z"></path>
+		<path d="M372 218 L388 190 L420 184 L445 218 Z"></path>
+		<path d="M640 218 L662 185 L705 175 L745 190 L770 218 Z"></path>
+		<path d="M1060 214 L1085 165 L1130 148 L1178 170 L1200 214 Z"></path>
+	</g>
+
+	<g class="seaweed">
+		<path class="sway" d="M520 215 C 500 170, 545 140, 522 100 S 540 40, 525 15"></path>
+		<path class="sway slow" d="M545 215 C 530 180, 570 155, 548 120 S 560 80, 550 60"></path>
+		<path class="sway" d="M495 215 C 480 185, 510 165, 492 135"></path>
+		<path class="sway slow" d="M900 212 C 885 175, 925 145, 905 105 S 920 60, 908 40"></path>
+		<path class="sway" d="M925 212 C 915 185, 945 165, 928 135"></path>
+		<path class="sway" d="M1320 215 C 1300 170, 1345 140, 1322 95 S 1340 45, 1325 25"></path>
+		<path class="sway slow" d="M1345 215 C 1330 180, 1370 155, 1348 120"></path>
+		<path class="sway slow" d="M120 212 C 105 175, 145 145, 125 105 S 140 65, 128 50"></path>
+	</g>
+
+	<path
+		class="coral"
+		d="M820 215 V170 M820 190 L795 160 L785 140 M795 160 L808 140 M820 175 L845 150 L835 130 M845 150 L860 132 M820 170 L822 135"
+	></path>
+
+	<path class="sand" d="M0 200 C 220 175, 430 215, 720 195 S 1180 170, 1440 205 V260 H0 Z"></path>
+
+	<g class="shells">
+		<path d="M625 208 L630 222 L645 222 L633 231 L638 245 L625 236 L612 245 L617 231 L605 222 L620 222 Z"></path>
+		<path d="M1000 232 C 1000 218, 1026 218, 1026 232 L1018 238 H1008 Z"></path>
+	</g>
+</svg>
+
+<style>
+	.sea-floor {
+		display: block;
+		width: 100%;
+		height: clamp(11rem, 18vw, 16rem);
+		/* Tucks up behind the footer's spare space, so the page does not gain an empty gap. */
+		margin-top: calc(var(--space-large) * -1);
+	}
+
+	.sand-back {
+		fill: var(--colour-sand-back);
+	}
+
+	.sand {
+		fill: var(--colour-sand);
+	}
+
+	.rocks {
+		fill: var(--colour-rock);
+		stroke: var(--colour-rock);
+		stroke-width: 8;
+		stroke-linejoin: round;
+	}
+
+	.fish {
+		fill: var(--colour-seaweed);
+	}
+
+	.seaweed path,
+	.coral {
+		fill: none;
+		stroke: var(--colour-seaweed);
+		stroke-width: 9;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.shells {
+		fill: var(--colour-shell);
+		stroke: var(--colour-shell);
+		stroke-width: 3;
+		stroke-linejoin: round;
+	}
+
+	/* Only the seaweed moves, slowly, so the floor feels alive without asking for attention. */
+	@media (prefers-reduced-motion: no-preference) {
+		.sway {
+			/* Rooted at its own base, so it bends from the sand and not from the page's corner. */
+			transform-box: fill-box;
+			transform-origin: bottom center;
+			animation: sway 6s ease-in-out infinite alternate;
+		}
+
+		.slow {
+			animation-duration: 8s;
+		}
+
+		@keyframes sway {
+			from {
+				transform: rotate(-2.5deg);
+			}
+
+			to {
+				transform: rotate(2.5deg);
+			}
+		}
+	}
+</style>

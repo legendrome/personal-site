@@ -1,18 +1,15 @@
 ---
 // An anchor that drops as you scroll: it holds its place on screen while the rope pays out
 // behind it, until it lands on the sea floor. Scrolling back up raises it again. This is all
-// done by position: sticky, so it needs no JavaScript. It runs down the gutter left of the
-// text, so it can never cross any words, at any screen width. It is pure decoration, so
-// screen readers skip it. The curve stretches to fit, which is why its line uses
-// non-scaling-stroke: that keeps the rope the same thickness all the way down.
+// done by position: sticky, so it needs no JavaScript. It runs down the page's side margin,
+// sized from --page-gutter so it keeps clear of the text at every screen width. It is pure
+// decoration, so screen readers skip it. The curve stretches to fit, which is why its line
+// uses non-scaling-stroke: that keeps the rope the same thickness all the way down.
 ---
 
 <div class="anchor-line" aria-hidden="true">
 	<svg class="from-boat" viewBox="0 0 100 100" preserveAspectRatio="none">
 		<path d="M100 0 C100 55 0 45 0 100" vector-effect="non-scaling-stroke"></path>
-	</svg>
-	<svg class="seabed" viewBox="0 0 1440 60" preserveAspectRatio="none">
-		<path d="M0 26 C 200 8, 420 38, 700 24 S 1180 6, 1440 30 V60 H0 Z"></path>
 	</svg>
 	<div class="drop">
 		<div class="weight">
@@ -29,10 +26,12 @@
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
-		/* The rope runs down the middle of the gutter, and the anchor fits exactly inside it. */
-		--rope-left: var(--space-tiny);
-		--anchor-width: var(--space-small);
-		--anchor-height: 1.25rem;
+		/* Everything is a share of the margin, so the gap to the text grows with the screen. */
+		--rope-left: calc(var(--page-gutter) * 0.35);
+		--anchor-width: calc(var(--page-gutter) * 0.55);
+		--anchor-height: calc(var(--anchor-width) * 1.25);
+		/* How far above the bottom of the page it comes to rest, on the sand. */
+		--anchor-rest: var(--space-medium);
 	}
 
 	svg {
@@ -43,7 +42,7 @@
 		stroke-linejoin: round;
 	}
 
-	/* From under the boat's hull across to the edge. Lined up with the boat in BaseLayout.astro. */
+	/* From under the boat's hull across to the margin. Lined up with the boat in BaseLayout.astro. */
 	.from-boat {
 		position: absolute;
 		top: 0;
@@ -54,33 +53,24 @@
 		stroke-width: 2;
 	}
 
-	.seabed {
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: var(--space-large);
-		fill: var(--colour-water-deep);
-	}
-
-	/* The whole fall, from the end of the curve to the sea floor. Clipping it stops the rope
-	   drawn on the weight showing above the curve. "clip" rather than "hidden", because
-	   "hidden" would stop the sticky position below from working. */
+	/* The whole fall, from the end of the curve to the sand. Clipping it stops the rope drawn
+	   on the weight showing above the curve. "clip" rather than "hidden", because "hidden"
+	   would stop the sticky position below from working. */
 	.drop {
 		position: absolute;
 		top: var(--space-huge);
-		bottom: var(--space-tiny);
+		bottom: var(--anchor-rest);
 		left: 0;
-		width: var(--anchor-width);
+		width: var(--page-gutter);
 		overflow: clip;
 	}
 
-	/* Holds at the bottom edge of the screen, which makes it look as if it leads the way down.
-	   That exact height means it touches the sea floor just as the page ends. A height any
+	/* Holds near the bottom edge of the screen, which makes it look as if it leads the way
+	   down. That exact height means it touches the sand just as the page ends. A height any
 	   further up would leave it hanging in the water at the bottom of the page. */
 	.weight {
 		position: sticky;
-		top: calc(100dvh - var(--anchor-height) - var(--space-tiny));
+		top: calc(100dvh - var(--anchor-height) - var(--anchor-rest));
 	}
 
 	/* The rope hangs above the anchor and only has to reach past the top of the screen. */
@@ -94,10 +84,12 @@
 		background: var(--colour-rope);
 	}
 
+	/* Moved across so the ring sits on the end of the rope. */
 	.anchor {
+		margin-left: calc(var(--rope-left) - var(--anchor-width) / 2);
 		width: var(--anchor-width);
 		height: var(--anchor-height);
 		stroke: var(--colour-on-water);
-		stroke-width: 4;
+		stroke-width: 3;
 	}
 </style>

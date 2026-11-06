@@ -15,6 +15,13 @@
 	--colour-water-floor: #060c1c;
 	--colour-on-water: #eaf6fc;
 	--colour-rope: color-mix(in srgb, var(--colour-on-water) 45%, transparent);
+
+	/* The sea floor, darkest at the back so the front feels closer */
+	--colour-sand-back: color-mix(in srgb, var(--colour-water-deep) 55%, var(--colour-water-floor));
+	--colour-sand: var(--colour-water-deep);
+	--colour-rock: color-mix(in srgb, var(--colour-water-mid) 55%, var(--colour-water-floor));
+	--colour-seaweed: var(--colour-water-mid);
+	--colour-shell: var(--colour-sky);
 	--water-gradient: linear-gradient(
 		var(--colour-water-shallow),
 		var(--colour-water-mid) 32%,
@@ -48,6 +55,8 @@
 	--space-medium: 1.5rem;
 	--space-large: 3rem;
 	--space-huge: 6rem;
+	/* The margin down each side of every page, which also gives the anchor line its room. */
+	--page-gutter: clamp(1.75rem, 5vw, 3.5rem);
 	--line-length: 34em;
 	--list-length: 52em;
 	--radius: 6px;

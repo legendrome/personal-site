@@ -6,6 +6,7 @@ import { getEntry } from 'astro:content';
 import AnchorLine from '../components/AnchorLine.astro';
 import ArrowRow from '../components/ArrowRow.astro';
 import YearMarker from '../components/YearMarker.astro';
+import SeaFloor from '../components/SeaFloor.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
 	chapterYears,
@@ -95,6 +96,7 @@ const latestPost = (await getPosts())[0];
 
 	<div slot="at-waterline" class="rope-to-hull" aria-hidden="true"></div>
 	<AnchorLine slot="underwater" />
+	<SeaFloor slot="seafloor" />
 	<YearMarker slot="overlay" start={site.markerStart} />
 </BaseLayout>
 
