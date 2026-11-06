@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The full site is live at https://sujithbandaru.com, with placeholders still in the longer writing, so the address should not be given out until those are gone. It is also still on the test address: https://personal-site.bsujith-pro.workers.dev/
+Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The domain switch waits until no placeholders remain. The full site is live on the test address, with placeholders in the longer writing: https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -46,9 +46,8 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 ## Phase 4: domain and finish
 
 - [x] Register the domain (sujithbandaru.com)
-- [x] Connect the domain and change the `site` address in `astro.config.mjs` to it
-- [ ] Make www.sujithbandaru.com redirect to the main address (a Cloudflare setting, left for later)
-- [ ] Decide when to turn off the test address, so two copies of the site do not exist
+- [ ] Connect the domain and change the `site` address in `astro.config.mjs` to it
+- [ ] Redirect the test address to the domain, so two copies of the site do not exist
 - [x] Social preview image and favicon
 - [ ] Sitemap
 - [ ] Check the phone top-of-page colour and link preview on a real iPhone
@@ -87,5 +86,3 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 2026-11-06 - Added the anchor line, sea floor, boat icon, link preview image, sea-coloured text selection, sky colour above the top of the page and "Come aboard". Committed locally. Next: Sujith's hand test, then chapters and small details side by side.
 2026-11-06 - First hand test attempt: Sujith wrote and added a post himself, but the build refused it because the file started with the guide's box markers and `\---`. The error named the file, but not the real cause. The guide now covers this, so the test still needs one clean run with no help.
 2026-11-06 - Phase 3 hand test passed: Sujith deleted the placeholder post, built, committed and pushed his first post with no AI, and it is live. Next: the About text and a first full chapter, then the switch to sujithbandaru.com.
-2026-11-06 - Found that sujithbandaru.com already serves the site, placeholders included, though the `site` address still points at the test address and www.sujithbandaru.com does not load. The rest of the domain work in Phase 4 is still to do.
-2026-11-06 - The `site` address now points at sujithbandaru.com, so link previews and the feed use it. The www redirect is left for later at Sujith's request.
