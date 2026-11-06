@@ -60,6 +60,13 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 - [ ] Ideally, a friend who codes reads it and says what confused them
 - [ ] Add a README section on upkeep: updating Astro and checking the site still builds
 
+## After prototype version 1
+
+Sujith wants these once the first version is done, so they are not part of it.
+
+- [ ] A more realistic sea floor, including seaweed that ripples along its length instead of swaying from its base
+- [ ] A more realistic boat
+
 ## Decisions log
 
 2026-11-03 - Plan set. Stack, hosting, repo shape and audience recorded in `docs/DECISIONS.md`.
