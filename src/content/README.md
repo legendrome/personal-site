@@ -8,7 +8,8 @@ Every post, project and journey chapter is one Markdown file in this folder, and
 | Add a project | Add a file to `projects/` (example below) |
 | Add a journey chapter | Add a file to `journey/` (example below) |
 | Change my first line, headings or links | Edit `site.json` (see "Site words" below) |
-| Change the About page | Edit `about.md`, where `description` is the sentence under the title |
+| Change the About page | Edit `about.md` (see "The About page" below) |
+| Add a role, course or note to About | Add a file to `experience/` (example below) |
 | Replace a placeholder | See "Replace a placeholder" below |
 | Fix a typo or change some words | Edit the file, then follow "Check and publish" |
 | Remove something from the site | Delete its file, then follow "Check and publish" |
@@ -19,11 +20,7 @@ The home page shows every journey chapter, every project marked `featured: true`
 
 Anything starting with `Placeholder:` is waiting for your words. To find what is left, search the `src/content` folder for that word in VS Code with Ctrl+Shift+F.
 
-Overwrite the placeholder words with your own and keep the rest of the file. Each journey chapter also needs these changes when its real words go in, because the placeholders use 1 to 5 just to set the order:
-
-1. Change `start` and `end` to the real years, leaving out `end` for your current chapter.
-2. Delete the `showYear: false` line, unless you want this chapter's years hidden.
-3. Replace the placeholder line below the second `---` with the full chapter. If you delete it and write nothing, the chapter keeps its one line on the home page and has no page of its own.
+Overwrite the placeholder words with your own and keep the rest of the file. For a journey chapter, replace the placeholder line below the second `---` with the full chapter. If you delete it and write nothing, the chapter keeps its one line on the home page and has no page of its own.
 
 The placeholder project and post can simply be deleted once you have real ones.
 
@@ -139,6 +136,45 @@ There are three optional fields:
 - `showYear: false` hides the years on the page, while `start` still sets the order. Use it if a chapter's year would give away a birth date.
 - `priority: 1` settles the order when two chapters start in the same year, with the lower number first. You can ignore it otherwise.
 - `draft: true` keeps it off the site.
+
+## The About page
+
+About has two parts, and its words live in two places.
+
+The first part, who you are, is `about.md`. The writing below the second `---` is the paragraphs at the top. The frontmatter holds everything else:
+
+| Field | Where it appears |
+|---|---|
+| `description` | The sentence under the title, and link previews |
+| `languagesHeading`, `languages` | Your languages. Each has a `name`, the `level` word shown beside it, and a `score` from 1 to 5 that sets the length of its bar |
+| `interestsHeading`, `interests` | The chips for what you do off the clock, one per line starting with `-` |
+| `interestsNote` | The optional line under the chips |
+| `doneHeading`, `doneIntro` | The heading and paragraph that open the second part |
+| `closing` | The last line of the page |
+
+The second part, what you have done, shows every journey chapter, newest first, with its one line. Under each chapter come the files in `experience/` that name it. To change a chapter's line, edit its file in `journey/`.
+
+## Add a role, course or note to About
+
+Create a file in `experience/` and copy this in:
+
+```markdown
+---
+chapter: "warwick"
+title: "Head of Operations"
+organisation: "Warwick Consulting Society"
+when: "2025 to 2026"
+date: 2025-04-01
+---
+
+One or two sentences about what you did.
+```
+
+`chapter` is the name of a file in `journey/` without `.md`, such as `"malmo"` or `"now"`. A name that matches no chapter fails the build, which tells you which file to fix.
+
+`when` is the dates as shown on the page, so `"Summer 2025"` works. `date` is when it started, and only sets the order, newest first.
+
+Every field except `chapter` is optional. A file with no `title` is a plain note that shows just its writing, like the tools line under Warwick, and a file with no `date` comes after the dated ones in its chapter. Add `draft: true` to hide one.
 
 ## Add an image
 

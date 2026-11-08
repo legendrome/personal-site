@@ -7,6 +7,9 @@
 	/* Above the water */
 	--colour-sky: #bfe1f0;
 	--colour-on-sky: #0b2a57;
+	/* Quieter text and lines on the sky, such as dates and the timeline on About */
+	--colour-on-sky-soft: color-mix(in srgb, var(--colour-on-sky) 70%, var(--colour-sky));
+	--colour-on-sky-line: color-mix(in srgb, var(--colour-on-sky) 30%, transparent);
 
 	/* Below the water, from the surface down to the sea floor */
 	--colour-water-shallow: #1c6ca3;

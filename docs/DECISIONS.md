@@ -102,6 +102,18 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The sea floor is drawn by hand in code, with no downloaded images.** Flat shapes match the boat and take their colours from `tokens.css`, so restyling the site restyles the floor. Only the home page has it, because only the home page is the whole dive.
 
+## 2026-11-08
+
+**About is in two parts: who Sujith is, then what he has done.** His vault note asks for a visual CV covering everything so far. He chose to keep the first part about him as a person, to invite people to understand him, and put the experience second. His About paragraphs moved between the parts without rewording.
+
+**The experience part is grouped by journey chapter, newest first, and stays on the deck.** Grouping under his own chapter lines makes the CV part read as his story and ties About to the journey. It stays above the water, because the home dive already uses depth for time going forward, and sinking while going back in time would contradict it.
+
+**Each role is its own file in `src/content/experience/`.** Adding a role is then adding a file, like a post or project, and the build checks each one. A file names its chapter, and a name that matches no chapter fails the build. Languages and interests are fields in `about.md`, because the page draws them as bars and chips.
+
+**Grades and contact details stay off the page.** Sujith wants the page to be about his journey, not his marks. The summer 2025 internship shows as "Finance intern" without naming the company, which he approved.
+
+**Chapter years are real now.** They come from his vault note, and he agreed the Malmö start year can show, since it does not give away his birth year.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

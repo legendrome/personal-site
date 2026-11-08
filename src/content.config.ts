@@ -1,7 +1,7 @@
 // The rules each file in src/content/ must follow. A file that breaks them fails
 // the build with a message naming the file and field, so a mistake stops at the
 // build instead of reaching the live site.
-import { defineCollection, type SchemaContext } from 'astro:content';
+import { defineCollection, reference, type SchemaContext } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
@@ -60,12 +60,50 @@ const journey = defineCollection({
 });
 
 // A collection of one file, so the About text gets the same checks as everything else.
+// The writing below the frontmatter is the first part of the page, who Sujith is. The
+// lists here are fields rather than writing, because the page draws them as chips and bars.
 const about = defineCollection({
 	loader: glob({ base: './src/content', pattern: 'about.md' }),
 	schema: z.object({
 		title: z.string(),
 		// The sentence under the title, and what link previews show.
 		description: z.string(),
+		languagesHeading: z.string(),
+		// "score" is out of 5 and sets the length of the bar, because a word like
+		// "Fluent" cannot be measured. "level" is the word shown beside it.
+		languages: z.array(
+			z.object({ name: z.string(), level: z.string(), score: z.number().int().min(1).max(5) }),
+		),
+		interestsHeading: z.string(),
+		interests: z.array(z.string()),
+		// An optional line under the interests.
+		interestsNote: z.string().optional(),
+		// The heading and paragraph that open the second part, what Sujith has done.
+		doneHeading: z.string(),
+		doneIntro: z.string(),
+		// The last line of the page.
+		closing: z.string(),
+	}),
+});
+
+// The second part of About: one file per role, course or note, shown under the journey
+// chapter it belongs to. Kept apart from the chapters so a new role is a new file, and
+// a chapter's own page stays about the story rather than the CV.
+const experience = defineCollection({
+	loader: glob({ base: './src/content/experience', pattern: '**/*.md' }),
+	schema: z.object({
+		// The journey file this belongs under, by its file name without .md. A name that
+		// matches no chapter fails the build, so a typo cannot hide an entry.
+		chapter: reference('journey'),
+		// Left out for a plain note, which shows just its writing.
+		title: z.string().optional(),
+		organisation: z.string().optional(),
+		// The dates as shown, free text so "Summer 2025" works.
+		when: z.string().optional(),
+		// When it started, used only for the order, newest first. Left out for a note,
+		// which then comes after the dated entries in its chapter.
+		date: z.coerce.date({ error: 'Needs a date written like 2026-11-04' }).optional(),
+		draft: z.boolean().default(false),
 	}),
 });
 
@@ -111,4 +149,4 @@ const site = defineCollection({
 	}),
 });
 
-export const collections = { posts, projects, journey, about, site };
+export const collections = { posts, projects, journey, about, experience, site };

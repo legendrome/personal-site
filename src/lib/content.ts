@@ -19,6 +19,17 @@ export async function getPosts() {
 	return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 }
 
+// The roles and notes for one chapter on About, newest first. Notes have no date, so
+// they come last, which keeps a closing line like the tools list at the bottom.
+export async function getExperience(chapterId: string) {
+	const entries = await getCollection(
+		'experience',
+		({ data }) => !data.draft && data.chapter.id === chapterId,
+	);
+	const time = (entry: CollectionEntry<'experience'>) => entry.data.date?.getTime() ?? -Infinity;
+	return entries.sort((a, b) => time(b) - time(a));
+}
+
 // A chapter with only its one line has no page of its own to link to.
 export function hasFullChapter(chapter: CollectionEntry<'journey'>) {
 	return Boolean(chapter.body?.trim());
