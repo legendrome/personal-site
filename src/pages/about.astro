@@ -23,7 +23,7 @@ const page = about.data;
 	<Fragment slot="surface">
 		<PageHead title={page.title} intro={page.description} />
 		<div class="about">
-			<section class="part">
+			<section class="part who">
 				<Reading>
 					<Content />
 				</Reading>
@@ -70,7 +70,22 @@ const page = about.data;
 	.about {
 		display: grid;
 		gap: var(--space-huge);
-		max-width: var(--list-length);
+		max-width: var(--wide-length);
+	}
+
+	/* On wide screens the languages and interests sit beside the writing rather than under
+	   it, while the writing keeps its comfortable reading width. */
+	@media (min-width: 60em) {
+		.who {
+			grid-template-columns: minmax(0, var(--line-length)) minmax(16rem, 24rem);
+			justify-content: space-between;
+			column-gap: var(--space-large);
+		}
+
+		.who .kit {
+			grid-template-columns: 1fr;
+			align-content: start;
+		}
 	}
 
 	.part {

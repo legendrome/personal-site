@@ -114,6 +114,10 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Chapter years are real now.** They come from his vault note, and he agreed the Malmö start year can show, since it does not give away his birth year.
 
+## 2026-11-09
+
+**About uses the full width on wide screens, while paragraphs stay narrow.** Sujith noticed everything sat on the left with the right side empty. Lines stay at `--line-length`, because long lines are tiring to read. From 60em up, languages and interests sit beside the writing, and each chapter's name and line move to the left of the rope. From 75em up, roles sit in two columns. On a laptop two columns would squeeze each role to a few words a line. The page's overall limit is `--wide-length`. Phones are unchanged.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

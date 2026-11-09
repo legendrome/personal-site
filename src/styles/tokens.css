@@ -62,6 +62,8 @@
 	--page-gutter: clamp(1.75rem, 5vw, 3.5rem);
 	--line-length: 34em;
 	--list-length: 52em;
+	/* The widest a page gets, used by About so wide screens fill out without lines getting long. */
+	--wide-length: 76em;
 	--radius: 6px;
 
 	/* The header */
