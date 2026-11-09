@@ -8,7 +8,8 @@ import { z } from 'astro/zod';
 // An image always comes with its description, because screen readers need one.
 // Without this rule, a missing description would pass unnoticed.
 const optionalImage = (image: SchemaContext['image']) =>
-	z.object({ src: image(), alt: z.string() }).optional();
+	// The caption is optional and shows under the image, for the story behind a photo.
+	z.object({ src: image(), alt: z.string(), caption: z.string().optional() }).optional();
 
 const posts = defineCollection({
 	loader: glob({ base: './src/content/posts', pattern: '**/*.md' }),

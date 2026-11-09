@@ -7,6 +7,7 @@ end: 2019
 image:
   src: "../../assets/kenya-bike-ride.webp"
   alt: "Four friends with bikes, seen from behind on a red dirt path through green bush under a cloudy evening sky."
+  caption: "During the two-week term break, we were hosted by a family whose kids went to our sister school there. We went on lots of trips with them, and this one was a bike ride inland to a nearby village, where they showed us their family's favourite spots and the people they know, and we had some of the local fish snacks. It was cultural exposure in an active way, and I enjoyed it a lot."
 ---
 
 From August to December 2019, I got to spend half an academic year in another country with my friends. It grew my understanding of other cultures and of how to thrive among very different people.

@@ -192,7 +192,10 @@ To give a post, project or chapter one main image, add this to its frontmatter i
 image:
   src: "../../assets/your-image.jpg"
   alt: "A short description of the image"
+  caption: "Optional: the story behind the photo, shown under it."
 ```
+
+`alt` is for screen readers and describes what the image shows. `caption` is for everyone, and can be left out.
 
 ## Check and publish
 
