@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The domain switch waits until no placeholders remain. The full site is live on the test address, with placeholders in the longer writing: https://personal-site.bsujith-pro.workers.dev/
+Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. No placeholders remain, so the domain switch can happen whenever Sujith is ready; he has parked the finish for later. The full site is live on the test address: https://personal-site.bsujith-pro.workers.dev/
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -8,8 +8,8 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 
 - [x] Pick a domain (see `docs/DECISIONS.md`, open questions)
 - [x] Write the About page in Obsidian: who I am now, in my own voice
-- [ ] Write the journey chapters: Malmö, Hyderabad, Kenya, Warwick, now
-- [ ] Write up a first passion project; more follow over the years, so the section can launch small
+- [x] Write the journey chapters: Malmö, Hyderabad, Kenya, Warwick, now
+- [x] Write up a first passion project; more follow over the years, so the section can launch small
 - [ ] Draft one blog post, so the blog launches with something in it
 - [ ] Decide what is public about other people and private matters
 - [ ] Decide whether to have a /now page (only if I will update it monthly)
@@ -100,3 +100,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-08 - Added his school years under Hyderabad from his university application CV, leaving out contact details and references. Committed locally, not pushed. Guitar, badminton and his two mottos are now in the first part of About, at his request; French is left out, because he is no longer learning it.
 2026-11-09 - The Kenya chapter is in, from the web draft Sujith approved, with his bike ride photo as its main image (no faces shown). Committed locally, not pushed. Next: more Kenya photos as he finds them, then mark the vault draft as published once it is live.
 2026-11-11 - Kenya caption pushed. Sanity check fixes done from the approved mock: page tops on About, Work and Writing lead with their sentence, fewer ocean puns (Sujith kept "Come aboard" and "Keep diving"), a basketball replaces the starfish, smaller gaps between chapters on a computer, and the faint line under the waves is gone. Committed locally, not pushed. Next: the Warwick chapter.
+2026-11-11 - The Malmö, Hyderabad, Warwick and Now chapters are in from the web drafts Sujith approved, with two edits to Hyderabad (IB years, and a line about his election friends removed). The "This website" write-up is in, drafted by Claude from the build and approved by Sujith. No placeholders remain. Committed locally, not pushed. The finish (domain, sitemap, accessibility check) is parked for later.
