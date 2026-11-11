@@ -86,6 +86,18 @@ const next = written[position + 1];
 		align-items: start;
 	}
 
+	/* On big screens the text grows a little and sits with the chapter list in the middle,
+	   instead of the text on the left and the list at the far right with a gap between.
+	   Line length is measured in letters, so lines keep the same number of words. What to
+	   do with the spare space on either side is still to be decided. */
+	@media (min-width: 75em) {
+		.body {
+			font-size: var(--size-text-large);
+			justify-content: center;
+			gap: var(--space-huge);
+		}
+	}
+
 	.descent {
 		position: sticky;
 		top: calc(var(--header-height) + var(--space-small));

@@ -134,6 +134,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The numbers are added by a small script, not a Markdown plugin.** Astro 7's Markdown engine needs an extra package (`@astrojs/markdown-remark`) for plugins, and a few lines of script avoid that dependency. Without JavaScript the headings still show, just without the numbers. The script is `src/components/LessonHeadings.astro`, and the styles are in `src/components/Reading.astro`.
 
+**On big screens, chapter text is a little larger and centred with the chapter list.** On a wide screen the text sat on the left and the chapter list at the far right, with a gap between. From 75em up the text grows to `--size-text-large` and the two sit together in the middle. Lines keep the same number of words, because line length is measured in letters. Sujith wants to decide later what fills the space either side, as the site grows. Laptops and phones are unchanged.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

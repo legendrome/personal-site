@@ -51,6 +51,7 @@
 	--size-reading-heading: clamp(1.25rem, 2.2vw, 1.75rem);
 	--size-lesson-number: clamp(3rem, 6vw, 4.5rem);
 	--size-text: 1.125rem;
+	--size-text-large: 1.25rem;
 	--size-small: 0.9375rem;
 
 	/* Spacing */
