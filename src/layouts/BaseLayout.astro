@@ -291,8 +291,10 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 	/* One unbroken gradient, because lines between chapters broke the feeling of a single dive. */
 	.sea {
 		position: relative;
-		margin-top: calc(var(--waterline-overlap) * -1);
-		padding-top: var(--waterline-overlap);
+		/* One pixel more than the sky's clip, because where the two meet at a fraction of a
+		   pixel the browser blends the edges into a faint pale line. */
+		margin-top: calc(var(--waterline-overlap) * -1 - 1px);
+		padding-top: calc(var(--waterline-overlap) + 1px);
 		background: var(--water-gradient);
 		/* Limits this area's fixed header to this area. See SiteHeader.astro. */
 		clip-path: inset(0);

@@ -159,7 +159,9 @@ const latestPost = (await getPosts())[0];
 	}
 
 	.stop {
-		min-height: 62svh;
+		/* Two fifths of the screen per chapter: enough for the dive to feel slow, without
+		   long stretches of empty water between chapters on a computer. */
+		min-height: 40svh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

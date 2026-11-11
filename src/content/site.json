@@ -5,11 +5,11 @@
 	"pinnedSentence": "Wherever I landed, I made the most of it.",
 	"workHeading": "Things I’ve built",
 	"writingHeading": "Deeper thoughts",
-	"floorHeading": "You made it.",
+	"floorHeading": "The bottom.",
 	"floorLine": "Come aboard. Here’s how to reach me.",
 	"markerStart": "On the boat",
 	"chapterLink": "Read the chapter",
-	"backUp": "Back up to the boat",
+	"backUp": "Back to the top",
 	"backToDive": "Back to the dive",
 	"skipLink": "Skip to the main content",
 	"nav": [
@@ -28,9 +28,9 @@
 	"keepDiving": "Keep diving",
 	"journeyEnd": "The next chapter is still being written",
 	"backUpTo": "Back up to",
-	"lostTitle": "Lost at sea.",
-	"lostLine": "This page has drifted off. The boat is right where you left it.",
-	"lostLink": "Swim back to the boat",
+	"lostTitle": "Page not found.",
+	"lostLine": "The home page is the best place to start.",
+	"lostLink": "Go to the home page",
 	"linkedin": "https://www.linkedin.com/in/sujith-bandaru-9b78a2215/",
 	"github": "https://github.com/legendrome"
 }

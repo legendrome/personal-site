@@ -7,17 +7,22 @@ interface Props {
 	intro?: string;
 	// A smaller title, for posts and projects, whose titles can be long.
 	small?: boolean;
+	// For About, Work and Writing: the page name becomes a small label and the intro becomes
+	// the headline. With a giant one-word title on all three, they read like a template;
+	// leading with each page's own sentence makes them differ by what they say. The name
+	// stays the h1, so screen readers still hear the page name first.
+	labelled?: boolean;
 	// Left off the page-not-found page, which has its own way back and nothing to return to.
 	back?: boolean;
 }
 
-const { title, intro, small = false, back = true } = Astro.props;
+const { title, intro, small = false, labelled = false, back = true } = Astro.props;
 ---
 
 <div class="head">
 	{back && <BackToDive />}
-	<h1 class:list={{ small }}>{title}</h1>
-	{intro && <p class="intro">{intro}</p>}
+	<h1 class:list={{ small, label: labelled }}>{title}</h1>
+	{intro && <p class:list={['intro', { headline: labelled }]}>{intro}</p>}
 	<slot />
 </div>
 
@@ -32,8 +37,29 @@ const { title, intro, small = false, back = true } = Astro.props;
 		font-size: var(--size-chapter);
 	}
 
+	.label {
+		font-family: var(--font-text);
+		font-size: var(--size-small);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
 	.intro {
 		font-size: var(--size-intro);
 		line-height: 1.35;
+	}
+
+	/* The label sits close above its headline, so the two read as one block. */
+	.label + .headline {
+		margin-top: calc(var(--space-medium) * -0.6);
+	}
+
+	.headline {
+		max-width: 16em;
+		font-family: var(--font-title);
+		font-size: var(--size-chapter);
+		font-weight: 800;
+		line-height: 1.1;
 	}
 </style>

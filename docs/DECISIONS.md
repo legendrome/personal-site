@@ -118,6 +118,16 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **About uses the full width on wide screens, while paragraphs stay narrow.** Sujith noticed everything sat on the left with the right side empty. Lines stay at `--line-length`, because long lines are tiring to read. From 60em up, languages and interests sit beside the writing, and each chapter's name and line move to the left of the rope. From 75em up, roles sit in two columns. On a laptop two columns would squeeze each role to a few words a line. The page's overall limit is `--wide-length`. Phones are unchanged.
 
+## 2026-11-11
+
+**About, Work and Writing open with their own sentence, not a giant one-word title.** Three pages with the same giant word and small line read like a template. The page name is now a small label and still the `h1`, so screen readers hear it first, and the intro sentence is the headline. Chapter, project and post pages keep their big titles, because those titles are already different on every page. This is the `labelled` option in `src/components/PageHead.astro`.
+
+**Ocean wording is kept to the site's one idea.** The boat in the first line and the dive (with "Back to the dive", "On the boat", "Keep diving" and "Come aboard", which Sujith chose to keep) stay. The rest became plain: "The bottom.", "Back to the top" and a plain page-not-found page. Too many sea puns together read like a generated theme.
+
+**A basketball on the sea floor instead of the starfish.** The starfish looked like clip art, and the basketball is a nod to his years as captain. If it ever feels silly, delete the `ball` group in `src/components/SeaFloor.astro`.
+
+**Chapters on the home page take two fifths of the screen, not two thirds.** The dive still feels slow, without long stretches of empty water on a computer. Phones are unchanged.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

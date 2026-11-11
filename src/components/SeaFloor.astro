@@ -37,10 +37,16 @@
 		d="M820 215 V170 M820 190 L795 160 L785 140 M795 160 L808 140 M820 175 L845 150 L835 130 M845 150 L860 132 M820 170 L822 135"
 	></path>
 
+	<!-- A basketball half sunk in the sand, a nod to Sujith's years as captain. It sits
+	     before the front sand in the file so the sand is drawn over its lower half. -->
+	<g class="ball">
+		<circle cx="610" cy="198" r="17"></circle>
+		<path d="M593 198 H627 M610 181 V215 M598 186 C 606 192, 606 204, 598 210 M622 186 C 614 192, 614 204, 622 210"></path>
+	</g>
+
 	<path class="sand" d="M0 200 C 220 175, 430 215, 720 195 S 1180 170, 1440 205 V260 H0 Z"></path>
 
 	<g class="shells">
-		<path d="M625 208 L630 222 L645 222 L633 231 L638 245 L625 236 L612 245 L617 231 L605 222 L620 222 Z"></path>
 		<path d="M1000 232 C 1000 218, 1026 218, 1026 232 L1018 238 H1008 Z"></path>
 	</g>
 </svg>
@@ -80,6 +86,17 @@
 		stroke-width: 9;
 		stroke-linecap: round;
 		stroke-linejoin: round;
+	}
+
+	.ball circle {
+		fill: var(--colour-shell);
+	}
+
+	.ball path {
+		fill: none;
+		stroke: var(--colour-sand);
+		stroke-width: 2.5;
+		stroke-linecap: round;
 	}
 
 	.shells {
