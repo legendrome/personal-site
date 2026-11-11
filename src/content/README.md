@@ -131,8 +131,9 @@ Your writing starts here.
 
 `start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter. The writing below the second `---` is optional: a chapter without any just shows its one line on the home page, and adding some makes `chapterLink` appear under it. Years appear in the corner marker as `2019 to 2022`, as `2019` when `start` and `end` match, and as `2026 onwards` when there is no `end`.
 
-There are three optional fields:
+There are four optional fields:
 
+- `lessons: true` turns each `## Heading` in the writing into a numbered lesson, with bubbles rising behind the number, like Warwick. Write the headings as normal `##` lines; the numbers are added for you.
 - `showYear: false` hides the years on the page, while `start` still sets the order. Use it if a chapter's year would give away a birth date.
 - `priority: 1` settles the order when two chapters start in the same year, with the lower number first. You can ignore it otherwise.
 - `draft: true` keeps it off the site.

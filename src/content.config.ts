@@ -55,6 +55,9 @@ const journey = defineCollection({
 			// Only a tiebreak for chapters starting in the same year, lower first. As the
 			// main sort, adding a chapter would mean renumbering every chapter after it.
 			priority: z.number().int().optional(),
+			// Turns each "##" heading in the writing into a numbered lesson with bubbles behind
+			// the number. See src/components/LessonHeadings.astro.
+			lessons: z.boolean().default(false),
 			image: optionalImage(image),
 			draft: z.boolean().default(false),
 		}),

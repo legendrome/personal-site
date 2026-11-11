@@ -128,6 +128,12 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Chapters on the home page take two fifths of the screen, not two thirds.** The dive still feels slow, without long stretches of empty water on a computer. Phones are unchanged.
 
+**Chapters can be built around lessons, starting with Warwick.** Sujith wanted chapters to read as if they were structured for a reason, not as a cleaned-up version of what he said. Warwick now opens with why he went, gives three lessons each with its story, and closes on what he took with him. His sentences are unchanged apart from order, four short headings and one joining line. The other chapters may follow, one at a time.
+
+**Lesson numbers are solid with bubbles rising behind them.** Outlined numbers showed lines crossing inside the 1, because the title font builds some digits from overlapping shapes. The number is the sky mixed into the chapter's water, so it looks soft but hides the bubbles. Each bubble rises and sways at its own speed, and anyone who asks their device for reduced motion sees them still.
+
+**The numbers are added by a small script, not a Markdown plugin.** Astro 7's Markdown engine needs an extra package (`@astrojs/markdown-remark`) for plugins, and a few lines of script avoid that dependency. Without JavaScript the headings still show, just without the numbers. The script is `src/components/LessonHeadings.astro`, and the styles are in `src/components/Reading.astro`.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

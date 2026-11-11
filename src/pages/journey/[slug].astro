@@ -3,10 +3,11 @@
 // page, so nothing links to an empty one.
 import { getEntry, render } from 'astro:content';
 import ArrowRow from '../../components/ArrowRow.astro';
+import LessonHeadings from '../../components/LessonHeadings.astro';
 import PageHead from '../../components/PageHead.astro';
 import Reading from '../../components/Reading.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { chapterWater, getChapters, hasFullChapter } from '../../lib/content';
+import { chapterMidWater, chapterWater, getChapters, hasFullChapter } from '../../lib/content';
 
 export async function getStaticPaths() {
 	const chapters = await getChapters();
@@ -36,10 +37,11 @@ const next = written[position + 1];
 >
 	<PageHead title={chapter.data.title} intro={chapter.data.line} />
 
-	<div class="body">
+	<div class="body" style={`--lesson-water: ${chapterMidWater(index, chapters.length)}`}>
 		<Reading image={chapter.data.image}>
 			<Content />
 		</Reading>
+		{chapter.data.lessons && <LessonHeadings />}
 
 		<!-- The line a diver follows down, showing where this chapter sits in the journey. -->
 		<ol class="descent">

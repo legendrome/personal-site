@@ -50,6 +50,16 @@ export function chapterWater(index: number, total: number) {
 	return `linear-gradient(${depth(index)}, ${depth(index + 1)})`;
 }
 
+// The single colour halfway down a chapter's water. Solid lesson numbers are mixed with it,
+// so they look soft against the water while still hiding the bubbles behind them.
+export function chapterMidWater(index: number, total: number) {
+	const shallow = 'var(--colour-water-shallow)';
+	const deep = 'var(--colour-water-deep)';
+	const floor = 'var(--colour-water-floor)';
+	if (index === total - 1) return `color-mix(in srgb, ${floor} 50%, ${deep})`;
+	return `color-mix(in srgb, ${deep} ${((index + 0.5) / (total - 1)) * 100}%, ${shallow})`;
+}
+
 // Empty for a chapter with showYear: false, whose years must not appear anywhere.
 export function chapterYears({ data }: CollectionEntry<'journey'>) {
 	if (!data.showYear) return '';

@@ -71,4 +71,113 @@ const { image } = Astro.props;
 	.reading :global(ol) {
 		margin: 0;
 	}
+
+	/* Numbered lesson headings, made by src/components/LessonHeadings.astro for chapters marked
+	   `lessons: true`. Three layers, bottom to top: the water, the bubbles, the number. */
+	.reading :global(.lesson-head) {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0 var(--space-small);
+		align-items: end;
+		margin-top: 1.5em;
+	}
+
+	.reading :global(.lesson-head h2) {
+		margin: 0;
+	}
+
+	.reading :global(.lesson-stage) {
+		position: relative;
+		/* Keeps the bubbles' layering inside the stage, so they never slip behind the page. */
+		isolation: isolate;
+		padding: 0.4rem 1rem 0 0.2rem;
+	}
+
+	/* Solid, so a bubble passing behind it disappears instead of showing through. The colour
+	   is the sky mixed into this chapter's water, set by the chapter page as --lesson-water. */
+	.reading :global(.lesson-number) {
+		position: relative;
+		z-index: 1;
+		display: block;
+		font-family: var(--font-title);
+		font-size: var(--size-lesson-number);
+		font-weight: 800;
+		line-height: 0.85;
+		color: color-mix(in srgb, var(--colour-sky) 50%, var(--lesson-water, var(--colour-water-mid)));
+	}
+
+	/* The outer part of a bubble rises; the inner part sways. Two movements at different
+	   speeds is what makes the path look natural rather than drawn. */
+	.reading :global(.bubble) {
+		position: absolute;
+		z-index: 0;
+		left: var(--x);
+		bottom: -0.6rem;
+		opacity: 0;
+		animation: lesson-rise var(--time) linear infinite;
+		animation-delay: var(--delay);
+	}
+
+	.reading :global(.bubble i) {
+		display: block;
+		width: var(--size);
+		height: var(--size);
+		border-radius: 50%;
+		/* Mostly clear, with a bright rim and a small highlight, like a real bubble. */
+		background: radial-gradient(
+			circle at 32% 30%,
+			color-mix(in srgb, white 90%, transparent) 0 12%,
+			color-mix(in srgb, var(--colour-on-water) 18%, transparent) 22%,
+			color-mix(in srgb, var(--colour-on-water) 6%, transparent) 60%,
+			color-mix(in srgb, var(--colour-on-water) 35%, transparent) 100%
+		);
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--colour-on-water) 45%, transparent);
+		animation: lesson-sway var(--sway-time) ease-in-out infinite alternate;
+		animation-delay: var(--delay);
+	}
+
+	/* Each bubble has its own place, size and speeds, so none move in step. */
+	.reading :global(.b1) { --x: 18%; --size: 12px; --time: 11s; --sway-time: 3.2s; --drift: 0.5rem; --delay: 0s; }
+	.reading :global(.b2) { --x: 52%; --size: 8px; --time: 9s; --sway-time: 2.6s; --drift: 0.35rem; --delay: -3s; }
+	.reading :global(.b3) { --x: 78%; --size: 6px; --time: 13s; --sway-time: 3.8s; --drift: 0.6rem; --delay: -7s; }
+	.reading :global(.b4) { --x: 36%; --size: 10px; --time: 12s; --sway-time: 3s; --drift: 0.45rem; --delay: -5s; }
+	.reading :global(.b5) { --x: 92%; --size: 5px; --time: 10s; --sway-time: 2.2s; --drift: 0.3rem; --delay: -9s; }
+
+	/* Each lesson starts its bubbles at a different point, so the numbers never move together. */
+	.reading :global(.lesson-head:nth-of-type(3n + 2) .bubble),
+	.reading :global(.lesson-head:nth-of-type(3n + 2) .bubble i) {
+		animation-delay: calc(var(--delay) - 4s);
+	}
+
+	.reading :global(.lesson-head:nth-of-type(3n) .bubble),
+	.reading :global(.lesson-head:nth-of-type(3n) .bubble i) {
+		animation-delay: calc(var(--delay) - 8s);
+	}
+
+	@keyframes lesson-rise {
+		0% { transform: translateY(0); opacity: 0; }
+		12% { opacity: 0.9; }
+		80% { opacity: 0.9; }
+		100% { transform: translateY(-6rem); opacity: 0; }
+	}
+
+	@keyframes lesson-sway {
+		from { transform: translateX(calc(var(--drift) * -1)); }
+		to { transform: translateX(var(--drift)); }
+	}
+
+	/* People who ask their device for less motion get still bubbles beside the number. */
+	@media (prefers-reduced-motion: reduce) {
+		.reading :global(.bubble),
+		.reading :global(.bubble i) {
+			animation: none;
+		}
+
+		.reading :global(.bubble) { opacity: 0.8; }
+		.reading :global(.b1) { transform: translateY(-1rem); }
+		.reading :global(.b2) { transform: translateY(-4.6rem); }
+		.reading :global(.b3) { transform: translateY(-2.2rem); }
+		.reading :global(.b4) { transform: translateY(-5.2rem); }
+		.reading :global(.b5) { transform: translateY(-3.4rem); }
+	}
 </style>

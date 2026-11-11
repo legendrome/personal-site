@@ -1,0 +1,36 @@
+---
+// Turns each "##" heading in a chapter into a numbered lesson heading, with bubbles rising
+// behind the number. Only chapters marked `lessons: true` include this. The look is in
+// src/components/Reading.astro, next to the other styles for written pieces.
+//
+// A script rather than a Markdown plugin, because Astro's Markdown plugins now need an
+// extra package. Without JavaScript the headings still show, just without the numbers.
+---
+
+<script>
+	const BUBBLES = 5;
+
+	document.querySelectorAll<HTMLElement>('.reading > h2').forEach((heading, index) => {
+		// The number and bubbles are scenery: screen readers skip them and hear just the heading.
+		const stage = document.createElement('div');
+		stage.className = 'lesson-stage';
+		stage.setAttribute('aria-hidden', 'true');
+
+		for (let i = 1; i <= BUBBLES; i++) {
+			const bubble = document.createElement('span');
+			bubble.className = `bubble b${i}`;
+			bubble.append(document.createElement('i'));
+			stage.append(bubble);
+		}
+
+		const number = document.createElement('span');
+		number.className = 'lesson-number';
+		number.textContent = String(index + 1).padStart(2, '0');
+		stage.append(number);
+
+		const head = document.createElement('div');
+		head.className = 'lesson-head';
+		heading.before(head);
+		head.append(stage, heading);
+	});
+</script>
