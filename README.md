@@ -24,6 +24,7 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Change the layout of another page | `src/pages/`, where each file or folder is named after its web address |
 | Change how deep a page starts | The `water` setting at the top of its page file, using the gradients in `src/styles/tokens.css` |
 | Change the shared title block or reading text | `src/components/PageHead.astro`, `src/components/Reading.astro` |
+| Write or rewrite a page with Claude's help | `.claude/skills/write-page/SKILL.md`, the process Claude follows, with the briefing and interview templates in the vault's `Website/` folder |
 | Change the link back to the spot left on the home page | `src/components/BackToDive.astro`, and the script in `src/pages/index.astro` |
 | Change the blog feed | `src/pages/rss.xml.js` |
 | Change the corner year marker | `src/components/YearMarker.astro` |

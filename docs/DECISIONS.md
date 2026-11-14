@@ -148,6 +148,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Sujith's graduation speech is embedded from YouTube, not downloaded.** The recording belongs to the school, which published it publicly with embedding allowed, so embedding is the use on offer, with nothing to download or store. The page shows a quote and a play button, and loads YouTube's privacy-enhanced player only when pressed, so the page stays fast and visitors who never watch are not tracked. Sujith checked that the speech names no one and holds nothing private. It sits at the end of Hyderabad, linked from the student council entry on About.
 
+**Pages are written through a set process, kept in the repo.** Rewriting Warwick showed that polishing notes makes a page smoother but not better, and that a brief and an interview find what the page is for. The process (brief, interview, format, spine and outline, follow-ups, draft with a fact check, build, revision) is `.claude/skills/write-page/SKILL.md`, with the fact check in `.claude/agents/fact-checker.md`. Both hold method and no private content, so they live in the public repo and travel with the project; a stranger can read how the pages were made. Sujith's answers stay in his vault. The site never depends on them: every page is still plain Markdown he can edit by hand.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

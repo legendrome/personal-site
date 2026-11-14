@@ -130,3 +130,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-14 - Plan step 4: the domain was already serving the site, so only the `site` address in `astro.config.mjs` changed, which link previews and the feed use. Still to do after sending: www, and turning off or redirecting the test address.
 2026-11-14 - Added Sujith's graduation speech (42:15 to 49:06 of the school's video) to the end of Hyderabad, with his favourite line as a quote, linked from About. Committed locally, not pushed.
 2026-11-14 - Plan steps 1 to 4 done and pushed. Sujith's iPhone check found the speech player sitting small in the corner of its panel; fixed and pushed. Left: he reloads Hyderabad on his iPhone to confirm, then sends the site. After that, plan steps 6 to 10.
+2026-11-14 - Plan steps 6 to 8 done: the write-page skill, the fact-checker agent, and the brief and interview templates in the vault. Next: step 9, Hyderabad through the new process.
