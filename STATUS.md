@@ -4,6 +4,26 @@ Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
+## Plan (tentative, set 2026-11-14)
+
+Sujith is sending the site to someone on 2026-11-15, so the work before that is only what that person will notice.
+
+Before sending:
+
+1. Build Warwick from the approved version 5, with the lesson layout: a big line per lesson, the story folded under "Read the story", and "What I did" cards that point to files in `src/content/experience/`. New home page line: "Where I learned the difference between what something is worth and what makes it worthwhile." About an hour.
+2. Read every page as the person receiving it would, and fix anything that reads badly. About 20 minutes.
+3. Push.
+4. Connect sujithbandaru.com, if there is time. Sujith clicks through Cloudflare while the address in `astro.config.mjs` changes. About 30 minutes. The first thing to drop if time runs short.
+5. Sujith checks the site and its link preview on his iPhone, then sends it.
+
+After sending:
+
+6. Write the page-writing process into a skill in the repo: brief, discovery interview, format proposal, spine and outline, follow-up questions, draft with a fresh-eyes fact check, build, and revision (diagnose vague feedback against a fixed list of causes, state the intended result, show every change marked up, and turn lasting feedback into rules). It keeps a list of the formats the site has, starting with lessons.
+7. A fact-checker agent definition that reads only the draft and Sujith's sources, and checks the draft against the brief.
+8. Two templates in the vault, a brief and a discovery interview, for Sujith to answer by voice note.
+9. Use the process on the other chapters one at a time, starting with Hyderabad, then posts.
+10. Still parked: the space either side of chapter text on wide screens, sitemap, accessibility check, analytics, and the Phase 5 handover test.
+
 ## Phase 0: content and decisions (Sujith, no code)
 
 - [x] Pick a domain (see `docs/DECISIONS.md`, open questions)
