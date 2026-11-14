@@ -146,6 +146,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The site's address is sujithbandaru.com.** The domain already served the site through Cloudflare, so the change was the `site` address in `astro.config.mjs`, which full links in link previews and the feed are built from. The test address stays on for now rather than being switched off the night before Sujith first shares the site; turning it off or redirecting it, and making www work, come after.
 
+**Sujith's graduation speech is embedded from YouTube, not downloaded.** The recording belongs to the school, which published it publicly with embedding allowed, so embedding is the use on offer, with nothing to download or store. The page shows a quote and a play button, and loads YouTube's privacy-enhanced player only when pressed, so the page stays fast and visitors who never watch are not tracked. Sujith checked that the speech names no one and holds nothing private. It sits at the end of Hyderabad, linked from the student council entry on About.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

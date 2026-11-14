@@ -6,6 +6,7 @@ import ArrowRow from '../../components/ArrowRow.astro';
 import LessonHeadings from '../../components/LessonHeadings.astro';
 import PageHead from '../../components/PageHead.astro';
 import Reading from '../../components/Reading.astro';
+import VideoMoment from '../../components/VideoMoment.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { chapterMidWater, chapterWater, getChapters, getProof, hasFullChapter } from '../../lib/content';
 
@@ -47,6 +48,7 @@ const next = written[position + 1];
 					<LessonHeadings proof={proof} storyLabel={site.storyLabel} proofLabel={site.proofLabel} />
 				)
 			}
+			{chapter.data.video && <VideoMoment {...chapter.data.video} />}
 		</Reading>
 
 		<!-- The line a diver follows down, showing where this chapter sits in the journey. -->

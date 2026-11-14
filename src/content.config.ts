@@ -62,6 +62,17 @@ const journey = defineCollection({
 			// file fails the build.
 			proof: z.array(z.union([z.literal(''), reference('experience')])).default([]),
 			image: optionalImage(image),
+			// A stretch of a YouTube video shown at the end of the chapter, such as a speech.
+			// Times are written as on YouTube, "42:15". See src/components/VideoMoment.astro.
+			video: z
+				.object({
+					youtube: z.string(),
+					start: z.string().regex(/^\d+(:\d{2}){1,2}$/, 'Write the time like 42:15'),
+					end: z.string().regex(/^\d+(:\d{2}){1,2}$/, 'Write the time like 49:06'),
+					label: z.string(),
+					quote: z.string().optional(),
+				})
+				.optional(),
 			draft: z.boolean().default(false),
 		}),
 });

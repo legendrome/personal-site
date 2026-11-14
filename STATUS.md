@@ -128,3 +128,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-14 - Plan step 1 done: Warwick version 5 built with the lesson layout and its new home page line, checked on a computer and a phone. Committed locally, not pushed.
 2026-11-14 - Plan step 2 done: reader pass on every page. With Sujith's OK, cut the outdated "just a prototype" ending from his post, the "national player" line from Malmö, and plainened one sentence in Now.
 2026-11-14 - Plan step 4: the domain was already serving the site, so only the `site` address in `astro.config.mjs` changed, which link previews and the feed use. Still to do after sending: www, and turning off or redirecting the test address.
+2026-11-14 - Added Sujith's graduation speech (42:15 to 49:06 of the school's video) to the end of Hyderabad, with his favourite line as a quote, linked from About. Committed locally, not pushed.

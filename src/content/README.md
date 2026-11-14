@@ -132,8 +132,9 @@ Your writing starts here.
 
 `start` and `end` are whole years with no quotes, because the timeline sorts on them. Delete the `end` line for your current chapter. The writing below the second `---` is optional: a chapter without any just shows its one line on the home page, and adding some makes `chapterLink` appear under it. Years appear in the corner marker as `2019 to 2022`, as `2019` when `start` and `end` match, and as `2026 onwards` when there is no `end`.
 
-There are four optional fields:
+There are five optional fields:
 
+- `video` shows a stretch of a YouTube video at the end of the chapter, like the speech in Hyderabad. See "Add a video to a chapter" below.
 - `lessons: true` lays the chapter out as numbered lessons, like Warwick. See "Write a chapter as lessons" below.
 - `showYear: false` hides the years on the page, while `start` still sets the order. Use it if a chapter's year would give away a birth date.
 - `priority: 1` settles the order when two chapters start in the same year, with the lower number first. You can ignore it otherwise.
@@ -176,6 +177,21 @@ proof:
 ```
 
 The card shows that file's title, organisation and writing, so a role is written once and appears on About and in the chapter. A name that matches no file stops the build and names the chapter to fix. The words "Read the story" and "What I did" are `storyLabel` and `proofLabel` in `site.json`.
+
+## Add a video to a chapter
+
+Add this to a chapter's frontmatter, using the code after `v=` in the YouTube address and the times as YouTube shows them:
+
+```yaml
+video:
+  youtube: "BFU2Eg7n5N0"
+  start: "42:15"
+  end: "49:06"
+  label: "Watch my graduation speech as student council president"
+  quote: "Optional: a line from the video, shown above it."
+```
+
+The page shows the quote and a play button with the length worked out for you, and YouTube only loads when someone presses it. To link to it from elsewhere, use the chapter's address followed by `#speech`, such as `/journey/hyderabad#speech`. Only embed videos that YouTube allows to be shared, and check that nobody in them would mind.
 
 ## The About page
 

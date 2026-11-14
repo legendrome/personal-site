@@ -4,6 +4,12 @@ place: "Hyderabad"
 line: "Where I learned the value of culture and friendships."
 start: 2016
 end: 2023
+video:
+  youtube: "BFU2Eg7n5N0"
+  start: "42:15"
+  end: "49:06"
+  label: "Watch my graduation speech as student council president"
+  quote: "Repeat after me: we are the batch of 2023, we own our freedom and our happiness, and no matter what, we will succeed. Good, now you just have to believe it."
 ---
 
 In 2016 we moved to Hyderabad, for family reasons. That wasn't my choice either. It simply was the next stage.
