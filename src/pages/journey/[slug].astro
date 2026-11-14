@@ -7,7 +7,7 @@ import LessonHeadings from '../../components/LessonHeadings.astro';
 import PageHead from '../../components/PageHead.astro';
 import Reading from '../../components/Reading.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { chapterMidWater, chapterWater, getChapters, hasFullChapter } from '../../lib/content';
+import { chapterMidWater, chapterWater, getChapters, getProof, hasFullChapter } from '../../lib/content';
 
 export async function getStaticPaths() {
 	const chapters = await getChapters();
@@ -19,6 +19,8 @@ export async function getStaticPaths() {
 const { chapter } = Astro.props;
 const { data: site } = await getEntry('site', 'site');
 const { Content } = await render(chapter);
+// The "What I did" cards for a chapter with lessons, looked up from experience/.
+const proof = await getProof(chapter);
 
 // Depth comes from all chapters, so a chapter's colour stays put while others are unwritten.
 const chapters = await getChapters();
@@ -40,8 +42,12 @@ const next = written[position + 1];
 	<div class="body" style={`--lesson-water: ${chapterMidWater(index, chapters.length)}`}>
 		<Reading image={chapter.data.image}>
 			<Content />
+			{
+				chapter.data.lessons && (
+					<LessonHeadings proof={proof} storyLabel={site.storyLabel} proofLabel={site.proofLabel} />
+				)
+			}
 		</Reading>
-		{chapter.data.lessons && <LessonHeadings />}
 
 		<!-- The line a diver follows down, showing where this chapter sits in the journey. -->
 		<ol class="descent">

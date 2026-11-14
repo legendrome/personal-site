@@ -55,9 +55,12 @@ const journey = defineCollection({
 			// Only a tiebreak for chapters starting in the same year, lower first. As the
 			// main sort, adding a chapter would mean renumbering every chapter after it.
 			priority: z.number().int().optional(),
-			// Turns each "##" heading in the writing into a numbered lesson with bubbles behind
-			// the number. See src/components/LessonHeadings.astro.
+			// Lays the writing out as numbered lessons. See src/components/LessonHeadings.astro.
 			lessons: z.boolean().default(false),
+			// For a chapter with lessons: one entry per lesson, in order, naming the file in
+			// experience/ whose card shows under it, or "" for no card. A name that matches no
+			// file fails the build.
+			proof: z.array(z.union([z.literal(''), reference('experience')])).default([]),
 			image: optionalImage(image),
 			draft: z.boolean().default(false),
 		}),
@@ -147,6 +150,9 @@ const site = defineCollection({
 		lostTitle: z.string(),
 		lostLine: z.string(),
 		lostLink: z.string(),
+		// The toggle that opens a folded lesson, and the label on its card.
+		storyLabel: z.string(),
+		proofLabel: z.string(),
 		// LinkedIn stays optional until Sujith gives the address, and its link is left out until then.
 		linkedin: z.url().optional(),
 		github: z.url(),

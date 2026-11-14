@@ -1,38 +1,50 @@
 ---
 title: "Warwick"
 place: "Warwick"
-line: "Where I learned the importance of skills, knowledge and tools."
+line: "Where I learned the difference between what something is worth and what makes it worthwhile."
 start: 2023
 end: 2026
 lessons: true
+proof:
+  - "reall"
+  - ""
+  - "finance-intern"
 ---
 
-I wouldn't describe Warwick as a pure choice. It was a choice within constraints, but it was mine. When it came to applying, I didn't know what I wanted to end up doing, so I applied to whichever economics-like courses I could find. US universities were asking for an arm and a leg. Warwick had a really interesting course in economics, psychology and philosophy, which I hadn't seen anywhere else, and it was an education in a new country. So I said, why not?
+I went to Warwick for a course I hadn't seen anywhere else, economics, psychology and philosophy, and for an education in a new country. I hoped to leave as an invincible student who had figured out his life. What I actually learned took me until graduation to notice: there is a sea of difference between what something is worth and what makes it worthwhile.
 
-My hope was that I would figure out my life, what job I wanted to do and what kind of person I would be, and become this invincible student. Clearly, that really did not happen. What happened instead was three lessons I didn't know I needed.
+I used to put a value tag on everything. Working was high value. Time with friends at 3am was low value, because I'd be sleep deprived. A boring-looking event was low value, because I wouldn't enjoy it. At Warwick I stopped weighing things and started asking what made them worthwhile. Those 3am chats did eat into my sleep, but they got me through some hard times, when I was overthinking things that could not have been simpler. Once I understood why some things mattered to me, a lot else fell into place.
 
 ## Saying what I mean
 
-The first memory that comes back is a moment in my flat's kitchen, which I shared with ten other people. We had been making jokes, and I was trying to get along with everyone. Then at some point the joke was about me. I went along with it for a couple of days, but one day I just snapped. I didn't think about what I wanted to say, who I was really targeting or what was really bothering me. I just told them I was sick of it and to stop, and I made the mood tense and awkward.
+> I had to consider what I wanted to say, and how, before I said it.
 
-One of my friends took me outside. He said he understood that I was upset, but the way I had said it meant nobody could tell what I was talking about or why I was annoyed. They just knew I was annoyed and really loud. I had to consider what I wanted to say, and how, before I said it.
+In my first year I shared a flat kitchen with ten people. We were always joking, until one day the joke was about me. I went along with it for a couple of days, then snapped and told everyone I was sick of it, without thinking about what was actually bothering me. A friend took me outside and explained that nobody could tell what I was upset about, only that I was upset and loud. I'd assumed that living in so many countries had already taught me how to communicate. It hadn't. Being right was never what made speaking up worthwhile. Being understood was.
 
-I was really embarrassed that night. I had thought that after living in so many countries with so many different people, I would already have learned how to deal with communication styles. I hadn't. So my growth over the next two years was focused on how I communicate and how I approach work.
+So when a teammate on a stats project wasn't pulling his weight, I asked him for a one-on-one instead of calling him out. He was struggling with a few things. I offered to help, and asked him to try first and tell me where he got stuck.
 
-## Holding a belief without being attached to it
+The biggest test was presenting an AI strategy to the CEO of ReAll and more than 40 of their staff, as a student consultant with 180 Degrees Consulting. I had researched the regulations, how to use AI safely and which tools could help, and made the slides myself. The hard part was pitching it at the right level. They knew far more about the corporate world than I did, but less about AI, and none of us were regulatory experts. So I kept the talk clear and left them an index that explained the regulations and tools in more depth, with what to search for to learn more. I was a bundle of nerves until the first word left my mouth. After that I was comfortable, because I trusted my research, and we went straight into questions. The project was later named among the top 2% of 180DC projects worldwide.
 
-Just recently, at Halloween, some friends and I sat up talking late into the night. A friend and I have now shared so many discussions that we purely listen to each other's words, refute what there is to refute, and concede where we need to concede, because we hold no emotional attachment to the belief we're holding in that moment.
+## Holding a belief loosely
 
-Between all the people I spoke to, the philosophy classes, and learning how to build an argument and how to model in economics, I think that's one of the biggest skills I've come away with: the ability to hold a belief while not being attached to it.
+> One of the biggest skills I've come away with: the ability to hold a belief while not being attached to it.
+
+A friend and I have had so many late-night discussions that we now just listen, refute what there is to refute and concede where we need to. Add the philosophy classes, and learning to build an argument and a model in economics, and I stopped needing to win. Getting to the best answer was what made the argument worthwhile.
+
+In a 24-hour case competition with three friends, we each had a different idea of how to approach the problem. We gave ourselves an hour to research the basics and form a hypothesis each, then explained them to one another. My friend's was easier to research, easier to calculate and easier to turn into a valid recommendation, so we went with it. We didn't progress, but it was a lot of fun.
 
 ## Measuring myself against myself
 
-I approached friends the way I had in Hyderabad. I was very lucky with the friends I found in my first-year flat, but beyond that I went out of my way to make friends on my course and in societies.
+> Once I stopped comparing, I felt free to focus on my strong points and my weak points, and see where I could grow.
 
-One of them took me aback when I first met him, because he had done everything I thought I would want to do. He was in great shape, he had the highest marks, and he was very charismatic. Honestly, I felt inferior to him, which was a new feeling. I'd seen people who were better than me before, but they weren't like me, and they hadn't grown up where I had. He seemed better than me in everything. I could have used him as a guide to what I could improve. Back then, though, I put him on a pedestal and told myself I couldn't do what he could do. I really valued myself in terms of others.
+Warwick was full of people who were better than me at something: sports, studies, socialising, mental clarity, and a few at all of them. I put many of them on pedestals and valued myself in terms of them. Once I stopped comparing, growing became the thing that was worthwhile, not where I ranked. I even made peace with the projects I didn't finish, because some of them I simply didn't enjoy.
 
-That changed over the course of university. I'm now able to find value in my skills, my capabilities and my shortcomings too, because they're all unique to me.
+What I found is that I'm hands on. If something needs sorting right now, my friends would send it my way. When one of the other society heads woke up too ill to give a talk, I learned the material with a couple of hours' notice and gave it myself, and by their account it went well.
 
-What I took with me is how to build a network in a different country, how to communicate in a way that holds up across different styles, and how to build a work ethic that gets most, if not all, things done. That last part I'm admittedly still working towards, but I've learned to be a lot more focused and clinical in how I approach tasks.
+It's the same at work. During my finance internship, my manager wanted an easier way to do the cash reconciliation, and I offered to sit down with AI and see what we could build. I came back with a rough sketch, and she helped me find where it could go wrong. The first version broke when a vendor was paid more than once in a month, and my projections assumed monthly or yearly schedules when real ones vary, so I changed the frequencies in the query. The finished model cut the preparation before each meeting from five hours to under one, and taught me to give AI one clear brief instead of a long back and forth.
 
-I still don't know much about my own career. But I am very interested in exploring new opportunities, doing the best I can, meeting new people and expanding the horizon of my abilities.
+---
+
+These days I journal and keep quick notes, so the things worth remembering actually stick. Every morning I move any ideas from my notes into my to-do list, next to the recurring things like learning valuation. And because I like a perfect start, I use a 3, 2, 1: a deep breath, a countdown, and I begin. It's also how I finally hold on to random facts. At a pub quiz recently I learned that the shortest war in history, between Britain and Zanzibar in 1896, lasted between 38 and 42 minutes, and now it's yours too.
+
+If I could tell myself one thing on my first day at Warwick, it would be this: it won't be easy, but nothing worthwhile is, so do what you do best, approach each day with a smile and make the most of it.

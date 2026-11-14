@@ -1,36 +1,105 @@
 ---
-// Turns each "##" heading in a chapter into a numbered lesson heading, with bubbles rising
-// behind the number. Only chapters marked `lessons: true` include this. The look is in
+// The lesson layout, for chapters marked `lessons: true`. In the Markdown, each lesson is a
+// "##" heading, then a "> " line for its big line, then the story. A "---" line ends the
+// last lesson, so the closing paragraphs after it are never folded. The script below
+// numbers each heading with bubbles rising behind it, folds the story under a toggle, and
+// moves in the "What I did" card named in the chapter's `proof` list. The look is in
 // src/components/Reading.astro, next to the other styles for written pieces.
 //
-// A script rather than a Markdown plugin, because Astro's Markdown plugins now need an
-// extra package. Without JavaScript the headings still show, just without the numbers.
+// A script rather than a Markdown plugin, because Astro's Markdown plugins now need an extra
+// package. Without JavaScript the chapter still reads in full, with the cards at the end.
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+	// One per lesson, in order. Empty where a lesson has no card.
+	proof: (CollectionEntry<'experience'> | undefined)[];
+	storyLabel: string;
+	proofLabel: string;
+}
+
+const { proof, storyLabel, proofLabel } = Astro.props;
+const cards = await Promise.all(
+	proof.map(async (entry) => (entry ? { entry, Content: (await render(entry)).Content } : undefined)),
+);
 ---
+
+<div class="lesson-cards" data-story-label={storyLabel}>
+	{
+		cards.map(
+			(card, index) =>
+				card && (
+					<aside class="card" data-lesson={index}>
+						<span class="card-label">{proofLabel}</span>
+						<strong>
+							{card.entry.data.title}
+							{card.entry.data.organisation && `, ${card.entry.data.organisation}`}
+						</strong>
+						<card.Content />
+					</aside>
+				),
+		)
+	}
+</div>
 
 <script>
 	const BUBBLES = 5;
+	const cards = document.querySelector<HTMLElement>('.lesson-cards');
+	const storyLabel = cards?.dataset.storyLabel ?? '';
 
 	document.querySelectorAll<HTMLElement>('.reading > h2').forEach((heading, index) => {
 		// The number and bubbles are scenery: screen readers skip them and hear just the heading.
 		const stage = document.createElement('div');
 		stage.className = 'lesson-stage';
 		stage.setAttribute('aria-hidden', 'true');
-
 		for (let i = 1; i <= BUBBLES; i++) {
 			const bubble = document.createElement('span');
 			bubble.className = `bubble b${i}`;
 			bubble.append(document.createElement('i'));
 			stage.append(bubble);
 		}
-
 		const number = document.createElement('span');
 		number.className = 'lesson-number';
 		number.textContent = String(index + 1).padStart(2, '0');
 		stage.append(number);
 
+		// Read what follows before moving the heading, so nothing is skipped.
+		let next = heading.nextElementSibling;
 		const head = document.createElement('div');
 		head.className = 'lesson-head';
 		heading.before(head);
 		head.append(stage, heading);
+
+		// The "> " line straight after the heading is the lesson's big line, always shown.
+		let after: Element = head;
+		if (next?.tagName === 'BLOCKQUOTE') {
+			next.classList.add('lesson-line');
+			after = next;
+			next = next.nextElementSibling;
+		}
+
+		// Everything up to the next lesson or the "---" line is the story, folded away.
+		const story = document.createElement('div');
+		story.className = 'lesson-story';
+		while (next && !['H2', 'HR'].includes(next.tagName) && !next.classList.contains('lesson-cards')) {
+			const current = next;
+			next = next.nextElementSibling;
+			story.append(current);
+		}
+		if (story.childElementCount) {
+			const details = document.createElement('details');
+			const summary = document.createElement('summary');
+			summary.textContent = storyLabel;
+			details.append(summary, story);
+			after.after(details);
+			after = details;
+		}
+
+		const card = cards?.querySelector(`[data-lesson="${index}"]`);
+		if (card) after.after(card);
 	});
+
+	// The "---" line only marks where the lessons end, so it is not drawn.
+	document.querySelectorAll('.reading > hr').forEach((line) => line.remove());
+	// Once its cards have moved, the empty holder would only add a gap at the end.
+	if (cards && !cards.childElementCount) cards.remove();
 </script>

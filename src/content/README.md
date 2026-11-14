@@ -43,6 +43,7 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `writingTitle`, `writingIntro`, `allWriting` | The title and sentence at the top of the Writing page, and the link back to it from a post |
 | `keepDiving`, `journeyEnd`, `backUpTo` | The words at the end of a chapter page |
 | `lostTitle`, `lostLine`, `lostLink` | The page people see at an address that does not exist |
+| `storyLabel`, `proofLabel` | In a chapter written as lessons, the toggle that opens a story and the label on a card |
 | `backUp` | The link at the bottom of pages with a boat, which returns to the top |
 | `backToDive` | The link at the top and bottom of inner pages, which returns to the spot left on the home page |
 | `skipLink` | The link keyboard users meet first, which jumps past the header |
@@ -133,10 +134,48 @@ Your writing starts here.
 
 There are four optional fields:
 
-- `lessons: true` turns each `## Heading` in the writing into a numbered lesson, with bubbles rising behind the number, like Warwick. Write the headings as normal `##` lines; the numbers are added for you.
+- `lessons: true` lays the chapter out as numbered lessons, like Warwick. See "Write a chapter as lessons" below.
 - `showYear: false` hides the years on the page, while `start` still sets the order. Use it if a chapter's year would give away a birth date.
 - `priority: 1` settles the order when two chapters start in the same year, with the lower number first. You can ignore it otherwise.
 - `draft: true` keeps it off the site.
+
+## Write a chapter as lessons
+
+With `lessons: true`, each lesson shows a number with bubbles, one big line, and its story folded under "Read the story". Write it like this below the frontmatter:
+
+```markdown
+The opening paragraphs, always shown.
+
+## The lesson's heading
+
+> The one line a skimmer should read.
+
+The story, as many paragraphs as you like. It starts folded.
+
+## The next lesson
+
+> Its big line.
+
+Its story.
+
+---
+
+The closing paragraphs, always shown.
+```
+
+The `---` line marks where the last lesson ends, so the paragraphs after it are not folded. The numbers are added for you.
+
+To put a "What I did" card under a lesson, add a `proof` list to the frontmatter, one line per lesson in order. Each line is the name of a file in `experience/` without `.md`, or `""` for no card:
+
+```yaml
+lessons: true
+proof:
+  - "reall"
+  - ""
+  - "finance-intern"
+```
+
+The card shows that file's title, organisation and writing, so a role is written once and appears on About and in the chapter. A name that matches no file stops the build and names the chapter to fix. The words "Read the story" and "What I did" are `storyLabel` and `proofLabel` in `site.json`.
 
 ## The About page
 

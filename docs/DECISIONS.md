@@ -136,6 +136,14 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **On big screens, chapter text is a little larger and centred with the chapter list.** On a wide screen the text sat on the left and the chapter list at the far right, with a gap between. From 75em up the text grows to `--size-text-large` and the two sit together in the middle. Lines keep the same number of words, because line length is measured in letters. Sujith wants to decide later what fills the space either side, as the site grows. Laptops and phones are unchanged.
 
+## 2026-11-14
+
+**Warwick is rewritten around Sujith's own idea: the difference between what something is worth and what makes it worthwhile.** It came from a writer-style interview, not from polishing his earlier notes. Each lesson shows the moment, the change and proof in real work, and ties back to that idea. The home page line changed to match.
+
+**The lesson layout folds each story and shows one big line and a card.** At a glance the chapter is three numbers, three lines and two cards, so a skimmer gets the point in seconds and a curious reader opens the stories. Cards name files in `src/content/experience/` rather than repeating them, so each role is written once. Built in `src/components/LessonHeadings.astro`.
+
+**A wrong name in `proof` or in an experience file's `chapter` stops the build.** Astro only logs these and finishes anyway, so the card or role would silently vanish from the live site. The checks in `src/lib/content.ts` stop the build and name the file instead.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

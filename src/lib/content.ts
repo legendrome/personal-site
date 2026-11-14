@@ -1,6 +1,6 @@
 // One place that decides what is published and in what order, so a draft cannot
 // appear on one page because that page forgot to hide it.
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
 export async function getChapters() {
 	const chapters = await getCollection('journey', ({ data }) => !data.draft);
@@ -22,12 +22,44 @@ export async function getPosts() {
 // The roles and notes for one chapter on About, newest first. Notes have no date, so
 // they come last, which keeps a closing line like the tools list at the bottom.
 export async function getExperience(chapterId: string) {
+	await checkExperienceChapters();
 	const entries = await getCollection(
 		'experience',
 		({ data }) => !data.draft && data.chapter.id === chapterId,
 	);
 	const time = (entry: CollectionEntry<'experience'>) => entry.data.date?.getTime() ?? -Infinity;
 	return entries.sort((a, b) => time(b) - time(a));
+}
+
+// Astro only logs a warning when a file names a chapter that does not exist, and the build
+// still finishes, so the entry would silently vanish from the live site. Failing here makes
+// the build stop with the file's name instead.
+async function checkExperienceChapters() {
+	const chapters = new Set((await getCollection('journey')).map(({ id }) => id));
+	for (const entry of await getCollection('experience')) {
+		if (!chapters.has(entry.data.chapter.id)) {
+			throw new Error(
+				`experience/${entry.id}.md names the chapter "${entry.data.chapter.id}", but there is no journey/${entry.data.chapter.id}.md`,
+			);
+		}
+	}
+}
+
+// Looks up the "What I did" cards a chapter names in its `proof` list. Fails the build on a
+// name that matches no file, for the same reason as above.
+export async function getProof(chapter: CollectionEntry<'journey'>) {
+	return Promise.all(
+		chapter.data.proof.map(async (item) => {
+			if (!item) return undefined;
+			const entry = await getEntry(item);
+			if (!entry) {
+				throw new Error(
+					`journey/${chapter.id}.md lists "${item.id}" in proof, but there is no experience/${item.id}.md`,
+				);
+			}
+			return entry;
+		}),
+	);
 }
 
 // A chapter with only its one line has no page of its own to link to.
