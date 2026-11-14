@@ -128,7 +128,9 @@ const embedUrl = `https://www.youtube-nocookie.com/embed/${youtube}?start=${from
 		background-color: color-mix(in srgb, var(--colour-sky) 20%, transparent);
 	}
 
-	iframe {
+	/* :global because the player is added by the script after the page loads, so Astro
+	   cannot mark it as belonging here, and a plain "iframe" rule would never reach it. */
+	.frame :global(iframe) {
 		display: block;
 		width: 100%;
 		height: 100%;
