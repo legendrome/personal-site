@@ -144,6 +144,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **A wrong name in `proof` or in an experience file's `chapter` stops the build.** Astro only logs these and finishes anyway, so the card or role would silently vanish from the live site. The checks in `src/lib/content.ts` stop the build and name the file instead.
 
+**The site's address is sujithbandaru.com.** The domain already served the site through Cloudflare, so the change was the `site` address in `astro.config.mjs`, which full links in link previews and the feed are built from. The test address stays on for now rather than being switched off the night before Sujith first shares the site; turning it off or redirecting it, and making www work, come after.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

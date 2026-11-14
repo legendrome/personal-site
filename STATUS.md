@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. No placeholders remain, so the domain switch can happen whenever Sujith is ready; he has parked the finish for later. The full site is live on the test address: https://personal-site.bsujith-pro.workers.dev/
+Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The site is live at https://sujithbandaru.com/. The test address (https://personal-site.bsujith-pro.workers.dev/) still works too, until it is turned off or redirected.
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -66,7 +66,8 @@ After sending:
 ## Phase 4: domain and finish
 
 - [x] Register the domain (sujithbandaru.com)
-- [ ] Connect the domain and change the `site` address in `astro.config.mjs` to it
+- [x] Connect the domain and change the `site` address in `astro.config.mjs` to it
+- [ ] Make www.sujithbandaru.com work, by sending it to sujithbandaru.com (it does not answer at all yet)
 - [ ] Redirect the test address to the domain, so two copies of the site do not exist
 - [x] Social preview image and favicon
 - [ ] Sitemap
@@ -126,3 +127,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-11 - Paused mid-Warwick. Read as a recruiter would, the chapter shows self-awareness but none of the Warwick achievements, its opening undersells the choice of course, and it ends on doubts about career and work ethic. Sujith likes the lighter layout mocked tonight (one big line per lesson, the story folded under "Read the story", a "What I did" card), but wants to rethink the content himself tomorrow before anything is built. Lesson three has no card yet. Three commits wait to push: the chapters, Warwick's lessons and the centred chapter text.
 2026-11-14 - Plan step 1 done: Warwick version 5 built with the lesson layout and its new home page line, checked on a computer and a phone. Committed locally, not pushed.
 2026-11-14 - Plan step 2 done: reader pass on every page. With Sujith's OK, cut the outdated "just a prototype" ending from his post, the "national player" line from Malmö, and plainened one sentence in Now.
+2026-11-14 - Plan step 4: the domain was already serving the site, so only the `site` address in `astro.config.mjs` changed, which link previews and the feed use. Still to do after sending: www, and turning off or redirecting the test address.
