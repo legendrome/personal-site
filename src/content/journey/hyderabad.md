@@ -9,7 +9,7 @@ video:
   start: "42:15"
   end: "49:06"
   label: "Watch my graduation speech as student council president"
-  quote: "Repeat after me: we are the batch of 2023, we own our freedom and our happiness, and no matter what, we will succeed. Good, now you just have to believe it."
+  quote: "We are the batch of 2023. We own our freedom and we own our happiness, and no matter what happens, we will succeed. Good, now you just have to believe it."
 ---
 
 In 2016 we moved to Hyderabad, for family reasons. That wasn't my choice either. It simply was the next stage.
