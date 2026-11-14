@@ -16,6 +16,6 @@ My school was very multicultural. I got to meet people from India, like me, and 
 
 I learned a good bit about myself too. I loved spending time with my friends, but I also enjoyed my own time, reading my books and playing my games. I was naturally curious, with a short attention span. And whatever extracurricular I took up, I always wanted to get better at it.
 
-There were a lot of them: swimming, cricket, the violin, which I later dropped for the guitar, the choir and the school plays. And badminton, how could I forget badminton? It was my and my best friend's favourite sport. We played it so much that we joined a club, and we ended up competing in under 12 and under 13 tournaments, including against Danish clubs. So for a moment there, I was a national player.
+There were a lot of them: swimming, cricket, the violin, which I later dropped for the guitar, the choir and the school plays. And badminton, how could I forget badminton? It was my and my best friend's favourite sport. We played it so much that we joined a club, and we ended up competing in under 12 and under 13 tournaments, including against Danish clubs.
 
 I never thought about taking anything specific with me when I left. But in hindsight, spending so much time in a very open, progressive and diverse society showed me, from a very young age, the many kinds of people there are in the world. I think it made me a lot more perceptive about cultures, feelings, ideas and expressions, and that has helped my social skills throughout my life.

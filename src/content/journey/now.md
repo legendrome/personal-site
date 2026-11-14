@@ -5,7 +5,7 @@ line: "Where I’m learning to become a better version of me every day."
 start: 2026
 ---
 
-I'm based in London now. My normal days are about upskilling myself, through courses like a valuation course and the McKinsey Forward Programme, to gain insights on the changes to make as AI steps into my career.
+I'm based in London now. My normal days are about upskilling myself, through courses like a valuation course and the McKinsey Forward Programme, to understand how AI is changing the work I want to do.
 
 I'm curious about how else I can use AI right now. I'm in the middle of trying to build an AI valuation bot, based on what I've learned, as well as an investment agent tailored to my needs.
 

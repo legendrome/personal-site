@@ -15,5 +15,3 @@ I mean, everybody tells you that AI isn't the solution to everything, you just h
 And I think that applies to research, it applies to work as well. Take university, for example. I could use AI to write me my essay, but at the end I would not know whether it was a good essay because I wouldn't know what a good essay looked like. On the other hand, if I knew what a good essay was structured like and where the research should come from and what sort of arguments I should be making, then you can use AI to make it better.
 
 That's what I did for the website as well. I first went through the websites, picked five things that I liked from each website, built a list of, okay, what a good personal website should look like. And then I put it together slowly, one by one.
-
-This is just a prototype of my website currently as it stands. But I think it's coming along decently.
