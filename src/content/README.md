@@ -187,7 +187,7 @@ video:
   youtube: "BFU2Eg7n5N0"
   start: "42:15"
   end: "49:06"
-  label: "Watch my graduation speech as student council president"
+  label: "Watch my high school graduation speech as student council president"
   quote: "Optional: a line from the video, shown above it."
 ```
 
