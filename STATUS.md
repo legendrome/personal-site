@@ -6,9 +6,11 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 
 ## Design pass (approved 2026-11-16)
 
+All design-pass work happens on the `redesign` branch, checked out in its own folder, `C:\Users\kumar\Projects\personal-site-redesign`, and previewed locally (launch config "redesign", port 4322). `main` stays exactly what is live, so small fixes can still be published. When Sujith is satisfied, `redesign` is merged into `main` and pushed in one go. Nothing from this branch is pushed before then.
+
 A senior audit found the theme works but a recruiter cannot tell who Sujith is or how to reach him in the first seconds. Direction chosen: "Deeper dive", which keeps the ocean, Unbounded and Karla, and adds buoy orange for the main action. Five phases, each shown to Sujith before the next:
 
-1. Foundation: type scale, accent, breakpoints, shared tokens, Karla 700, link colour, tap sizes, checks at 320px and 200% zoom. Done 2026-11-16, committed locally, not pushed.
+1. Foundation: type scale, accent, breakpoints, shared tokens, Karla 700, link colour, tap sizes, checks at 320px and 200% zoom. Done 2026-11-16, committed on the redesign branch.
 2. Home page, mocked first: a hero with a plain line and two buttons ("Get in touch", "Start the dive"), an "At a glance" strip, a tighter journey section, a contact button in the footer. Text in `site.json`.
 3. Inner pages: experience before interests on About, the headline as the h1, a decision on Work, plain labels in place of "Back to the dive".
 4. Features: hand-written sitemap and robots.txt, missing link-preview tags, structured data, his photo when he has one; analytics and an email link only if he says yes.

@@ -154,6 +154,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The site keeps the ocean dive and gets sharper rather than replaced.** A fresh audit found the problems were information and hierarchy (a recruiter cannot tell who Sujith is or how to reach him within seconds), not the theme, which is the most memorable thing about the site. Of three directions (a refined dive, a paper logbook, a nautical chart), Sujith chose the refined dive. The audit and plan are summarised in `STATUS.md`.
 
+**The design pass lives on its own branch until Sujith is happy with all of it.** He wants to change a copy, not the live site, until satisfied. A git branch (`redesign`) in a second folder (a "worktree") does that: `main` stays what is live and can still take small fixes, and the redesign is merged and pushed in one go at the end. The branch stays on his computer, because pushing it would put work in progress in the public repo.
+
 **Text sizes come from a six-step type scale.** The nine separate sizes in `src/styles/tokens.css` now each point at one of six steps (`--step--1` to `--step-4`), so headings always sit in proportion and the whole site's type can be resized from one place. Component files still use the named sizes, so nothing outside `tokens.css` had to learn the steps.
 
 **One warm accent, buoy orange (#ff8a3d), for the main action on a page.** This amends the 2026-11-05 entry that rejected red and green accents: those competed with the water, while a single warm colour used only for buttons such as "Get in touch" gives the eye one place to land. It is not used for focus outlines, because orange on the light sky is too faint to see.
