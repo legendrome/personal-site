@@ -8,7 +8,6 @@
 // "water" sets the page's own gradient, to keep it at its depth.
 import { Font } from 'astro:assets';
 import { getEntry } from 'astro:content';
-import BackToDive from '../components/BackToDive.astro';
 import CursorWater from '../components/CursorWater.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/tokens.css';
@@ -121,8 +120,9 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 				)
 			}
 			<footer class="inner">
-				{/* A water page has no boat of its own, so it returns to the spot left on the home page. */}
-				{opening === 'water' ? <BackToDive /> : <a href="#top">{site.backUp}</a>}
+				{/* Home is always one click away through the name in the menu, so the footer only
+				    offers the way back up this page. */}
+				<a href="#top">{site.backUp}</a>
 				<div class="foot">
 					<span>{site.name}</span>
 					<div class="links">

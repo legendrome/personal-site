@@ -34,7 +34,8 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Change how deep a page starts | The `water` setting at the top of its page file, using the gradients in `src/styles/tokens.css` |
 | Change the shared title block or reading text | `src/components/PageHead.astro`, `src/components/Reading.astro` |
 | Write or rewrite a page with Claude's help | `.claude/skills/write-page/SKILL.md`, the process Claude follows, with the briefing and interview templates in the vault's `Website/` folder |
-| Change the link back to the spot left on the home page | `src/components/BackToDive.astro`, and the script in `src/pages/index.astro` |
+| Change the back button on chapters, projects and posts | `src/components/PageHead.astro` |
+| Change the boat and name that link home in the menu | `src/components/SiteHeader.astro` |
 | Change the blog feed | `src/pages/rss.xml.js` |
 | Change the project and post rows, or their arrow | `src/components/ArrowRow.astro` |
 | Change what counts as published, or the order | `src/lib/content.ts` |

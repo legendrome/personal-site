@@ -40,7 +40,7 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `surfaceZone`, `workZone`, `journeyZone`, `writingZone`, `floorZone` | The ocean-zone names: small labels above each section of the home page, and what the depth gauge on the right shows |
 | `proofHeading`, `projectsHeading` | The headings above the proof cards and the projects, on the home page and Work |
 | `journeyHeading`, `journeyLink` | The heading of the journey section on the home page and its link to the Journey page |
-| `journeyTitle` | The title of the Journey page |
+| `journeyTitle` | The title of the Journey page, and the label on the back button at the top of a chapter |
 | `description` | Search results and link previews |
 | `pinnedSentence` | The sentence under "Where I've been" on the home page, and at the top of the Journey page |
 | `writingHeading` | The heading above your latest post on the home page |
@@ -48,15 +48,13 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `floorHeading`, `floorLine` | The heading and last line at the bottom of the dive |
 | `markerStart` | Not shown at the moment: the corner marker is off while the redesign is in progress |
 | `chapterLink` | The link under a chapter that has a full write-up |
-| `workTitle`, `workIntro` | The title and sentence at the top of the Work page |
+| `workTitle`, `workIntro` | The title and sentence at the top of the Work page; the title is also the back button on a project |
 | `allWork`, `projectLink` | On a project page, the link back to all projects and the link to a project's `link` address |
-| `writingTitle`, `writingIntro`, `allWriting` | The title and sentence at the top of the Writing page, and the link back to it from a post |
+| `writingTitle`, `writingIntro`, `allWriting` | The title and sentence at the top of the Writing page (the title is also the back button on a post), and the link back to it at the end of a post |
 | `keepDiving`, `journeyEnd`, `backUpTo` | The words at the end of a chapter page |
 | `lostTitle`, `lostLine`, `lostLink` | The page people see at an address that does not exist |
 | `storyLabel`, `proofLabel` | In a chapter written as lessons, the toggle that opens a story and the label on a card |
-| `backUp` | The link at the bottom of pages with a boat, which returns to the top |
-| `backToDive` | The link at the top and bottom of inner pages, which returns to the spot left on the home page |
-| `backToJourney` | The link at the top of a chapter page, back to the Journey page |
+| `backUp` | The link at the bottom of every page, which returns to the top |
 | `skipLink` | The link keyboard users meet first, which jumps past the header |
 | `nav` | The header menu, with each item's label and the page it goes to |
 | `github`, `linkedin` | Your links in the footer, each a full address starting with `https://` |

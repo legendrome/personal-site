@@ -25,7 +25,7 @@ const { Content } = await render(project);
 		title={project.data.title}
 		intro={project.data.summary}
 		small
-		back={{ href: '/work', label: site.allWork }}
+		back={{ href: '/work', label: site.workTitle }}
 	>
 		<p class="meta">
 			<time datetime={project.data.date.toISOString()}>{formatDate(project.data.date)}</time>

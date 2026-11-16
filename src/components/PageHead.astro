@@ -1,6 +1,5 @@
 ---
 // The title block at the top of every inner page.
-import BackToDive from './BackToDive.astro';
 
 interface Props {
 	title: string;
@@ -13,17 +12,26 @@ interface Props {
 	// The headline is the h1, the page's main heading, because it is what the page is about;
 	// the browser tab and search results still carry the page name.
 	labelled?: boolean;
-	// The link back up. Left off the page-not-found page, which has its own way back. A
-	// chapter passes its own, back to the Journey page, instead of the default home link.
-	back?: boolean | { href: string; label: string };
+	// For a page inside a section (a chapter, a project, a post): a small button back up to
+	// that section, such as "Journey". Other pages have none, because the name in the menu
+	// already goes home on every page.
+	back?: { href: string; label: string };
 }
 
-const { title, intro, small = false, labelled = false, back = true } = Astro.props;
-const backLink = typeof back === 'object' ? back : undefined;
+const { title, intro, small = false, labelled = false, back } = Astro.props;
 ---
 
 <div class="head">
-	{backLink ? <a class="back" href={backLink.href}>{backLink.label}</a> : back && <BackToDive />}
+	{
+		back && (
+			<a class="back" href={back.href} aria-label={`Back to ${back.label}`}>
+				<svg viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M19 12 H5 M11 6 l-6 6 l6 6"></path>
+				</svg>
+				{back.label}
+			</a>
+		)
+	}
 	{
 		labelled && intro ? (
 			<>
@@ -47,9 +55,39 @@ const backLink = typeof back === 'object' ? back : undefined;
 		padding-block: var(--space-large);
 	}
 
+	/* The way back up to the section, as a small pill with an arrow. It is still a link
+	   underneath, because it goes to another page. 44px tall, a comfortable size to tap. */
 	.back {
 		justify-self: start;
-		font-weight: 500;
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-tiny);
+		min-height: 2.75rem;
+		padding: 0 var(--space-small) 0 0.75rem;
+		border-radius: var(--radius-pill);
+		box-shadow: inset 0 0 0 var(--line-thin) currentColor;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.back svg {
+		width: 1.1rem;
+		height: 1.1rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.back svg {
+			transition: translate 0.2s ease;
+		}
+
+		.back:hover svg {
+			translate: -0.2rem 0;
+		}
 	}
 
 	.small {

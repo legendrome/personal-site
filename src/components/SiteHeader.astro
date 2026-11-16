@@ -18,17 +18,18 @@ const path = Astro.url.pathname;
 // Both copies of the header on the home page share this layout, so the links sit in exactly
 // the same places above and below the waves; only the sky's copy turns About amber.
 const sunRoom = path === '/';
-// On a phone there is no room for the full name beside four links, so it shows initials.
-const initials = site.name
-	.split(' ')
-	.map((word) => word[0])
-	.join('');
 ---
 
 <header class:list={['site-header', tone, { 'sun-room': sunRoom }]}>
+	{/* The way home from every page. The little boat, the same as the site's tab icon, marks
+	   it as the site's logo, which people expect to click to get home. */}
 	<a href="/" class="home">
+		<svg class="boat-mark" viewBox="0 0 120 90" aria-hidden="true">
+			<path d="M58 6 V62 H18 Z"></path>
+			<path d="M64 18 V62 H98 Z"></path>
+			<path d="M6 66 H114 L98 88 H22 Z"></path>
+		</svg>
 		<span class="full">{site.name}</span>
-		<span class="short" aria-hidden="true">{initials}</span>
 	</a>
 	<nav aria-label="Main">
 		{
@@ -115,8 +116,32 @@ const initials = site.name
 		clip-path: none;
 	}
 
-	.short {
-		display: none;
+	.home {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-tiny);
+	}
+
+	.boat-mark {
+		width: 1.6em;
+		height: 1.2em;
+		fill: currentColor;
+	}
+
+	/* Underlines on hover like the other links, so it reads as one of them. */
+	.home:hover .full {
+		text-decoration: underline;
+		text-underline-offset: var(--underline-offset);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.boat-mark {
+			transition: translate 0.2s ease;
+		}
+
+		.home:hover .boat-mark {
+			translate: 0 -0.15rem;
+		}
 	}
 
 	/* About takes a box as wide as the sun, minus the page margin, and sits at its left
@@ -165,17 +190,23 @@ const initials = site.name
 			white-space: nowrap;
 		}
 
-		.short {
-			display: inline;
-			font-family: var(--font-title);
-			font-weight: 800;
+		/* On a phone the boat alone is the logo, so the four links fit beside it. The name is
+		   still read out to screen readers, above. */
+		.boat-mark {
+			width: 2em;
+			height: 1.5em;
 		}
 	}
 
-	/* The smallest phones cannot fit the initials and four links at the normal size. */
+	/* The smallest phones cannot fit the boat and four links at the normal size. */
 	@media (max-width: 370px) {
 		.site-header {
 			font-size: var(--size-small);
+		}
+
+		.boat-mark {
+			width: 1.5em;
+			height: 1.1em;
 		}
 
 		nav {
