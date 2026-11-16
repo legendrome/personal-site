@@ -39,7 +39,6 @@ const projects = await getProjects();
 							href={`/work/${project.id}`}
 							title={project.data.title}
 							detail={project.data.summary}
-							large
 							heading="h3"
 						/>
 					))}
@@ -58,6 +57,8 @@ const projects = await getProjects();
 		padding-bottom: var(--space-huge);
 	}
 
+	/* A step above the project titles under it, so a section heading never reads as one
+	   of its own entries. */
 	.part h2 {
 		font-size: var(--size-stop);
 	}
