@@ -6,7 +6,7 @@ Each phase ends with a hand test: one change made by Sujith with no AI, followin
 
 ## Design pass (approved 2026-11-16)
 
-All design-pass work happens on the `redesign` branch, checked out in its own folder, `C:\Users\kumar\Projects\personal-site-redesign`, and previewed locally (launch config "redesign", port 4322). `main` stays exactly what is live, so small fixes can still be published. When Sujith is satisfied, `redesign` is merged into `main` and pushed in one go. Nothing from this branch is pushed before then.
+Done and live: the redesign was built on the `redesign` branch (in its own folder, `C:\Users\kumar\Projects\personal-site-redesign`) and merged into `main` and pushed on 2026-11-16. New work goes on `main` again.
 
 A senior audit found the theme works but a recruiter cannot tell who Sujith is or how to reach him in the first seconds. Direction chosen: "Deeper dive", which keeps the ocean, Unbounded and Karla, and adds buoy orange for the main action. Five phases, each shown to Sujith before the next:
 
@@ -147,3 +147,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-15 - Malmö rewritten the same way (brief and interview in the vault, fact-checked): a short chapter opening on Pildammsparken and the beach, with the electromagnetism project and the two badminton finals; new home page line "Where I started learning for myself." Pushed.
 2026-11-15 - Kenya revised the same way (brief and interview in the vault, fact-checked): campus life, a fuller curium story from his slides, and a closing link to Warwick. Line and photo unchanged. Pushed.
 2026-11-15 - Now rewritten the same way (brief and interview in the vault, fact-checked): his days, two ideas from the valuation and McKinsey courses, the valuation bot, and the kinds of roles he wants next, with no companies named. All five chapters have now been through the write-page process. Pushed.
+2026-11-16 - Design pass done and pushed: ocean-zone home page with the sun and his photo, rays, scenery, depth gauge with anchor slider, cursor wake, proof cards, Journey page with a lit route, Work as a showcase, inner pages tidied, sitemap and link previews, contrast and keyboard fixes, hand test passed. Still open: check About in Firefox, Astro 7.4.12 update, the unused YearMarker, analytics and email (need his yes), www and the test address.
