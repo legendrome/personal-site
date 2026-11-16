@@ -1,6 +1,6 @@
 # Status
 
-Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The site is live at https://sujithbandaru.com/. The test address (https://personal-site.bsujith-pro.workers.dev/) still works too, until it is turned off or redirected.
+Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase 3 is finished. The site is live at https://sujithbandaru.com/, and www.sujithbandaru.com redirects to it. The old test address is turned off.
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
@@ -80,7 +80,7 @@ After sending:
 - [x] Register the domain (sujithbandaru.com)
 - [x] Connect the domain and change the `site` address in `astro.config.mjs` to it
 - [x] Make www.sujithbandaru.com work, by sending it to sujithbandaru.com
-- [ ] Redirect the test address to the domain, so two copies of the site do not exist
+- [x] Turn off the test address, so two copies of the site do not exist (takes effect on the next push)
 - [x] Social preview image and favicon
 - [ ] Sitemap
 - [ ] Check the phone top-of-page colour and link preview on a real iPhone
@@ -148,4 +148,5 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-15 - Kenya revised the same way (brief and interview in the vault, fact-checked): campus life, a fuller curium story from his slides, and a closing link to Warwick. Line and photo unchanged. Pushed.
 2026-11-15 - Now rewritten the same way (brief and interview in the vault, fact-checked): his days, two ideas from the valuation and McKinsey courses, the valuation bot, and the kinds of roles he wants next, with no companies named. All five chapters have now been through the write-page process. Pushed.
 2026-11-16 - Design pass done and pushed: ocean-zone home page with the sun and his photo, rays, scenery, depth gauge with anchor slider, cursor wake, proof cards, Journey page with a lit route, Work as a showcase, inner pages tidied, sitemap and link previews, contrast and keyboard fixes, hand test passed. Still open: check About in Firefox, Astro 7.4.12 update, the unused YearMarker, analytics and email (need his yes), www and the test address.
-2026-11-16 - www works: in Cloudflare (not in the repo), a proxied A record for www pointing at the placeholder 192.0.2.1, and the "Redirect from WWW to root" rule, which sends every www address to the same path on sujithbandaru.com with a 301. "Always Use HTTPS" is now on too (SSL/TLS, Edge Certificates), because the site was still answering over plain http and Chrome warned about it. Next: the test address.
+2026-11-16 - www works: in Cloudflare (not in the repo), a proxied A record for www pointing at the placeholder 192.0.2.1, and the "Redirect from WWW to root" rule, which sends every www address to the same path on sujithbandaru.com with a 301. "Always Use HTTPS" is now on too (SSL/TLS, Edge Certificates), because the site was still answering over plain http and Chrome warned about it.
+2026-11-16 - The test address is turned off through `"workers_dev": false` in `wrangler.jsonc`, which takes effect on the next push. See `docs/DECISIONS.md`.

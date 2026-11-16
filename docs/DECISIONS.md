@@ -188,6 +188,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Home is the boat and name in the menu, and only pages inside a section get a back button.** The "Back to home" links at the top and bottom of every inner page repeated what the name in the menu already does, as it does on almost every site. They are gone, along with the trick that returned you to your spot on the home page (the browser's back button still does that). The name now carries the little boat from the tab icon, which marks it as the logo, and underlines on hover; on phones the boat alone is the home link, so four links still fit. Chapters, projects and posts get one pill-shaped back button at the top, such as "← Journey", still a link underneath because it goes to another page. The footer keeps "Back to the top". This replaces the 2026-11-16 entry that renamed the links "Back to home".
 
+**The test address is turned off, and www sends visitors to sujithbandaru.com.** Two copies of the site at two addresses split search results and link previews, so the site now lives at one address. The test address (personal-site.bsujith-pro.workers.dev) is off through `"workers_dev": false` in `wrangler.jsonc` rather than the Cloudflare dashboard, because each deploy otherwise switches it back on. It is off rather than redirected, because a redirect would need Worker code, and the site deliberately has none. Branch preview links are a separate setting and keep working. www and the switch from plain http to https live in the Cloudflare dashboard, not the repo: a proxied www record, the "Redirect from WWW to root" rule and "Always Use HTTPS".
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”
