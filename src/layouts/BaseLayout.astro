@@ -9,6 +9,7 @@
 import { Font } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import BackToDive from '../components/BackToDive.astro';
+import CursorWater from '../components/CursorWater.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import '../styles/tokens.css';
 
@@ -137,6 +138,7 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 		<!-- Outside the sky and water, whose clip-paths would otherwise cut off anything fixed
 		     to the screen. The home page puts its year marker here. -->
 		<slot name="overlay" />
+		<CursorWater />
 
 		<script>
 			// Tells the water header where the water is on screen, so its copy of the gradient

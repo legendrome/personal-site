@@ -17,6 +17,7 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Change the sea floor scenery | `src/components/SeaFloor.astro` |
 | Change the light rays, jellyfish or marine snow | `src/components/DiveScenery.astro`; the rays' positions and depths are in `src/lib/sunrays.ts` |
 | Change the sun, my photo in it, or the anglerfish | `src/pages/index.astro`; the photo itself is `src/assets/portrait.webp` |
+| Change the water ripple or bubbles around the mouse under water | `src/components/CursorWater.astro` (`scale` in its filter sets how strong the ripple is) |
 | Change the depth gauge and its anchor slider | `src/components/DepthGauge.astro` |
 | Choose which roles show as proof cards | Add `featured: true` and a `result:` line to the role's file in `src/content/experience/` (see `src/content/README.md`) |
 | Change the proof cards' look | `src/components/ProofCard.astro` |

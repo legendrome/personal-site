@@ -56,6 +56,13 @@ const initials = site.name
 		gap: var(--space-small);
 		padding-inline: var(--page-gutter);
 		font-weight: 500;
+		/* The bar itself lets clicks through to what is behind it, such as the photo in the
+		   home page's sun; only its links catch them. */
+		pointer-events: none;
+	}
+
+	.site-header a {
+		pointer-events: auto;
 	}
 
 	nav {
@@ -119,6 +126,9 @@ const initials = site.name
 	   The small inset grows on phones, where the sun's curve is tighter. */
 	.sun-room a[href='/about'] {
 		flex: 0 0 calc(var(--sun-size) - var(--page-gutter));
+		/* The same width again as a minimum, because Firefox can let a link shrink below
+		   its flex size, which slid About under the photo. */
+		min-width: calc(var(--sun-size) - var(--page-gutter));
 		box-sizing: border-box;
 		padding-left: clamp(0.5rem, 2.5rem - 4vw, 1rem);
 	}

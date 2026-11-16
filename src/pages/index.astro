@@ -244,11 +244,12 @@ const latestPost = (await getPosts())[0];
 		box-shadow: 0 0 0 calc(var(--sun-size) * 0.12) var(--colour-sun-halo);
 	}
 
-	/* The photo, tucked into the top-right corner of the sun, to the right of About. It is
-	   its own layer above the header, which is see-through there, so it can be clicked. */
+	/* The photo, tucked into the top-right corner of the sun, to the right of About. It sits
+	   under the header's links, so About always shows on top even if a browser lays the
+	   menu out a little differently, and the header lets clicks through to it. */
 	.portrait {
 		position: absolute;
-		z-index: 6;
+		z-index: 4;
 		top: calc(var(--sun-size) * 0.04);
 		right: calc(var(--sun-size) * 0.04);
 		width: calc(var(--sun-size) * 0.5);
