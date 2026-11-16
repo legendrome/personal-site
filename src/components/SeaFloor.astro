@@ -20,7 +20,9 @@
 		<path class="haze-kelp sway" d="M1240 160 C 1232 135, 1252 118, 1242 92"></path>
 	</g>
 
-	<!-- A small school of fish drifting across the middle distance -->
+	<!-- A small school of fish crossing the middle distance. They face left, with their
+	     tails on the right, so they always swim left: in from the right edge, out at the left,
+	     then round again. -->
 	<g class="school">
 		<g class="fish-set">
 			<path d="M640 92 c8 -7 22 -7 30 0 c-8 7 -22 7 -30 0 Z m30 0 l11 -7 v14 Z"></path>
@@ -197,8 +199,9 @@
 		stroke-linecap: round;
 	}
 
-	/* Slow movement only: kelp leaning in the current and the school drifting back and
-	   forth, so the floor feels alive without asking for attention. */
+	/* Slow movement only: kelp leaning in the current and the school swimming across, the
+	   way it faces, with a gentle rise and fall, so the floor feels alive without asking for
+	   attention. */
 	@media (prefers-reduced-motion: no-preference) {
 		.sway {
 			/* Rooted at its own base, so it bends from the sand and not from the page's corner. */
@@ -212,7 +215,11 @@
 		}
 
 		.fish-set {
-			animation: drift 26s ease-in-out infinite alternate;
+			animation: swim 38s linear infinite;
+		}
+
+		.school {
+			animation: rise-fall 6s ease-in-out infinite alternate;
 		}
 
 		@keyframes sway {
@@ -225,13 +232,24 @@
 			}
 		}
 
-		@keyframes drift {
+		/* From just past the right edge of the drawing to just past its left edge. */
+		@keyframes swim {
 			from {
-				transform: translate(-140px, 6px);
+				transform: translateX(860px);
 			}
 
 			to {
-				transform: translate(140px, -6px);
+				transform: translateX(-860px);
+			}
+		}
+
+		@keyframes rise-fall {
+			from {
+				transform: translateY(5px);
+			}
+
+			to {
+				transform: translateY(-5px);
 			}
 		}
 	}
