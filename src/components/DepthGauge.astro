@@ -116,9 +116,6 @@ const { surface } = Astro.props;
 		right: var(--space-small);
 		top: 50%;
 		translate: 0 -50%;
-		display: grid;
-		justify-items: center;
-		gap: var(--space-small);
 		color: var(--colour-on-water);
 		--depth: 0;
 	}
@@ -189,7 +186,16 @@ const { surface } = Astro.props;
 		outline-offset: -2px;
 	}
 
+	/* Hangs below the line without taking up room in the layout. The gauge is centred on
+	   the screen, so if the zone name took up room, a longer name ("Twilight zone" after
+	   "Surface") would make the gauge taller and shift the line, and the anchor with it. */
 	.zone {
+		position: absolute;
+		top: calc(100% + var(--space-small));
+		left: 50%;
+		translate: -50% 0;
+		margin: 0;
+		white-space: nowrap;
 		writing-mode: vertical-rl;
 		font-size: var(--size-small);
 		font-weight: 700;
