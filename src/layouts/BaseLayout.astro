@@ -208,8 +208,15 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 		max-width: var(--line-length);
 	}
 
+	/* Links take the colour of the text around them, so a link inside Markdown never shows
+	   the browser's default blue. */
+	a {
+		color: inherit;
+		text-underline-offset: var(--underline-offset);
+	}
+
 	:focus-visible {
-		outline: 2px solid currentColor;
+		outline: var(--line-thin) solid currentColor;
 		outline-offset: 3px;
 	}
 
@@ -339,9 +346,12 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 	}
 
 	footer a {
+		/* The padding makes each link about 44px tall, a comfortable size to tap. */
+		display: inline-block;
+		padding-block: var(--space-tiny);
 		color: inherit;
 		font-weight: 500;
-		text-underline-offset: 4px;
+		text-underline-offset: var(--underline-offset);
 	}
 
 	footer > a {

@@ -90,7 +90,7 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Icons and the preview image are drawn by `scripts/make-images.mjs`.** Pictures cannot read `tokens.css`, so they hold their own copy of the colours, and the script makes them easy to redraw. It uses sharp, which already comes with Astro, so nothing new was added; if Astro ever stops including sharp, the script needs it installed first. The image has no words, because a link preview already shows the title and description.
 
-**The site address is set to the test address for now.** The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
+**The site address is set to the test address for now.** (Replaced on 2026-11-14: the address is now sujithbandaru.com, see below.) The feed and link previews need full addresses, so this must change to sujithbandaru.com in Phase 4 or they will point at the wrong place.
 
 ## 2026-11-06
 
@@ -149,6 +149,18 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 **Sujith's graduation speech is embedded from YouTube, not downloaded.** The recording belongs to the school, which published it publicly with embedding allowed, so embedding is the use on offer, with nothing to download or store. The page shows a quote and a play button, and loads YouTube's privacy-enhanced player only when pressed, so the page stays fast and visitors who never watch are not tracked. Sujith checked that the speech names no one and holds nothing private. It sits at the end of Hyderabad, linked from the student council entry on About.
 
 **Pages are written through a set process, kept in the repo.** Rewriting Warwick showed that polishing notes makes a page smoother but not better, and that a brief and an interview find what the page is for. The process (brief, interview, format, spine and outline, follow-ups, draft with a fact check, build, revision) is `.claude/skills/write-page/SKILL.md`, with the fact check in `.claude/agents/fact-checker.md`. Both hold method and no private content, so they live in the public repo and travel with the project; a stranger can read how the pages were made. Sujith's answers stay in his vault. The site never depends on them: every page is still plain Markdown he can edit by hand.
+
+## 2026-11-16: the design pass
+
+**The site keeps the ocean dive and gets sharper rather than replaced.** A fresh audit found the problems were information and hierarchy (a recruiter cannot tell who Sujith is or how to reach him within seconds), not the theme, which is the most memorable thing about the site. Of three directions (a refined dive, a paper logbook, a nautical chart), Sujith chose the refined dive. The audit and plan are summarised in `STATUS.md`.
+
+**Text sizes come from a six-step type scale.** The nine separate sizes in `src/styles/tokens.css` now each point at one of six steps (`--step--1` to `--step-4`), so headings always sit in proportion and the whole site's type can be resized from one place. Component files still use the named sizes, so nothing outside `tokens.css` had to learn the steps.
+
+**One warm accent, buoy orange (#ff8a3d), for the main action on a page.** This amends the 2026-11-05 entry that rejected red and green accents: those competed with the water, while a single warm colour used only for buttons such as "Get in touch" gives the eye one place to land. It is not used for focus outlines, because orange on the light sky is too faint to see.
+
+**Four breakpoints, written the same way everywhere.** CSS cannot put breakpoints in variables, so they are listed at the top of `tokens.css` and every file uses one of them. The old 600px and 760px phone breakpoints became one, `(width < 48em)`.
+
+**Shared small details are tokens:** the 2px line, the 4px link underline offset, the label letter spacing and the pill radius, so they match everywhere and change in one place. Links also inherit the colour of the text around them, which fixed a link on About showing the browser's default blue. Karla is now loaded at weight 700, which labels already used, so the browser no longer fakes the bold. The soft text colour on the sky went from 70% to 78% strength, lifting its contrast from about 4.7:1 to 5.8:1.
 
 ## Open questions
 

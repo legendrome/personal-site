@@ -79,7 +79,7 @@ const { href, title, detail, date, large = false, heading: Heading = 'h3' } = As
 	}
 
 	/* No room for a date column on a phone, so the date sits above the title. */
-	@media (max-width: 600px) {
+	@media (width < 48em) {
 		.dated {
 			grid-template-columns: minmax(0, 1fr) auto;
 		}

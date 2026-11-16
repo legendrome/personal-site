@@ -2,13 +2,21 @@
   The whole look of the site lives here. Change a value and it changes everywhere,
   because every other file uses these names instead of raw colours or sizes.
   To swap a font itself, see the "fonts" list in astro.config.mjs.
+
+  Breakpoints. CSS cannot put these in variables, so they are written out in each
+  file, always as one of these four:
+    (width < 48em)    phones: about 768px and narrower
+    (min-width: 60em) laptops: about 960px and wider
+    (min-width: 75em) wide screens: about 1200px and wider
+    (max-width: 370px) the smallest phones, only where the header needs to squeeze
 */
 :root {
 	/* Above the water */
 	--colour-sky: #bfe1f0;
 	--colour-on-sky: #0b2a57;
 	/* Quieter text and lines on the sky, such as dates and the timeline on About */
-	--colour-on-sky-soft: color-mix(in srgb, var(--colour-on-sky) 70%, var(--colour-sky));
+	/* 78% keeps small soft text above the 4.5:1 contrast that accessibility guidelines ask for. */
+	--colour-on-sky-soft: color-mix(in srgb, var(--colour-on-sky) 78%, var(--colour-sky));
 	--colour-on-sky-line: color-mix(in srgb, var(--colour-on-sky) 30%, transparent);
 
 	/* Below the water, from the surface down to the sea floor */
@@ -18,6 +26,12 @@
 	--colour-water-floor: #060c1c;
 	--colour-on-water: #eaf6fc;
 	--colour-rope: color-mix(in srgb, var(--colour-on-water) 45%, transparent);
+
+	/* The one warm colour on the site, a buoy on the water. It is kept for the main action
+	   on a page, such as "Get in touch", so the eye always finds it. Not for focus outlines:
+	   on the light sky it is too faint to see. */
+	--colour-accent: #ff8a3d;
+	--colour-on-accent: #3a1600;
 
 	/* The sea floor, darkest at the back so the front feels closer */
 	--colour-sand-back: color-mix(in srgb, var(--colour-water-deep) 55%, var(--colour-water-floor));
@@ -41,18 +55,29 @@
 	--font-title: var(--font-unbounded), 'Arial Black', sans-serif;
 	--font-text: var(--font-karla), system-ui, sans-serif;
 
-	/* Text sizes. The middle value grows with the screen, between the two limits. */
-	--size-title: clamp(2.25rem, 8.6vw, 7.75rem);
-	--size-chapter: clamp(1.9rem, 5.6vw, 4.75rem);
-	--size-intro: clamp(1.25rem, 2.4vw, 1.75rem);
-	--size-stop: clamp(1.625rem, 3.4vw, 2.875rem);
-	--size-row: clamp(1.125rem, 2vw, 1.625rem);
-	--size-row-large: clamp(1.625rem, 4vw, 3.25rem);
-	--size-reading-heading: clamp(1.25rem, 2.2vw, 1.75rem);
+	/* The type scale: six sizes, smallest to largest. Every text size on the site is one of
+	   these steps, so headings always sit in proportion to each other. The middle value of
+	   each clamp() grows with the screen, between the two limits. */
+	--step--1: 0.9375rem;
+	--step-0: 1.125rem;
+	--step-1: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+	--step-2: clamp(1.625rem, 1.25rem + 1.9vw, 3rem);
+	--step-3: clamp(1.9rem, 1.1rem + 4vw, 4.75rem);
+	--step-4: clamp(2.25rem, 0.75rem + 7.5vw, 7.75rem);
+
+	/* What each kind of text uses. To make all chapter titles bigger, change the step here. */
+	--size-title: var(--step-4);
+	--size-chapter: var(--step-3);
+	--size-stop: var(--step-2);
+	--size-row-large: var(--step-2);
+	--size-intro: var(--step-1);
+	--size-reading-heading: var(--step-1);
+	--size-row: var(--step-1);
+	--size-text-large: var(--step-1);
+	--size-text: var(--step-0);
+	--size-small: var(--step--1);
+	/* Decoration rather than text, so it sits outside the scale. */
 	--size-lesson-number: clamp(3rem, 6vw, 4.5rem);
-	--size-text: 1.125rem;
-	--size-text-large: 1.25rem;
-	--size-small: 0.9375rem;
 
 	/* Spacing */
 	--space-tiny: 0.5rem;
@@ -67,6 +92,12 @@
 	/* The widest a page gets, used by About so wide screens fill out without lines getting long. */
 	--wide-length: 76em;
 	--radius: 6px;
+	--radius-pill: 999px;
+
+	/* Small shared details, kept here so lines and links match everywhere */
+	--line-thin: 2px;
+	--underline-offset: 4px;
+	--tracking-label: 0.08em;
 
 	/* The header */
 	--header-height: 3.5rem;

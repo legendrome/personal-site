@@ -92,7 +92,7 @@ const embedUrl = `https://www.youtube-nocookie.com/embed/${youtube}?start=${from
 		font-weight: 500;
 		text-align: center;
 		text-decoration: underline;
-		text-underline-offset: 4px;
+		text-underline-offset: var(--underline-offset);
 	}
 
 	/* Centred items in a column size to their text, so a long label would run past the
@@ -107,7 +107,7 @@ const embedUrl = `https://www.youtube-nocookie.com/embed/${youtube}?start=${from
 		width: 4rem;
 		height: 4rem;
 		border-radius: 50%;
-		border: 2px solid currentColor;
+		border: var(--line-thin) solid currentColor;
 		background: linear-gradient(currentColor, currentColor) no-repeat 55% 50% / 0 0;
 		position: relative;
 	}

@@ -18,7 +18,7 @@ export default defineConfig({
 			name: 'Karla',
 			cssVariable: '--font-karla',
 			provider: fontProviders.google(),
-			weights: [400, 500],
+			weights: [400, 500, 700],
 		},
 	],
 });

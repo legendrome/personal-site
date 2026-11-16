@@ -4,6 +4,16 @@ Current phase: 4, domain and finish (Phase 0 writing continues alongside). Phase
 
 Each phase ends with a hand test: one change made by Sujith with no AI, following the README. A phase is not done until that works.
 
+## Design pass (approved 2026-11-16)
+
+A senior audit found the theme works but a recruiter cannot tell who Sujith is or how to reach him in the first seconds. Direction chosen: "Deeper dive", which keeps the ocean, Unbounded and Karla, and adds buoy orange for the main action. Five phases, each shown to Sujith before the next:
+
+1. Foundation: type scale, accent, breakpoints, shared tokens, Karla 700, link colour, tap sizes, checks at 320px and 200% zoom. Done 2026-11-16, committed locally, not pushed.
+2. Home page, mocked first: a hero with a plain line and two buttons ("Get in touch", "Start the dive"), an "At a glance" strip, a tighter journey section, a contact button in the footer. Text in `site.json`.
+3. Inner pages: experience before interests on About, the headline as the h1, a decision on Work, plain labels in place of "Back to the dive".
+4. Features: hand-written sitemap and robots.txt, missing link-preview tags, structured data, his photo when he has one; analytics and an email link only if he says yes.
+5. Check and hand over: keyboard, contrast, Lighthouse, 320px and 200% zoom, docs, and his hand test.
+
 ## Plan (tentative, set 2026-11-14)
 
 Sujith is sending the site to someone on 2026-11-15, so the work before that is only what that person will notice.
@@ -134,4 +144,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-15 - Hyderabad rewritten through the write-page process (brief and interview in the vault, fact-checked) as a straight story with five headings; new home page line "Where I learned to include myself." The speech label now says "high school graduation", because in India "graduation" means a university degree. Pushed. Next: Malmö, Now and Kenya the same way.
 2026-11-15 - Malmö rewritten the same way (brief and interview in the vault, fact-checked): a short chapter opening on Pildammsparken and the beach, with the electromagnetism project and the two badminton finals; new home page line "Where I started learning for myself." Pushed.
 2026-11-15 - Kenya revised the same way (brief and interview in the vault, fact-checked): campus life, a fuller curium story from his slides, and a closing link to Warwick. Line and photo unchanged. Pushed.
-2026-11-15 - Now rewritten the same way (brief and interview in the vault, fact-checked): his days, two ideas from the valuation and McKinsey courses, the valuation bot, and the kinds of roles he wants next, with no companies named. All five chapters have now been through the write-page process. Committed locally, not pushed.
+2026-11-15 - Now rewritten the same way (brief and interview in the vault, fact-checked): his days, two ideas from the valuation and McKinsey courses, the valuation bot, and the kinds of roles he wants next, with no companies named. All five chapters have now been through the write-page process. Pushed.

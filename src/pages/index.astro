@@ -125,7 +125,7 @@ const latestPost = (await getPosts())[0];
 		z-index: 3;
 		left: calc(12% + var(--boat-width) / 2 - 1px);
 		bottom: var(--waterline-overlap);
-		width: 2px;
+		width: var(--line-thin);
 		height: var(--space-medium);
 		background: var(--colour-rope);
 	}
@@ -175,7 +175,7 @@ const latestPost = (await getPosts())[0];
 
 	.stop a {
 		color: inherit;
-		text-underline-offset: 4px;
+		text-underline-offset: var(--underline-offset);
 	}
 
 	/* Sighted visitors see the years in the corner marker, which screen readers skip,
@@ -204,7 +204,7 @@ const latestPost = (await getPosts())[0];
 
 	/* No room for two columns on a phone, and a sentence pinned above moving text would
 	   cover it, so the sentence just scrolls away like everything else. */
-	@media (max-width: 760px) {
+	@media (width < 48em) {
 		.journey {
 			grid-template-columns: minmax(0, 1fr);
 		}
