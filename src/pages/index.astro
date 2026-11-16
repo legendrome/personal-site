@@ -150,7 +150,7 @@ const latestPost = (await getPosts())[0];
 	<div slot="at-waterline" class="rope-to-hull" aria-hidden="true"></div>
 	<AnchorLine slot="underwater" />
 	<DiveScenery slot="underwater" />
-	<DepthGauge slot="overlay" />
+	<DepthGauge slot="overlay" surface={site.surfaceZone} />
 	<SeaFloor slot="seafloor" />
 </BaseLayout>
 

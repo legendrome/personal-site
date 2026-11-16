@@ -151,6 +151,7 @@ const site = defineCollection({
 		glance: z.array(z.object({ text: z.string(), href: z.string().optional() })).max(4),
 		// The home page is a dive through the ocean's real zones, one part of the site in
 		// each. The zone names are the small labels above each section.
+		surfaceZone: z.string(),
 		workZone: z.string(),
 		journeyZone: z.string(),
 		writingZone: z.string(),

@@ -1,35 +1,108 @@
 ---
-// A slim gauge on the right edge, like the one a diver watches, naming the ocean zone
-// you are in. It reads the zones from the page: any section with data-zone="Sunlit zone"
-// counts as one. Hidden at the surface and on phones, where there is no spare edge.
-// It repeats the zone labels already on the page, so screen readers skip it.
+// A slim gauge on the right edge, like the line a diver watches, with a small anchor on it
+// that shows how deep you are. Drag the anchor, or click anywhere on the line, to move up
+// and down the page; with the keyboard, focus it and use the arrow keys, Page Up and Down,
+// Home and End. Under it, the name of the ocean zone you are in. It reads the zones from
+// the page: any section with data-zone="Sunlit zone" counts as one. Hidden on phones,
+// where there is no spare edge and a thumb already scrolls the page.
+interface Props {
+	// What the label says above the first zone, while you are still at the boat.
+	surface: string;
+}
+
+const { surface } = Astro.props;
 ---
 
-<div class="gauge" aria-hidden="true" hidden>
-	<div class="track"><span class="fill"></span></div>
-	<p class="zone"></p>
+<div class="gauge" data-surface={surface} hidden>
+	<div class="track">
+		<span class="fill"></span>
+		<div
+			class="anchor"
+			role="slider"
+			tabindex="0"
+			aria-label="Dive depth"
+			aria-orientation="vertical"
+			aria-valuemin="0"
+			aria-valuemax="100"
+			aria-valuenow="0"
+		>
+			<svg viewBox="0 0 40 50" aria-hidden="true">
+				<circle cx="20" cy="6" r="4"></circle>
+				<path d="M20 10 V46 M11 18 H29 M4 30 C5 40 11 46 20 46 C29 46 35 40 36 30"></path>
+			</svg>
+		</div>
+	</div>
+	<p class="zone" aria-hidden="true"></p>
 </div>
 
 <script>
 	const gauge = document.querySelector<HTMLElement>('.gauge');
+	const track = gauge?.querySelector<HTMLElement>('.track');
 	const fill = gauge?.querySelector<HTMLElement>('.fill');
+	const anchor = gauge?.querySelector<HTMLElement>('.anchor');
 	const label = gauge?.querySelector<HTMLElement>('.zone');
 	const zones = [...document.querySelectorAll<HTMLElement>('[data-zone]')];
+	const calm = matchMedia('(prefers-reduced-motion: reduce)');
+
+	const furthest = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
 
 	function update() {
-		if (!gauge || !fill || !label) return;
-		const depth = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
-		fill.style.transform = `scaleY(${depth})`;
-		let name = '';
+		if (!gauge || !fill || !anchor || !label) return;
+		const depth = Math.min(1, scrollY / furthest());
+		gauge.style.setProperty('--depth', String(depth));
+		let name = gauge.dataset.surface ?? '';
 		zones.forEach((zone) => {
-			if (zone.getBoundingClientRect().top < innerHeight * 0.5) name = zone.dataset.zone ?? '';
+			if (zone.getBoundingClientRect().top < innerHeight * 0.5) name = zone.dataset.zone ?? name;
 		});
 		label.textContent = name;
-		gauge.classList.toggle('active', name !== '');
+		anchor.setAttribute('aria-valuenow', String(Math.round(depth * 100)));
+		anchor.setAttribute('aria-valuetext', name);
 	}
 
-	if (gauge && zones.length) {
+	// Turns a point on the line into a place on the page and goes there.
+	function goTo(clientY: number, smooth: boolean) {
+		if (!track) return;
+		const box = track.getBoundingClientRect();
+		const share = Math.min(1, Math.max(0, (clientY - box.top) / box.height));
+		scrollTo({ top: share * furthest(), behavior: smooth && !calm.matches ? 'smooth' : 'instant' });
+	}
+
+	if (gauge && track && anchor && zones.length) {
 		gauge.hidden = false;
+
+		// Dragging the anchor follows the pointer exactly, so it moves without smoothing.
+		anchor.addEventListener('pointerdown', (event) => {
+			event.preventDefault();
+			anchor.setPointerCapture(event.pointerId);
+			gauge.classList.add('dragging');
+		});
+		anchor.addEventListener('pointermove', (event) => {
+			if (anchor.hasPointerCapture(event.pointerId)) goTo(event.clientY, false);
+		});
+		anchor.addEventListener('pointerup', () => gauge.classList.remove('dragging'));
+
+		// Clicking the line away from the anchor glides there.
+		track.addEventListener('click', (event) => {
+			if (event.target === track || event.target === track.querySelector('.fill')) {
+				goTo(event.clientY, true);
+			}
+		});
+
+		anchor.addEventListener('keydown', (event) => {
+			const step = innerHeight * 0.8;
+			const moves: Record<string, number> = {
+				ArrowDown: step,
+				ArrowUp: -step,
+				PageDown: step,
+				PageUp: -step,
+				Home: -scrollY,
+				End: furthest(),
+			};
+			if (!(event.key in moves)) return;
+			event.preventDefault();
+			scrollBy({ top: moves[event.key], behavior: calm.matches ? 'instant' : 'smooth' });
+		});
+
 		addEventListener('scroll', update, { passive: true });
 		addEventListener('resize', update);
 		update();
@@ -44,32 +117,76 @@
 		top: 50%;
 		translate: 0 -50%;
 		display: grid;
-		justify-items: end;
-		gap: var(--space-tiny);
+		justify-items: center;
+		gap: var(--space-small);
 		color: var(--colour-on-water);
-		opacity: 0;
-		pointer-events: none;
+		--depth: 0;
 	}
 
-	.gauge.active {
-		opacity: 1;
+	/* Over the sky, before the water starts, it takes the sky's colours to stay readable. */
+	:global(html.at-surface) .gauge {
+		color: var(--colour-on-sky);
 	}
 
 	.track {
+		position: relative;
 		width: 3px;
 		height: 30vh;
 		border-radius: var(--radius-pill);
-		background: var(--colour-rope);
-		overflow: hidden;
+		background: color-mix(in srgb, currentColor 35%, transparent);
+		cursor: pointer;
+	}
+
+	/* A wider strip you cannot see makes the thin line easy to click. */
+	.track::before {
+		content: '';
+		position: absolute;
+		inset: 0 -0.75rem;
 	}
 
 	.fill {
-		display: block;
-		width: 100%;
-		height: 100%;
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
 		background: var(--colour-accent);
 		transform-origin: top;
-		transform: scaleY(0);
+		transform: scaleY(var(--depth));
+	}
+
+	/* The anchor rides on the line at the depth you have reached. Its box is 44px, a
+	   comfortable size to grab, though the drawing inside is smaller. */
+	.anchor {
+		position: absolute;
+		left: 50%;
+		top: calc(var(--depth) * 100%);
+		width: 2.75rem;
+		height: 2.75rem;
+		translate: -50% -50%;
+		display: grid;
+		place-items: center;
+		border-radius: 50%;
+		cursor: grab;
+		touch-action: none;
+	}
+
+	.dragging .anchor {
+		cursor: grabbing;
+	}
+
+	.anchor svg {
+		width: 1.25rem;
+		height: 1.5rem;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 3.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		overflow: visible;
+	}
+
+	.anchor:focus-visible {
+		outline: var(--line-thin) solid currentColor;
+		outline-offset: -2px;
 	}
 
 	.zone {
@@ -88,7 +205,16 @@
 
 	@media (prefers-reduced-motion: no-preference) {
 		.gauge {
-			transition: opacity 0.4s ease;
+			transition: color 0.3s ease;
+		}
+
+		.anchor svg {
+			transition: scale 0.15s ease;
+		}
+
+		.anchor:hover svg,
+		.dragging .anchor svg {
+			scale: 1.15;
 		}
 	}
 </style>
