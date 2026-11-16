@@ -15,7 +15,9 @@ const { data: site } = await getEntry('site', 'site');
 const path = Astro.url.pathname;
 // On the home page the sky has a sun in its top-right corner (see src/pages/index.astro).
 // About, last in the menu, sits on it, and the other links are kept clear of it.
-const sunRoom = tone === 'sky' && path === '/';
+// Both copies of the header on the home page share this layout, so the links sit in exactly
+// the same places above and below the waves; only the sky's copy turns About amber.
+const sunRoom = path === '/';
 // On a phone there is no room for the full name beside four links, so it shows initials.
 const initials = site.name
 	.split(' ')
@@ -79,14 +81,32 @@ const initials = site.name
 		color: var(--colour-on-sky);
 	}
 
+	/* A frosted bar: whatever passes under it, text or light rays, is blurred, and a layer of
+	   the water's own gradient (lined up with the water by the script in BaseLayout.astro)
+	   sits over that. Passing text becomes unreadable, but the rays and the water still show
+	   through softly, so the bar does not cut a hard band across them. */
 	.water {
 		color: var(--colour-on-water);
-		/* A solid bar painted with the same gradient as the water, lined up with it by the
-		   script in BaseLayout.astro, so it hides passing text but blends into the water. */
+		backdrop-filter: blur(18px);
+	}
+
+	.water::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
 		background-image: var(--water-gradient);
 		background-repeat: no-repeat;
 		background-size: 100% var(--sea-height, 100vh);
 		background-position: 0 var(--sea-top, 0);
+		opacity: 0.7;
+	}
+
+	/* Browsers that cannot blur keep the solid bar, so text never shows through. */
+	@supports not (backdrop-filter: blur(1px)) {
+		.water::before {
+			opacity: 1;
+		}
 	}
 
 	.short {
@@ -106,7 +126,7 @@ const initials = site.name
 
 	/* While the sun is on screen, About turns deep amber: it stands apart from the sun and
 	   from the navy links. The home page sets sun-in-view. */
-	:global(html.sun-in-view) .sun-room a[href='/about'] {
+	:global(html.sun-in-view) .sky.sun-room a[href='/about'] {
 		color: var(--colour-on-sun);
 		font-weight: 700;
 	}
