@@ -178,7 +178,7 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The final checks changed three looks to keep contrast at 4.5:1.** Measuring every text colour against its background found small text below the accessibility floor in three places. The rays in the water are now much fainter (they lifted the light water behind text too much); the proof cards are panels of deeper water rather than lighter, which also makes them stand out more; and places not yet reached on the Journey page's route keep full-strength names and show only an empty dot, instead of fading. The duplicate photo link in the sun is skipped by keyboards and screen readers, who meet About in the menu just before it.
 
-**Both headers on the home page share one layout.** The links sat in different places above and below the waves, because only the sky's copy made room for the sun; both copies now use the same layout, and only the sky's turns About amber. (A frosted-glass underwater header, so the rays would show through it, was tried and rejected by Sujith; the solid water-coloured bar stays.)
+**Both headers on the home page share one layout.** The links sat in different places above and below the waves, because only the sky's copy made room for the sun; both copies now use the same layout, and only the sky's turns About amber. The solid water-coloured bar behind the underwater header now fills in only a wave's height below the top of the water, so the sun's rays entering the water are no longer cut off by it; just under the waves there is no text for the bar to hide. (A frosted-glass header was tried first and rejected by Sujith.)
 
 ## Open questions
 

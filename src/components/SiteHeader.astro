@@ -83,12 +83,28 @@ const initials = site.name
 
 	.water {
 		color: var(--colour-on-water);
-		/* A solid bar painted with the same gradient as the water, lined up with it by the
-		   script in BaseLayout.astro, so it hides passing text but blends into the water. */
+	}
+
+	/* A solid bar painted with the same gradient as the water, lined up with it by the
+	   script in BaseLayout.astro, so it hides passing text but blends into the water. It
+	   only fills in a wave's height below the top of the water: just under the waves there
+	   is no text to hide, only the sun's rays entering the water, which the bar would
+	   otherwise cut off. --sea-top is how far the water's top is below the screen's top. */
+	.water::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
 		background-image: var(--water-gradient);
 		background-repeat: no-repeat;
 		background-size: 100% var(--sea-height, 100vh);
 		background-position: 0 var(--sea-top, 0);
+		clip-path: inset(clamp(0px, calc(var(--sea-top, 0px) + var(--wave-height)), 100%) 0 0 0);
+	}
+
+	/* Pages that start under water have no waves or rays at the top, so the bar is whole. */
+	:global(.no-sky) .water::before {
+		clip-path: none;
 	}
 
 	.short {
