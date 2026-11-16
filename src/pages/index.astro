@@ -45,10 +45,10 @@ const latestPost = (await getPosts())[0];
 	</div>
 	<div slot="surface" class="sun" data-sun>
 		<span class="disc" aria-hidden="true"></span>
-		<a class="portrait" href="/about">
-			<Image src={portrait} alt={site.portraitAlt} width={240} height={240} loading="eager" />
-		</a>
 	</div>
+	<a slot="surface" class="portrait" href="/about">
+		<Image src={portrait} alt={site.portraitAlt} width={240} height={240} loading="eager" />
+	</a>
 
 	<div slot="surface" class="hello">
 		<h1>{site.name}</h1>
@@ -222,13 +222,14 @@ const latestPost = (await getPosts())[0];
 		box-shadow: 0 0 0 calc(var(--sun-size) * 0.12) var(--colour-sun-halo);
 	}
 
-	/* The photo, just under the menu row and inside the sun's curve. */
+	/* The photo, tucked into the top-right corner of the sun, to the right of About. It is
+	   its own layer above the header, which is see-through there, so it can be clicked. */
 	.portrait {
 		position: absolute;
-		top: calc(var(--header-height) + var(--sun-size) * 0.02);
-		right: calc(var(--sun-size) * 0.12);
+		z-index: 6;
+		top: calc(var(--sun-size) * 0.04);
+		right: calc(var(--sun-size) * 0.04);
 		width: calc(var(--sun-size) * 0.4);
-		pointer-events: auto;
 	}
 
 	.portrait img {
@@ -241,11 +242,12 @@ const latestPost = (await getPosts())[0];
 		box-shadow: 0 0 0 3px var(--colour-sun-halo);
 	}
 
-	/* On a phone the sun is small and the menu row fills most of it, so the photo would
-	   spill out of the curve. It stays on bigger screens. */
+	/* On a phone the sun is small and About fills its top edge, so the photo drops just
+	   below the menu row, still in the sun's corner. */
 	@media (width < 48em) {
 		.portrait {
-			display: none;
+			top: calc(var(--header-height) - var(--space-tiny));
+			width: calc(var(--sun-size) * 0.36);
 		}
 	}
 
