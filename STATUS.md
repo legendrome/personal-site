@@ -79,7 +79,7 @@ After sending:
 
 - [x] Register the domain (sujithbandaru.com)
 - [x] Connect the domain and change the `site` address in `astro.config.mjs` to it
-- [ ] Make www.sujithbandaru.com work, by sending it to sujithbandaru.com (it does not answer at all yet)
+- [x] Make www.sujithbandaru.com work, by sending it to sujithbandaru.com
 - [ ] Redirect the test address to the domain, so two copies of the site do not exist
 - [x] Social preview image and favicon
 - [ ] Sitemap
@@ -148,3 +148,4 @@ Sujith wants these once the first version is done, so they are not part of it.
 2026-11-15 - Kenya revised the same way (brief and interview in the vault, fact-checked): campus life, a fuller curium story from his slides, and a closing link to Warwick. Line and photo unchanged. Pushed.
 2026-11-15 - Now rewritten the same way (brief and interview in the vault, fact-checked): his days, two ideas from the valuation and McKinsey courses, the valuation bot, and the kinds of roles he wants next, with no companies named. All five chapters have now been through the write-page process. Pushed.
 2026-11-16 - Design pass done and pushed: ocean-zone home page with the sun and his photo, rays, scenery, depth gauge with anchor slider, cursor wake, proof cards, Journey page with a lit route, Work as a showcase, inner pages tidied, sitemap and link previews, contrast and keyboard fixes, hand test passed. Still open: check About in Firefox, Astro 7.4.12 update, the unused YearMarker, analytics and email (need his yes), www and the test address.
+2026-11-16 - www works: in Cloudflare (not in the repo), a proxied A record for www pointing at the placeholder 192.0.2.1, and the "Redirect from WWW to root" rule, which sends every www address to the same path on sujithbandaru.com with a 301. Next: the test address.
