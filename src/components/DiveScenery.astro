@@ -121,13 +121,14 @@ import { sunrays } from '../lib/sunrays';
 		top: 0;
 		left: 0;
 		overflow: visible;
-		/* A little fainter than in the sky, because pale light shows up more on dark water. */
-		opacity: 0.3;
+		/* Fainter than in the sky: pale light shows up more on dark water, and any brighter
+		   would lift the water behind small text below the 4.5:1 contrast it needs. */
+		opacity: 0.1;
 	}
 
 	/* The piece of each ray inside the wave, drawn into BaseLayout's wave by the script. */
 	:global(.wave-rays) {
-		opacity: 0.3;
+		opacity: 0.1;
 	}
 
 	:global(.wave-rays polygon) {

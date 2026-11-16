@@ -176,6 +176,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Search engines and link previews get the full picture, with no new dependency.** A sitemap (`src/pages/sitemap.xml.js`, hand-written like the RSS feed, reading the same content as the pages) and a `robots.txt` let search engines find every page. Link previews now carry the site name, title and description for every platform, and posts are marked as articles with their date. The preview picture, drawn by `scripts/make-images.mjs`, now matches the new first screen: the pale sun with Sujith's photo, its rays, the boat and the waves, because a face makes a shared link far more likely to be noticed. The home page also carries structured data (schema.org, a Person: name, photo, university, languages, LinkedIn and GitHub), every fact read from the content files, so a search for his name can show them. Analytics and an email link were left out for now; each needs Sujith's say-so.
 
+**The final checks changed three looks to keep contrast at 4.5:1.** Measuring every text colour against its background found small text below the accessibility floor in three places. The rays in the water are now much fainter (they lifted the light water behind text too much); the proof cards are panels of deeper water rather than lighter, which also makes them stand out more; and places not yet reached on the Journey page's route keep full-strength names and show only an empty dot, instead of fading. The duplicate photo link in the sun is skipped by keyboards and screen readers, who meet About in the menu just before it.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

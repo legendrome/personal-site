@@ -65,8 +65,11 @@ const latestPost = (await getPosts())[0];
 	<div slot="surface" class="sun" data-sun>
 		<span class="disc" aria-hidden="true"></span>
 	</div>
-	<a slot="surface" class="portrait" href="/about">
-		<Image src={portrait} alt={site.portraitAlt} width={240} height={240} loading="eager" />
+	{/* A second way to About for mouse and touch. Keyboard and screen reader users already
+	   meet About in the menu just before it, so it is skipped for them rather than
+	   announced twice. The About page shows the same photo with its description. */}
+	<a slot="surface" class="portrait" href="/about" tabindex="-1" aria-hidden="true">
+		<Image src={portrait} alt="" width={240} height={240} loading="eager" />
 	</a>
 
 	<div slot="surface" class="hello">
@@ -439,7 +442,10 @@ const latestPost = (await getPosts())[0];
 		margin-block: var(--space-medium);
 	}
 
+	/* Padding makes these short links tall enough to tap comfortably. */
 	.onward a {
+		display: inline-block;
+		padding-block: var(--space-tiny);
 		font-weight: 500;
 	}
 

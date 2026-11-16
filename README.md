@@ -15,8 +15,15 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Swap a font | The `fonts` list in `astro.config.mjs`, then `src/styles/tokens.css` |
 | Change the rope or anchor | `src/components/AnchorLine.astro` |
 | Change the sea floor scenery | `src/components/SeaFloor.astro` |
+| Change the light rays, jellyfish or marine snow | `src/components/DiveScenery.astro`; the rays' positions and depths are in `src/lib/sunrays.ts` |
+| Change the sun, my photo in it, or the anglerfish | `src/pages/index.astro`; the photo itself is `src/assets/portrait.webp` |
+| Change the depth gauge and its anchor slider | `src/components/DepthGauge.astro` |
+| Choose which roles show as proof cards | Add `featured: true` and a `result:` line to the role's file in `src/content/experience/` (see `src/content/README.md`) |
+| Change the proof cards' look | `src/components/ProofCard.astro` |
+| Change the route of places on the home and Journey pages | `src/components/VoyageMap.astro` |
+| Change the list of pages for search engines | `src/pages/sitemap.xml.js` |
 | Change the margin down each side of every page | `--page-gutter` in `src/styles/tokens.css` |
-| Redraw the tab icons or link preview image | `scripts/make-images.mjs`, then run `node scripts/make-images.mjs` |
+| Redraw the tab icons or link preview image (it includes my photo) | `scripts/make-images.mjs`, then run `node scripts/make-images.mjs` |
 | Replace my CV | `public/` |
 | Change my first line, headings, links or the header menu | `src/content/site.json` |
 | Change the About page | `src/content/about.md` |
@@ -27,7 +34,6 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Write or rewrite a page with Claude's help | `.claude/skills/write-page/SKILL.md`, the process Claude follows, with the briefing and interview templates in the vault's `Website/` folder |
 | Change the link back to the spot left on the home page | `src/components/BackToDive.astro`, and the script in `src/pages/index.astro` |
 | Change the blog feed | `src/pages/rss.xml.js` |
-| Change the corner year marker | `src/components/YearMarker.astro` |
 | Change the project and post rows, or their arrow | `src/components/ArrowRow.astro` |
 | Change what counts as published, or the order | `src/lib/content.ts` |
 | Preview, check and publish my changes | "Check and publish" in `src/content/README.md` |

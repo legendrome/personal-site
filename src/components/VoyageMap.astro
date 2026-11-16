@@ -158,11 +158,6 @@ const route = points
 		text-underline-offset: var(--underline-offset);
 	}
 
-	/* Stops not reached yet, only on the Journey page while scrolling, are faint. */
-	.stop:not(.reached) {
-		opacity: 0.7;
-	}
-
 	.reached .dot {
 		background: var(--colour-on-water);
 	}
@@ -225,6 +220,9 @@ const route = points
 			top: calc(var(--band) * 3 / 4 - 0.55rem);
 		}
 	}
+
+	/* Stops not reached yet, on the Journey page while scrolling, show an empty dot. Their
+	   names stay full strength, because faded text would be too faint to read. */
 
 	@media (prefers-reduced-motion: no-preference) {
 		.stop,
