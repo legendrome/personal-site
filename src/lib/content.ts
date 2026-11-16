@@ -84,29 +84,24 @@ export function hasFullChapter(chapter: CollectionEntry<'journey'>) {
 	return Boolean(chapter.body?.trim());
 }
 
-// Each chapter page is one stretch of the descent, and the bottom of one is the exact
-// colour at the top of the next, so reading in order feels like one dive. Worked out
-// from the position, so adding a chapter needs no new colours. The last chapter goes
-// down to the sea floor. A browser without color-mix shows the page's dark background.
-export function chapterWater(index: number, total: number) {
-	const shallow = 'var(--colour-water-shallow)';
-	const deep = 'var(--colour-water-deep)';
-	const floor = 'var(--colour-water-floor)';
-	if (index === total - 1) return `linear-gradient(${deep}, ${floor})`;
+// Each chapter page is one stretch of the twilight zone, where the journey sits on the
+// home page and where the Journey page opens: together the chapters run from its top (mid
+// water) to its bottom (deep water), and the bottom of one is the exact colour at the top
+// of the next, so reading in order feels like one dive. Worked out from the position, so
+// adding a chapter needs no new colours. A browser without color-mix shows the page's
+// dark background.
+const zoneTop = 'var(--colour-water-mid)';
+const zoneBottom = 'var(--colour-water-deep)';
+const depth = (share: number) => `color-mix(in srgb, ${zoneBottom} ${share * 100}%, ${zoneTop})`;
 
-	const depth = (position: number) =>
-		`color-mix(in srgb, ${deep} ${(position / (total - 1)) * 100}%, ${shallow})`;
-	return `linear-gradient(${depth(index)}, ${depth(index + 1)})`;
+export function chapterWater(index: number, total: number) {
+	return `linear-gradient(${depth(index / total)}, ${depth((index + 1) / total)})`;
 }
 
 // The single colour halfway down a chapter's water. Solid lesson numbers are mixed with it,
 // so they look soft against the water while still hiding the bubbles behind them.
 export function chapterMidWater(index: number, total: number) {
-	const shallow = 'var(--colour-water-shallow)';
-	const deep = 'var(--colour-water-deep)';
-	const floor = 'var(--colour-water-floor)';
-	if (index === total - 1) return `color-mix(in srgb, ${floor} 50%, ${deep})`;
-	return `color-mix(in srgb, ${deep} ${((index + 0.5) / (total - 1)) * 100}%, ${shallow})`;
+	return depth((index + 0.5) / total);
 }
 
 // Empty for a chapter with showYear: false, whose years must not appear anywhere.
