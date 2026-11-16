@@ -1,6 +1,6 @@
 ---
 // Life in the water on the way down the home page: the sun's rays carrying on below the
-// waves and fading out by the end of the sunlit zone, a jellyfish glowing in the dark
+// waves and fading out at different depths within the sunlit zone, a jellyfish glowing in the dark
 // middle, and "marine snow", the specks that drift down through the deep ocean, lower
 // still. It sits behind the text and screen readers skip it. With reduced motion
 // everything stays, still.
@@ -31,12 +31,14 @@ import { sunrays } from '../lib/sunrays';
 <script>
 	// Each ray is a straight line from the sun, in the page's top-right corner, so its
 	// position in the water follows from where it crossed the bottom of the sky. This works
-	// that out from the real sizes and draws each ray from the waterline down to the end of
-	// the sunlit zone. It redraws whenever the page changes size.
+	// that out from the real sizes and draws each ray in two pieces on the same line: one
+	// inside the wave at the waterline (cut to the wave's curve, in BaseLayout.astro), and
+	// one from there down to the end of the sunlit zone. It redraws when the page resizes.
 	const rays = document.querySelector<SVGSVGElement>('svg[data-rays]');
 	const sea = rays?.closest<HTMLElement>('.sea');
 	const sky = document.querySelector<HTMLElement>('.surface');
 	const zone = document.querySelector<HTMLElement>('[data-zone]');
+	const wave = document.querySelector<SVGSVGElement>('.wave');
 
 	function draw() {
 		if (!rays || !sea || !sky || !zone) return;
@@ -48,7 +50,7 @@ import { sunrays } from '../lib/sunrays';
 		const waterTop = sky.getBoundingClientRect().bottom - seaBox.top;
 		const start = skyHeight - waterTop;
 		const depth = zone.getBoundingClientRect().bottom - seaBox.top;
-		const pairs: [number, number][] = JSON.parse(rays.dataset.rays ?? '[]');
+		const pairs: [number, number, number][] = JSON.parse(rays.dataset.rays ?? '[]');
 		// Where a ray edge that crosses the bottom of the sky at "edge" percent is, at a
 		// given distance below the top of the sky.
 		const x = (edge: number, down: number) => width * (1 + ((edge / 100 - 1) * down) / skyHeight);
@@ -59,16 +61,39 @@ import { sunrays } from '../lib/sunrays';
 		const group = rays.querySelector('g');
 		if (!group) return;
 		group.innerHTML = pairs
-			.map(([left, right]) => {
+			.map(([left, right, reach]) => {
+				// Each ray fades out at its own depth; the fade runs over the ray's own length.
+				const end = (depth * reach) / 100;
 				const top = start;
-				const bottom = start + depth;
+				const bottom = start + end;
 				const points = [
 					[x(left, top), 0],
 					[x(right, top), 0],
-					[x(right, bottom), depth],
-					[x(left, bottom), depth],
+					[x(right, bottom), end],
+					[x(left, bottom), end],
 				];
 				return `<polygon points="${points.map((p) => p.join(',')).join(' ')}" fill="url(#ray-fade)" />`;
+			})
+			.join('');
+
+		// The piece inside the wave, in the wave drawing's own units (1440 wide, 90 tall).
+		const waveRays = wave?.querySelector('.wave-rays');
+		if (!wave || !waveRays) return;
+		const waveBox = wave.getBoundingClientRect();
+		const skyTop = sky.getBoundingClientRect().top;
+		const waveTop = waveBox.top - skyTop;
+		const across = 1440 / width;
+		waveRays.innerHTML = pairs
+			.map(([left, right]) => {
+				const top = waveTop;
+				const bottom = waveTop + waveBox.height;
+				const points = [
+					[x(left, top) * across, 0],
+					[x(right, top) * across, 0],
+					[x(right, bottom) * across, 90],
+					[x(left, bottom) * across, 90],
+				];
+				return `<polygon points="${points.map((p) => p.join(',')).join(' ')}" />`;
 			})
 			.join('');
 	}
@@ -98,6 +123,15 @@ import { sunrays } from '../lib/sunrays';
 		overflow: visible;
 		/* A little fainter than in the sky, because pale light shows up more on dark water. */
 		opacity: 0.3;
+	}
+
+	/* The piece of each ray inside the wave, drawn into BaseLayout's wave by the script. */
+	:global(.wave-rays) {
+		opacity: 0.3;
+	}
+
+	:global(.wave-rays polygon) {
+		fill: var(--colour-sunlight);
 	}
 
 	.ray-start {
@@ -161,11 +195,13 @@ import { sunrays } from '../lib/sunrays';
 	@media (prefers-reduced-motion: no-preference) {
 		/* The same timing as the rays in the sky (src/pages/index.astro), so each ray
 		   brightens and dims in step above and below the waves. */
-		.rays :global(polygon) {
+		.rays :global(polygon),
+		:global(.wave-rays polygon) {
 			animation: shimmer 8s ease-in-out infinite alternate;
 		}
 
-		.rays :global(polygon:nth-child(2n)) {
+		.rays :global(polygon:nth-child(2n)),
+		:global(.wave-rays polygon:nth-child(2n)) {
 			animation-duration: 11s;
 			animation-delay: -4s;
 		}

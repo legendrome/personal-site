@@ -81,7 +81,15 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 						<path d="M6 66 H114 L98 88 H22 Z" />
 					</svg>
 					<svg class="wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+						<defs>
+							<clipPath id="wave-shape">
+								<path d="M0 40 C 180 10, 360 70, 540 40 S 900 10, 1080 40 S 1320 70, 1440 36 V90 H0 Z" />
+							</clipPath>
+						</defs>
 						<path d="M0 40 C 180 10, 360 70, 540 40 S 900 10, 1080 40 S 1320 70, 1440 36 V90 H0 Z" />
+						{/* Empty here. On the home page, DiveScenery.astro draws the sun's rays into it,
+						    cut to the wave's shape, so light enters the water at the wave itself. */}
+						<g class="wave-rays" clip-path="url(#wave-shape)"></g>
 					</svg>
 					<slot name="at-waterline" />
 				</div>
