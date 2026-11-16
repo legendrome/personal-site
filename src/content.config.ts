@@ -118,9 +118,13 @@ const experience = defineCollection({
 		organisation: z.string().optional(),
 		// The dates as shown, free text so "Summer 2025" works.
 		when: z.string().optional(),
-		// When it started, used only for the order, newest first. Left out for a note,
-		// which then comes after the dated entries in its chapter.
+		// When it started. Left out for a note, which then comes after the dated entries.
 		date: z.coerce.date({ error: 'Needs a date written like 2026-11-04' }).optional(),
+		// When it was finished, which sets the order (most recently finished first) on About
+		// and in the proof cards, because a role counts once it is done. Left out while it is
+		// still going, and then the start date is used. Write "2025" or "2025-08" in quotes
+		// if the exact day does not matter.
+		finished: z.coerce.date({ error: 'Needs a date written like "2025-08" or "2025"' }).optional(),
 		// Shows this role as a proof card on the home page and on Work. Keep it to the four
 		// or so strongest, because a pitch with ten highlights has none.
 		featured: z.boolean().default(false),

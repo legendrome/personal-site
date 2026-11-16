@@ -4,6 +4,9 @@ title: "Economics, Psychology and Philosophy"
 organisation: "University of Warwick"
 when: "2023 to 2026"
 date: 2023-09-01
+finished: "2026-07"
+featured: true
+result: "Upper Second Class Honours (2:1)"
 ---
 
 BSc on the behavioural economics pathway, with modules from Behavioural Economics and Strategic Games to Negotiation and Influence.

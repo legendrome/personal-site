@@ -3,6 +3,7 @@ chapter: "warwick"
 title: "Finance intern"
 when: "Summer 2025"
 date: 2025-06-01
+finished: "2025-08"
 featured: true
 result: "Cut the preparation before each meeting from five hours to under one"
 ---

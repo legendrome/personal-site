@@ -27,8 +27,17 @@ export async function getExperience(chapterId: string) {
 		'experience',
 		({ data }) => !data.draft && data.chapter.id === chapterId,
 	);
-	const time = (entry: CollectionEntry<'experience'>) => entry.data.date?.getTime() ?? -Infinity;
-	return entries.sort((a, b) => time(b) - time(a));
+	return entries.sort(byFinish);
+}
+
+// Newest first by when it was finished, because a role counts once it is done. Something
+// with no finish date yet comes by when it started; a tie goes to the later start. Notes
+// have neither, so they come last.
+function byFinish(a: CollectionEntry<'experience'>, b: CollectionEntry<'experience'>) {
+	const finish = (entry: CollectionEntry<'experience'>) =>
+		(entry.data.finished ?? entry.data.date)?.getTime() ?? -Infinity;
+	const start = (entry: CollectionEntry<'experience'>) => entry.data.date?.getTime() ?? -Infinity;
+	return finish(b) - finish(a) || start(b) - start(a);
 }
 
 // Astro only logs a warning when a file names a chapter that does not exist, and the build
@@ -62,11 +71,12 @@ export async function getProof(chapter: CollectionEntry<'journey'>) {
 	);
 }
 
-// The roles marked featured, for the proof cards on the home page and Work, newest first.
+// The roles marked featured, for the proof cards on the home page and Work, most recently
+// finished first.
 export async function getFeaturedExperience() {
 	await checkExperienceChapters();
 	const entries = await getCollection('experience', ({ data }) => !data.draft && data.featured);
-	return entries.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+	return entries.sort(byFinish);
 }
 
 // A chapter with only its one line has no page of its own to link to.

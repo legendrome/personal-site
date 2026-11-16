@@ -239,7 +239,9 @@ One or two sentences about what you did.
 
 `chapter` is the name of a file in `journey/` without `.md`, such as `"malmo"` or `"now"`. A name that matches no chapter fails the build, which tells you which file to fix.
 
-`when` is the dates as shown on the page, so `"Summer 2025"` works. `date` is when it started, and only sets the order, newest first.
+`when` is the dates as shown on the page, so `"Summer 2025"` works. `date` is when it started.
+
+To set the order, add `finished` with when it ended, such as `finished: "2025-08"` or just `finished: "2025"` (keep the quotes). Things are listed most recently finished first, on About and in the proof cards, because a role counts once it is done. Leave `finished` out while something is still going; it then sorts by its start `date`.
 
 To make a role one of the proof cards on the home page and Work, add two lines to its frontmatter. Keep it to about four, because a pitch with ten highlights has none:
 
@@ -248,7 +250,7 @@ featured: true
 result: "Cut the preparation before each meeting from five hours to under one"
 ```
 
-`result` is the big line on the card: the outcome, ideally with a number in it. The card links to the role's chapter.
+`result` is the big line on the card: the outcome, ideally with a number in it. The card links to the role's chapter. Cards are in the same order as everywhere else: most recently finished first, set by `finished`.
 
 Every field except `chapter` is optional. A file with no `title` is a plain note that shows just its writing, like the tools line under Warwick, and a file with no `date` comes after the dated ones in its chapter. Add `draft: true` to hide one.
 

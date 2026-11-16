@@ -4,6 +4,7 @@ title: "External affairs intern"
 organisation: "Aga Khan Academy"
 when: "2022 to 2023"
 date: 2022-01-02
+finished: "2023"
 featured: true
 result: "More than $40,000 raised for scholarships"
 ---

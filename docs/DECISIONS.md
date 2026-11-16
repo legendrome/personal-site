@@ -180,6 +180,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Both headers on the home page share one layout.** The links sat in different places above and below the waves, because only the sky's copy made room for the sun; both copies now use the same layout, and only the sky's turns About amber. The solid water-coloured bar behind the underwater header now fills in only a wave's height below the top of the water, so the sun's rays entering the water are no longer cut off by it; just under the waves there is no text for the bar to hide. (A frosted-glass header was tried first and rejected by Sujith.)
 
+**Roles are ordered by when they were finished, and the degree card shows his grade.** In his hand test Sujith made his Warwick degree a proof card, and moved its start date to put it first, which showed the README never said how cards are ordered. He wants things ordered by completion, since a role counts once it is done, so experience files take an optional `finished` date that sets the order on About and in the cards, falling back to the start `date` for anything still going. Finish dates were filled in for the five cards from their own "when" text. The degree card's result is his 2:1, which reverses the earlier choice to leave grades off the site; he confirmed it on 2026-11-16.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

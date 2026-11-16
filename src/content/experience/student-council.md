@@ -4,6 +4,7 @@ title: "Student council president"
 organisation: "Aga Khan Academy"
 when: "2022 to 2023"
 date: 2022-06-01
+finished: "2023"
 featured: true
 result: "Elected president, with student representatives across the school"
 ---
