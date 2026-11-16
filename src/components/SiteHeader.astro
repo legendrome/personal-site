@@ -93,12 +93,15 @@ const initials = site.name
 		display: none;
 	}
 
-	/* About takes a box as wide as the sun, minus the page margin, and sits at its right
-	   end. So About is always on the sun and every other link always stops short of it,
-	   at any screen width, because the box and the sun use the same size. */
+	/* About takes a box as wide as the sun, minus the page margin, and sits at its left
+	   end, just inside the sun's edge. So About is always on the sun, every other link
+	   always stops short of it at any screen width (the box and the sun use the same
+	   size), and the gap from Writing stays close to the gaps between the other links.
+	   The small inset grows on phones, where the sun's curve is tighter. */
 	.sun-room a[href='/about'] {
 		flex: 0 0 calc(var(--sun-size) - var(--page-gutter));
-		text-align: right;
+		box-sizing: border-box;
+		padding-left: clamp(0.5rem, 2.5rem - 4vw, 1rem);
 	}
 
 	/* While the sun is on screen, About turns deep amber: it stands apart from the sun and
