@@ -38,7 +38,11 @@ const next = written[position + 1];
 	opening="water"
 	water={chapterWater(index, chapters.length)}
 >
-	<PageHead title={chapter.data.title} intro={chapter.data.line} />
+	<PageHead
+		title={chapter.data.title}
+		intro={chapter.data.line}
+		back={{ href: '/journey', label: site.backToJourney }}
+	/>
 
 	<div class="body" style={`--lesson-water: ${chapterMidWater(index, chapters.length)}`}>
 		<Reading image={chapter.data.image}>

@@ -7,22 +7,36 @@ interface Props {
 	intro?: string;
 	// A smaller title, for posts and projects, whose titles can be long.
 	small?: boolean;
-	// For About, Work and Writing: the page name becomes a small label and the intro becomes
-	// the headline. With a giant one-word title on all three, they read like a template;
-	// leading with each page's own sentence makes them differ by what they say. The name
-	// stays the h1, so screen readers still hear the page name first.
+	// For About, Work, Writing and Journey: the page name becomes a small label and the
+	// intro becomes the headline. With a giant one-word title on all of them, they read like
+	// a template; leading with each page's own sentence makes them differ by what they say.
+	// The headline is the h1, the page's main heading, because it is what the page is about;
+	// the browser tab and search results still carry the page name.
 	labelled?: boolean;
-	// Left off the page-not-found page, which has its own way back and nothing to return to.
-	back?: boolean;
+	// The link back up. Left off the page-not-found page, which has its own way back. A
+	// chapter passes its own, back to the Journey page, instead of the default home link.
+	back?: boolean | { href: string; label: string };
 }
 
 const { title, intro, small = false, labelled = false, back = true } = Astro.props;
+const backLink = typeof back === 'object' ? back : undefined;
 ---
 
 <div class="head">
-	{back && <BackToDive />}
-	<h1 class:list={{ small, label: labelled }}>{title}</h1>
-	{intro && <p class:list={['intro', { headline: labelled }]}>{intro}</p>}
+	{backLink ? <a class="back" href={backLink.href}>{backLink.label}</a> : back && <BackToDive />}
+	{
+		labelled && intro ? (
+			<>
+				<p class="label">{title}</p>
+				<h1 class="headline">{intro}</h1>
+			</>
+		) : (
+			<>
+				<h1 class:list={{ small }}>{title}</h1>
+				{intro && <p class="intro">{intro}</p>}
+			</>
+		)
+	}
 	<slot />
 </div>
 
@@ -31,6 +45,11 @@ const { title, intro, small = false, labelled = false, back = true } = Astro.pro
 		display: grid;
 		gap: var(--space-medium);
 		padding-block: var(--space-large);
+	}
+
+	.back {
+		justify-self: start;
+		font-weight: 500;
 	}
 
 	.small {

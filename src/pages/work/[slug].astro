@@ -21,7 +21,12 @@ const { Content } = await render(project);
 	opening="water"
 	water="var(--water-work)"
 >
-	<PageHead title={project.data.title} intro={project.data.summary} small>
+	<PageHead
+		title={project.data.title}
+		intro={project.data.summary}
+		small
+		back={{ href: '/work', label: site.allWork }}
+	>
 		<p class="meta">
 			<time datetime={project.data.date.toISOString()}>{formatDate(project.data.date)}</time>
 			{project.data.link && <a href={project.data.link}>{site.projectLink}</a>}

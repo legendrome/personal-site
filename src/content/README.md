@@ -55,6 +55,7 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `storyLabel`, `proofLabel` | In a chapter written as lessons, the toggle that opens a story and the label on a card |
 | `backUp` | The link at the bottom of pages with a boat, which returns to the top |
 | `backToDive` | The link at the top and bottom of inner pages, which returns to the spot left on the home page |
+| `backToJourney` | The link at the top of a chapter page, back to the Journey page |
 | `skipLink` | The link keyboard users meet first, which jumps past the header |
 | `nav` | The header menu, with each item's label and the page it goes to |
 | `github`, `linkedin` | Your links in the footer, each a full address starting with `https://` |

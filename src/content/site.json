@@ -30,7 +30,8 @@
 	"markerStart": "On the boat",
 	"chapterLink": "Read the chapter",
 	"backUp": "Back to the top",
-	"backToDive": "Back to the dive",
+	"backToDive": "Back to home",
+	"backToJourney": "Back to the journey",
 	"skipLink": "Skip to the main content",
 	"nav": [
 		{ "label": "Work", "href": "/work" },

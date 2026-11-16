@@ -1,8 +1,11 @@
 ---
 // About sits above the water, on the boat, because it is about who Sujith is right now.
-// It has two parts: who he is (the writing in about.md, his languages and interests),
-// then what he has done, chapter by chapter, newest first.
+// It runs: who he is (the writing in about.md, beside his photo and languages), then what
+// he has done, chapter by chapter, newest first, then what he does off the clock. The
+// experience comes before the interests because it is what most visitors came for.
 import { getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.webp';
 import ChapterTimeline from '../components/ChapterTimeline.astro';
 import PageHead from '../components/PageHead.astro';
 import Reading from '../components/Reading.astro';
@@ -27,7 +30,8 @@ const page = about.data;
 				<Reading>
 					<Content />
 				</Reading>
-				<div class="kit">
+				<div class="kit side">
+					<Image class="photo" src={portrait} alt={site.portraitAlt} width={384} height={384} />
 					<div>
 						<h2>{page.languagesHeading}</h2>
 						<ul class="languages">
@@ -45,11 +49,6 @@ const page = about.data;
 							}
 						</ul>
 					</div>
-					<div>
-						<h2>{page.interestsHeading}</h2>
-						<ul class="chips">{page.interests.map((interest) => <li>{interest}</li>)}</ul>
-						{page.interestsNote && <p class="note">{page.interestsNote}</p>}
-					</div>
 				</div>
 			</section>
 
@@ -59,6 +58,14 @@ const page = about.data;
 					<p class="intro">{page.doneIntro}</p>
 				</div>
 				<ChapterTimeline chapterLink={site.chapterLink} />
+			</section>
+
+			<section class="part kit">
+				<div>
+					<h2>{page.interestsHeading}</h2>
+					<ul class="chips">{page.interests.map((interest) => <li>{interest}</li>)}</ul>
+					{page.interestsNote && <p class="note">{page.interestsNote}</p>}
+				</div>
 			</section>
 
 			<p class="closing">{page.closing}</p>
@@ -73,8 +80,8 @@ const page = about.data;
 		max-width: var(--wide-length);
 	}
 
-	/* On wide screens the languages and interests sit beside the writing rather than under
-	   it, while the writing keeps its comfortable reading width. */
+	/* On wide screens the photo and languages sit beside the writing rather than under it,
+	   while the writing keeps its comfortable reading width. */
 	@media (min-width: 60em) {
 		.who {
 			grid-template-columns: minmax(0, var(--line-length)) minmax(16rem, 24rem);
@@ -82,10 +89,21 @@ const page = about.data;
 			column-gap: var(--space-large);
 		}
 
-		.who .kit {
+		.who .side {
 			grid-template-columns: 1fr;
 			align-content: start;
 		}
+	}
+
+	/* The photo, round like the one in the home page's sun, first in the side column. On a
+	   phone it comes after the writing, smaller. */
+	.photo {
+		width: min(100%, 12rem);
+		height: auto;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		object-fit: cover;
+		box-shadow: 0 0 0 0.4rem var(--colour-sun);
 	}
 
 	.part {
