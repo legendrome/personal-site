@@ -1,10 +1,11 @@
 ---
 // Moving the mouse under water feels like moving through water.
 //
-// In Chrome and Edge, a small lens follows the cursor and ripples whatever is behind it,
-// using an SVG "displacement filter" (it shifts each pixel by a wavy amount). The lens is
-// kept about 120px across on purpose: the work grows with the area, and at this size any
-// recent laptop draws it easily, while a whole page of rippling would stutter. Safari and
+// In Chrome and Edge, the cursor leaves a wake: a small patch of rippled water just behind
+// it, stretched along the way it is moving and stronger the faster it goes, as if the
+// cursor were an object being dragged through water. The ripple is an SVG "displacement
+// filter" (it shifts each pixel by a wavy amount). The patch is kept small on purpose:
+// the work grows with the area, and a whole page of rippling would stutter. Safari and
 // Firefox cannot apply this filter to what is behind an element, so there the cursor leaves
 // a short trail of rising bubbles instead.
 //
@@ -19,7 +20,7 @@
 			<feTurbulence type="fractalNoise" baseFrequency="0.018 0.03" numOctaves="2" seed="3" result="noise">
 				<animate attributeName="baseFrequency" dur="7s" values="0.018 0.03;0.024 0.036;0.018 0.03" repeatCount="indefinite" />
 			</feTurbulence>
-			<feDisplacementMap in="SourceGraphic" in2="noise" scale="16" xChannelSelector="R" yChannelSelector="G" />
+			<feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
 		</filter>
 	</svg>
 	<div class="lens"></div>
@@ -52,15 +53,25 @@
 
 		const underwater = (clientY: number) => clientY > sea.getBoundingClientRect().top;
 
-		// The lens trails the cursor a little, easing towards it, which reads as moving
-		// through something thicker than air.
+		// The wake trails the cursor, easing towards it. How far behind it lags is how fast
+		// the cursor is moving, so that sets how visible the wake is and how much it stretches
+		// out behind, along the direction of travel. When the cursor stops, the wake catches
+		// up and settles away to nothing.
 		function frame() {
-			lensX += (x - lensX) * 0.18;
-			lensY += (y - lensY) * 0.18;
+			lensX += (x - lensX) * 0.2;
+			lensY += (y - lensY) * 0.2;
+			const dx = x - lensX;
+			const dy = y - lensY;
+			const speed = Math.hypot(dx, dy);
+			const stretch = 1 + Math.min(speed / 25, 1.2);
 			lens!.style.translate = `${lensX}px ${lensY}px`;
-			if (Math.abs(x - lensX) + Math.abs(y - lensY) > 0.5) {
+			lens!.style.rotate = `${Math.atan2(dy, dx)}rad`;
+			lens!.style.scale = `${stretch} ${1 / Math.sqrt(stretch)}`;
+			lens!.style.opacity = String(Math.min(1, speed / 12));
+			if (speed > 0.5) {
 				requestAnimationFrame(frame);
 			} else {
+				lens!.style.opacity = '0';
 				running = false;
 			}
 		}
@@ -119,20 +130,18 @@
 		position: absolute;
 	}
 
-	/* The lens: centred on its position, invisible until the mouse moves under water. A thin
-	   pale rim and a soft highlight make it read as a drop of water, even before the ripple. */
+	/* The wake: centred on its position, with no outline, and its ripple fading out towards
+	   its edge so it has no hard rim, only disturbed water. The script sets its opacity,
+	   stretch and angle from the cursor's speed and direction. */
 	.lens {
 		position: absolute;
-		top: -3.75rem;
-		left: -3.75rem;
-		width: 7.5rem;
-		height: 7.5rem;
+		top: -1.75rem;
+		left: -1.75rem;
+		width: 3.5rem;
+		height: 3.5rem;
 		border-radius: 50%;
-		box-shadow:
-			inset 0 0 0 1px var(--colour-glow),
-			inset 0.4rem 0.6rem 1.2rem -0.6rem var(--colour-glow);
+		mask-image: radial-gradient(closest-side, black 35%, transparent);
 		opacity: 0;
-		transition: opacity 0.4s ease;
 	}
 
 	.ripple .lens {
@@ -141,10 +150,6 @@
 
 	.trail .lens {
 		display: none;
-	}
-
-	.ripple.active .lens {
-		opacity: 1;
 	}
 
 	/* The fallback: bubbles that wobble upward from the cursor and fade. */
