@@ -19,11 +19,21 @@ const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
 	<g transform="translate(14 24) scale(0.83)" fill="${ink}">${boat}</g>
 </svg>`;
 
-// The first screen of the site in miniature. It has no words, because a link preview
-// already shows the page's title and description next to the image.
+const sun = '#fbefc4';
+
+// The first screen of the site in miniature: the pale sun in the corner with Sujith's photo
+// in it, its rays, and the boat on the waves. It has no words, because a link preview
+// already shows the page's title and description next to the image. The photo is added
+// below, from src/assets/portrait.webp, so a new photo there shows up here too.
 const preview = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
 	<rect width="1200" height="630" fill="${sky}"/>
-	<g transform="translate(420 170) scale(3)" fill="${ink}">${boat}</g>
+	<g fill="#ffffff" opacity="0.3">
+		<path d="M1200 0 L216 497 L360 497 Z"/><path d="M1200 0 L552 497 L648 497 Z"/>
+		<path d="M1200 0 L840 497 L960 497 Z"/>
+	</g>
+	<circle cx="1200" cy="0" r="330" fill="${sun}" opacity="0.45"/>
+	<circle cx="1200" cy="0" r="290" fill="${sun}"/>
+	<g transform="translate(300 170) scale(3)" fill="${ink}">${boat}</g>
 	<g transform="translate(0 390) scale(0.8334 1.2)" fill="${water}"><path d="${wave}"/></g>
 	<rect y="497" width="1200" height="133" fill="${water}"/>
 </svg>`;
@@ -49,4 +59,18 @@ function toIco(image, size) {
 await writeFile('public/favicon.svg', `${icon}\n`);
 await writeFile('public/favicon.ico', toIco(await png(icon, 32, 32), 32));
 await writeFile('public/apple-touch-icon.png', await png(icon, 180, 180));
-await writeFile('public/preview.png', await png(preview, 1200, 630));
+// The photo, cut to a circle and placed in the sun's corner.
+const photoSize = 210;
+const circle = Buffer.from(
+	`<svg xmlns="http://www.w3.org/2000/svg" width="${photoSize}" height="${photoSize}"><circle cx="${photoSize / 2}" cy="${photoSize / 2}" r="${photoSize / 2}"/></svg>`,
+);
+const photo = await sharp('src/assets/portrait.webp')
+	.resize(photoSize, photoSize)
+	.composite([{ input: circle, blend: 'dest-in' }])
+	.png()
+	.toBuffer();
+const previewImage = await sharp(await png(preview, 1200, 630))
+	.composite([{ input: photo, left: 1200 - photoSize - 40, top: 40 }])
+	.png()
+	.toBuffer();
+await writeFile('public/preview.png', previewImage);

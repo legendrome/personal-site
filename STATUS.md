@@ -13,7 +13,7 @@ A senior audit found the theme works but a recruiter cannot tell who Sujith is o
 1. Foundation: type scale, accent, breakpoints, shared tokens, Karla 700, link colour, tap sizes, checks at 320px and 200% zoom. Done 2026-11-16, committed on the redesign branch.
 2. Home page (built on the redesign branch 2026-11-16, then reworked at Sujith's request into a pitch: ocean zones with proof cards, the voyage map, writing and contact; a new Journey page; Work as a showcase; redrawn sea floor, swinging anchor, rays, jellyfish, marine snow, anglerfish, depth gauge). Originally planned as: a hero with a plain line and two buttons ("Get in touch", "Start the dive"), an "At a glance" strip, a tighter journey section, a contact button in the footer. Text in `site.json`.
 3. Inner pages (done on the redesign branch 2026-11-16: headline as h1, plain back links, About reordered with his photo; Work kept as the showcase). Originally: experience before interests on About, the headline as the h1, a decision on Work, plain labels in place of "Back to the dive".
-4. Features: hand-written sitemap and robots.txt, missing link-preview tags, structured data, his photo when he has one; analytics and an email link only if he says yes.
+4. Features (done on the redesign branch 2026-11-16: sitemap, robots.txt, fuller preview tags, posts as articles, a preview picture with his photo, structured data; analytics and email still need his say). Originally: hand-written sitemap and robots.txt, missing link-preview tags, structured data, his photo when he has one; analytics and an email link only if he says yes.
 5. Check and hand over: keyboard, contrast, Lighthouse, 320px and 200% zoom, docs, and his hand test.
 
 ## Plan (tentative, set 2026-11-14)

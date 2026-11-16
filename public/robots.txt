@@ -1,0 +1,5 @@
+# Every page may be read by search engines. The sitemap lists them all.
+User-agent: *
+Allow: /
+
+Sitemap: https://sujithbandaru.com/sitemap.xml

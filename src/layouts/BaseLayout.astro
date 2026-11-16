@@ -20,9 +20,11 @@ interface Props {
 	water?: string;
 	// The boat small and far away, for the page-not-found page.
 	adrift?: boolean;
+	// For a blog post: link previews then show it as an article, with its date.
+	published?: Date;
 }
 
-const { title, description, opening = 'dive', water, adrift = false } = Astro.props;
+const { title, description, opening = 'dive', water, adrift = false, published } = Astro.props;
 const { data: site } = await getEntry('site', 'site');
 const summary = description ?? site.description;
 const address = new URL(Astro.url.pathname, Astro.site).href;
@@ -42,15 +44,23 @@ const address = new URL(Astro.url.pathname, Astro.site).href;
 		<meta name="description" content={summary} />
 		<link rel="canonical" href={address} />
 		<link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
-		<meta property="og:type" content="website" />
+		<meta name="theme-color" content="#bfe1f0" />
+		{/* What LinkedIn, WhatsApp, Slack and others show when someone shares a link here. */}
+		<meta property="og:site_name" content={site.name} />
+		<meta property="og:locale" content="en_GB" />
+		<meta property="og:type" content={published ? 'article' : 'website'} />
+		{published && <meta property="article:published_time" content={published.toISOString()} />}
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={summary} />
 		<meta property="og:url" content={address} />
 		<meta property="og:image" content={new URL('/preview.png', Astro.site).href} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="A small sailing boat on blue waves under a pale sky" />
+		<meta property="og:image:alt" content={site.previewAlt} />
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={summary} />
+		<slot name="head" />
 	</head>
 	<body id="top">
 		<a class="skip-link" href="#main">{site.skipLink}</a>

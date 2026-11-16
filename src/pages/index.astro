@@ -29,10 +29,31 @@ const { data: site } = await getEntry('site', 'site');
 const chapters = await getChapters();
 const projects = (await getProjects()).filter((project) => project.data.featured);
 const proof = await getFeaturedExperience();
+const { data: about } = await getEntry('about', 'about');
+// The university comes from the degree's own file, so it is written in one place.
+const degree = await getEntry('experience', 'warwick-degree');
+
+// Facts about Sujith in a form search engines read, so a search for his name can show his
+// photo, university and profiles. "Structured data", in the vocabulary from schema.org.
+// Every fact comes from the site's own content files.
+const person = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: site.name,
+	url: Astro.site?.href,
+	image: new URL(portrait.src, Astro.site).href,
+	description: site.heroLine,
+	alumniOf: degree?.data.organisation
+		? { '@type': 'CollegeOrUniversity', name: degree.data.organisation }
+		: undefined,
+	knowsLanguage: about.languages.map((language) => language.name),
+	sameAs: [site.linkedin, site.github].filter(Boolean),
+};
 const latestPost = (await getPosts())[0];
 ---
 
 <BaseLayout title={site.name}>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(person)} />
 	{/* The sun, a quarter of it in the corner. The menu's About link sits on it, and the
 	   photo under it links to About too.
 	   Its rays cross the sky here and carry on into the water in DiveScenery.astro. */}
