@@ -81,32 +81,14 @@ const initials = site.name
 		color: var(--colour-on-sky);
 	}
 
-	/* A frosted bar: whatever passes under it, text or light rays, is blurred, and a layer of
-	   the water's own gradient (lined up with the water by the script in BaseLayout.astro)
-	   sits over that. Passing text becomes unreadable, but the rays and the water still show
-	   through softly, so the bar does not cut a hard band across them. */
 	.water {
 		color: var(--colour-on-water);
-		backdrop-filter: blur(18px);
-	}
-
-	.water::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		z-index: -1;
+		/* A solid bar painted with the same gradient as the water, lined up with it by the
+		   script in BaseLayout.astro, so it hides passing text but blends into the water. */
 		background-image: var(--water-gradient);
 		background-repeat: no-repeat;
 		background-size: 100% var(--sea-height, 100vh);
 		background-position: 0 var(--sea-top, 0);
-		opacity: 0.7;
-	}
-
-	/* Browsers that cannot blur keep the solid bar, so text never shows through. */
-	@supports not (backdrop-filter: blur(1px)) {
-		.water::before {
-			opacity: 1;
-		}
 	}
 
 	.short {
