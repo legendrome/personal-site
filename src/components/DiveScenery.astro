@@ -1,17 +1,24 @@
 ---
-// Life in the water on the way down the home page, placed by how far down the page it is:
-// the sun's rays carrying on below the waves and dimming with depth, a jellyfish glowing in the dark middle, and "marine snow",
-// the specks that drift down through the deep ocean, lower still. It sits behind the text
-// and screen readers skip it. With reduced motion everything stays, still.
+// Life in the water on the way down the home page: the sun's rays carrying on below the
+// waves and fading out by the end of the sunlit zone, a jellyfish glowing in the dark
+// middle, and "marine snow", the specks that drift down through the deep ocean, lower
+// still. It sits behind the text and screen readers skip it. With reduced motion
+// everything stays, still.
+import { sunrays } from '../lib/sunrays';
 ---
 
 <div class="scenery" aria-hidden="true">
-	<div class="rays">
-		<span></span>
-		<span></span>
-		<span></span>
-		<span></span>
-	</div>
+	{/* Filled in by the script below, which needs the real sizes of the sky and the
+	   sunlit zone to keep each ray on the same line as its half in the sky. */}
+	<svg class="rays" data-rays={JSON.stringify(sunrays)}>
+		<defs>
+			<linearGradient id="ray-fade" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" class="ray-start"></stop>
+				<stop offset="1" class="ray-end"></stop>
+			</linearGradient>
+		</defs>
+		<g></g>
+	</svg>
 
 	<svg class="jelly" viewBox="0 0 80 140">
 		<path class="bell" d="M8 40 C 8 16, 24 4, 40 4 C 56 4, 72 16, 72 40 C 64 44, 56 40, 48 44 C 42 40, 38 40, 32 44 C 24 40, 16 44, 8 40 Z"></path>
@@ -20,6 +27,57 @@
 
 	<div class="snow"></div>
 </div>
+
+<script>
+	// Each ray is a straight line from the sun, in the page's top-right corner, so its
+	// position in the water follows from where it crossed the bottom of the sky. This works
+	// that out from the real sizes and draws each ray from the waterline down to the end of
+	// the sunlit zone. It redraws whenever the page changes size.
+	const rays = document.querySelector<SVGSVGElement>('svg[data-rays]');
+	const sea = rays?.closest<HTMLElement>('.sea');
+	const sky = document.querySelector<HTMLElement>('.surface');
+	const zone = document.querySelector<HTMLElement>('[data-zone]');
+
+	function draw() {
+		if (!rays || !sea || !sky || !zone) return;
+		const seaBox = sea.getBoundingClientRect();
+		const width = seaBox.width;
+		const skyHeight = sky.offsetHeight;
+		// The sky and the water overlap a little at the waves; this is where the water starts,
+		// measured from the top of the sky.
+		const waterTop = sky.getBoundingClientRect().bottom - seaBox.top;
+		const start = skyHeight - waterTop;
+		const depth = zone.getBoundingClientRect().bottom - seaBox.top;
+		const pairs: [number, number][] = JSON.parse(rays.dataset.rays ?? '[]');
+		// Where a ray edge that crosses the bottom of the sky at "edge" percent is, at a
+		// given distance below the top of the sky.
+		const x = (edge: number, down: number) => width * (1 + ((edge / 100 - 1) * down) / skyHeight);
+
+		rays.setAttribute('viewBox', `0 0 ${width} ${depth}`);
+		rays.setAttribute('width', String(width));
+		rays.setAttribute('height', String(depth));
+		const group = rays.querySelector('g');
+		if (!group) return;
+		group.innerHTML = pairs
+			.map(([left, right]) => {
+				const top = start;
+				const bottom = start + depth;
+				const points = [
+					[x(left, top), 0],
+					[x(right, top), 0],
+					[x(right, bottom), depth],
+					[x(left, bottom), depth],
+				];
+				return `<polygon points="${points.map((p) => p.join(',')).join(' ')}" fill="url(#ray-fade)" />`;
+			})
+			.join('');
+	}
+
+	if (sea) {
+		new ResizeObserver(draw).observe(sea);
+		draw();
+	}
+</script>
 
 <style>
 	.scenery {
@@ -31,45 +89,24 @@
 		pointer-events: none;
 	}
 
-	/* Soft beams slanting down from the surface, fading out as the water gets deeper. */
+	/* The sun's rays below the waves, at the sky's strength where they enter the water,
+	   fading to nothing at the bottom of the sunlit zone. */
 	.rays {
 		position: absolute;
 		top: 0;
 		left: 0;
-		right: 0;
-		height: 30%;
-		/* Strongest at the top right under the sun, gone by the twilight zone. */
-		mask-image: linear-gradient(to bottom left, black, transparent 75%);
+		overflow: visible;
+		/* A little fainter than in the sky, because pale light shows up more on dark water. */
+		opacity: 0.3;
 	}
 
-	.rays span {
-		position: absolute;
-		top: -5%;
-		width: 9%;
-		height: 110%;
-		background: linear-gradient(var(--colour-glow), transparent 85%);
-		opacity: 0.35;
-		transform: skewX(-18deg);
+	.ray-start {
+		stop-color: var(--colour-sunlight);
 	}
 
-	/* Spaced to carry on the sky's rays, which fan out from the top right. */
-	.rays span:nth-child(1) {
-		left: 30%;
-	}
-
-	.rays span:nth-child(2) {
-		left: 52%;
-		width: 5%;
-	}
-
-	.rays span:nth-child(3) {
-		left: 70%;
-		width: 10%;
-	}
-
-	.rays span:nth-child(4) {
-		left: 90%;
-		width: 5%;
+	.ray-end {
+		stop-color: var(--colour-sunlight);
+		stop-opacity: 0;
 	}
 
 	/* The jellyfish, glowing faintly, in the darker water partway down. */
@@ -122,13 +159,15 @@
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
-		.rays span {
-			animation: shimmer 7s ease-in-out infinite alternate;
+		/* The same timing as the rays in the sky (src/pages/index.astro), so each ray
+		   brightens and dims in step above and below the waves. */
+		.rays :global(polygon) {
+			animation: shimmer 8s ease-in-out infinite alternate;
 		}
 
-		.rays span:nth-child(2n) {
-			animation-duration: 9s;
-			animation-delay: -3s;
+		.rays :global(polygon:nth-child(2n)) {
+			animation-duration: 11s;
+			animation-delay: -4s;
 		}
 
 		.jelly {
@@ -141,11 +180,11 @@
 
 		@keyframes shimmer {
 			from {
-				opacity: 0.15;
+				opacity: 0.5;
 			}
 
 			to {
-				opacity: 0.45;
+				opacity: 1;
 			}
 		}
 
