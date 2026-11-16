@@ -1,0 +1,238 @@
+---
+// The route through every place Sujith has lived, as a dotted line with a stop for each
+// journey chapter, in order. It reads the chapters, so a new chapter adds a stop by itself.
+//
+// "follow" is for the Journey page: stops light up one by one as you scroll past each
+// chapter (the page marks each chapter with data-chapter-stop). Anywhere else every stop
+// is lit and the latest glows. Without JavaScript every stop simply shows as lit.
+// "down" keeps the route running down the page on every screen, for a narrow column.
+import type { CollectionEntry } from 'astro:content';
+import { chapterYears, hasFullChapter } from '../lib/content';
+
+interface Props {
+	chapters: CollectionEntry<'journey'>[];
+	follow?: boolean;
+	down?: boolean;
+}
+
+const { chapters, follow = false, down = false } = Astro.props;
+
+// The wavy line behind the stops on wider screens: stops sit alternately high and low,
+// evenly spaced, joined by smooth curves. Drawn in a 100 by 60 box that stretches to fit.
+const count = chapters.length;
+const points = chapters.map((_, i) => ({ x: ((i + 0.5) / count) * 100, y: i % 2 ? 45 : 15 }));
+const route = points
+	.map((p, i) => {
+		if (i === 0) return `M ${p.x} ${p.y}`;
+		const prev = points[i - 1];
+		const mid = (prev.x + p.x) / 2;
+		return `C ${mid} ${prev.y} ${mid} ${p.y} ${p.x} ${p.y}`;
+	})
+	.join(' ');
+---
+
+<div class:list={['voyage', { follow, across: !down }]} data-voyage>
+	<svg class="route" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+		<path d={route}></path>
+	</svg>
+	<ol style={`--stops: ${count}`}>
+		{
+			chapters.map((chapter, i) => {
+				const years = chapterYears(chapter);
+				const label = (
+					<>
+						<span class="dot" aria-hidden="true" />
+						<span class="place">{chapter.data.title}</span>
+						{years && <span class="years">{years}</span>}
+					</>
+				);
+				return (
+					<li
+						class:list={['stop', { low: i % 2 === 1, reached: true, here: i === count - 1 }]}
+						data-chapter={chapter.id}
+					>
+						{hasFullChapter(chapter) ? <a href={`/journey/${chapter.id}`}>{label}</a> : label}
+					</li>
+				);
+			})
+		}
+	</ol>
+</div>
+
+<script>
+	// On the Journey page, light each stop once its chapter is a little over halfway up
+	// the screen, and make the latest one reached glow.
+	document.querySelectorAll<HTMLElement>('[data-voyage].follow').forEach((voyage) => {
+		const stops = [...voyage.querySelectorAll<HTMLElement>('[data-chapter]')];
+		const sections = [...document.querySelectorAll<HTMLElement>('[data-chapter-stop]')];
+
+		function update() {
+			let reached = -1;
+			sections.forEach((section, i) => {
+				if (section.getBoundingClientRect().top < innerHeight * 0.6) reached = i;
+			});
+			stops.forEach((stop, i) => {
+				stop.classList.toggle('reached', i <= Math.max(reached, 0));
+				stop.classList.toggle('here', i === Math.max(reached, 0));
+			});
+		}
+
+		addEventListener('scroll', update, { passive: true });
+		addEventListener('resize', update);
+		update();
+	});
+</script>
+
+<style>
+	.voyage {
+		position: relative;
+	}
+
+	ol {
+		display: grid;
+		gap: var(--space-medium);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	/* On a phone the route runs down the page: a dashed line on the left, a dot per stop. */
+	.stop {
+		position: relative;
+		padding-left: var(--space-large);
+	}
+
+	.stop::before {
+		content: '';
+		position: absolute;
+		left: 0.55rem;
+		top: 1.2rem;
+		bottom: calc(-1 * var(--space-medium));
+		border-left: var(--line-thin) dashed var(--colour-rope);
+	}
+
+	.stop:last-child::before {
+		display: none;
+	}
+
+	.route {
+		display: none;
+	}
+
+	.stop a {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.dot {
+		position: absolute;
+		left: 0;
+		top: 0.15rem;
+		width: 1.1rem;
+		height: 1.1rem;
+		box-sizing: border-box;
+		border-radius: 50%;
+		border: var(--line-thin) solid var(--colour-on-water);
+		background: var(--colour-water-deep);
+	}
+
+	.place {
+		display: block;
+		font-family: var(--font-title);
+		font-weight: 800;
+		font-size: var(--size-row);
+		line-height: 1.2;
+	}
+
+	.years {
+		display: block;
+		font-size: var(--size-small);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.stop a:hover .place,
+	.stop a:focus-visible .place {
+		text-decoration: underline;
+		text-decoration-thickness: var(--line-thin);
+		text-underline-offset: var(--underline-offset);
+	}
+
+	/* Stops not reached yet, only on the Journey page while scrolling, are faint. */
+	.stop:not(.reached) {
+		opacity: 0.7;
+	}
+
+	.reached .dot {
+		background: var(--colour-on-water);
+	}
+
+	/* The latest stop glows buoy orange, the one warm colour on the site. */
+	.here .dot {
+		background: var(--colour-accent);
+		border-color: var(--colour-accent);
+		box-shadow: 0 0 0 0.4rem color-mix(in srgb, var(--colour-accent) 30%, transparent);
+	}
+
+	/* On wider screens the route runs across: stops alternate high and low along a wave. */
+	@media (min-width: 60em) {
+		.voyage.across {
+			--band: 6rem;
+		}
+
+		.across .route {
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: var(--band);
+		}
+
+		.across .route path {
+			fill: none;
+			stroke: var(--colour-rope);
+			stroke-width: var(--line-thin);
+			stroke-dasharray: 6 6;
+			vector-effect: non-scaling-stroke;
+		}
+
+		.across ol {
+			grid-template-columns: repeat(var(--stops), minmax(0, 1fr));
+			gap: 0;
+		}
+
+		.across .stop {
+			padding: calc(var(--band) / 4 + 1.1rem) var(--space-tiny) 0;
+			text-align: center;
+		}
+
+		.across .stop.low {
+			padding-top: calc(var(--band) * 3 / 4 + 1.1rem);
+		}
+
+		.across .stop::before {
+			display: none;
+		}
+
+		.across .dot {
+			left: 50%;
+			top: calc(var(--band) / 4 - 0.55rem);
+			translate: -50% 0;
+		}
+
+		.across .low .dot {
+			top: calc(var(--band) * 3 / 4 - 0.55rem);
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.stop,
+		.dot {
+			transition:
+				opacity 0.4s ease,
+				background-color 0.4s ease,
+				box-shadow 0.4s ease;
+		}
+	}
+</style>

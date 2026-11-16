@@ -1,26 +1,29 @@
 ---
-// The home page is the whole dive: the journey first, because it is the heart of the
-// site, then the latest work and writing, then the sea floor. All the words come from
-// src/content/.
+// The home page is the pitch, told as one dive through the ocean's real zones. Each zone
+// holds a short preview of one part of the site and links on to its full page: what
+// Sujith has done first, because that is what most visitors came for, then where he has
+// been, then his writing, then the sea floor with how to reach him. All the words come
+// from src/content/.
 import { getEntry } from 'astro:content';
 import AnchorLine from '../components/AnchorLine.astro';
 import ArrowRow from '../components/ArrowRow.astro';
 import ButtonLink from '../components/ButtonLink.astro';
-import YearMarker from '../components/YearMarker.astro';
+import ProofCard from '../components/ProofCard.astro';
+import VoyageMap from '../components/VoyageMap.astro';
 import SeaFloor from '../components/SeaFloor.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
-	chapterYears,
 	formatDate,
 	getChapters,
+	getFeaturedExperience,
 	getPosts,
 	getProjects,
-	hasFullChapter,
 } from '../lib/content';
 
 const { data: site } = await getEntry('site', 'site');
 const chapters = await getChapters();
 const projects = (await getProjects()).filter((project) => project.data.featured);
+const proof = await getFeaturedExperience();
 const latestPost = (await getPosts())[0];
 ---
 
@@ -40,65 +43,52 @@ const latestPost = (await getPosts())[0];
 			<ul>
 				{
 					site.glance.map((item) => (
-						<li>
-							<a href={item.href}>{item.text}</a>
-						</li>
+						<li>{item.href ? <a href={item.href}>{item.text}</a> : item.text}</li>
 					))
 				}
 			</ul>
 		</section>
 	</div>
 
-	<section class="section journey" id="journey">
-		<div class="pinned">
-			<h2>{site.pinnedSentence}</h2>
+	<section class="section zone" id="journey">
+		<p class="zone-name">{site.workZone}</p>
+		<h2>{site.proofHeading}</h2>
+		<div class="cards">
+			{proof.map((entry) => <ProofCard entry={entry} />)}
 		</div>
-		<div>
-			{
-				chapters.map((chapter) => {
-					const years = chapterYears(chapter);
-					return (
-						<div
-							class="stop"
-							data-when={years ? `${chapter.data.title}, ${years}` : chapter.data.title}
-						>
-							<h3>
-								{chapter.data.title}
-								{years && <span class="years">{years}</span>}
-							</h3>
-							<p>{chapter.data.line}</p>
-							{hasFullChapter(chapter) && (
-								<p>
-									<a href={`/journey/${chapter.id}`}>{site.chapterLink}</a>
-								</p>
-							)}
-						</div>
-					);
-				})
-			}
+		{
+			projects.length > 0 && (
+				<>
+					<h3 class="sub">{site.projectsHeading}</h3>
+					<div class="rows">
+						{projects.map((project) => (
+							<ArrowRow
+								href={`/work/${project.id}`}
+								title={project.data.title}
+								detail={project.data.summary}
+							/>
+						))}
+					</div>
+				</>
+			)
+		}
+		<p class="onward"><a href="/work">{site.allWork}</a></p>
+	</section>
+
+	<section class="section zone">
+		<p class="zone-name">{site.journeyZone}</p>
+		<h2>{site.journeyHeading}</h2>
+		<p class="lead">{site.pinnedSentence}</p>
+		<div class="map">
+			<VoyageMap chapters={chapters} />
 		</div>
+		<p class="onward"><a href="/journey">{site.journeyLink}</a></p>
 	</section>
 
 	{
-		projects.length > 0 && (
-			<section class="section">
-				<h2>{site.workHeading}</h2>
-				<div class="rows">
-					{projects.map((project) => (
-						<ArrowRow
-							href={`/work/${project.id}`}
-							title={project.data.title}
-							detail={project.data.summary}
-						/>
-					))}
-				</div>
-			</section>
-		)
-	}
-
-	{
 		latestPost && (
-			<section class="section">
+			<section class="section zone">
+				<p class="zone-name">{site.writingZone}</p>
 				<h2>{site.writingHeading}</h2>
 				<div class="rows">
 					<ArrowRow
@@ -107,6 +97,7 @@ const latestPost = (await getPosts())[0];
 						detail={formatDate(latestPost.data.date)}
 					/>
 				</div>
+				<p class="onward"><a href="/writing">{site.allWriting}</a></p>
 			</section>
 		)
 	}
@@ -126,7 +117,6 @@ const latestPost = (await getPosts())[0];
 	<div slot="at-waterline" class="rope-to-hull" aria-hidden="true"></div>
 	<AnchorLine slot="underwater" />
 	<SeaFloor slot="seafloor" />
-	<YearMarker slot="overlay" start={site.markerStart} />
 </BaseLayout>
 
 <script>
@@ -245,50 +235,48 @@ const latestPost = (await getPosts())[0];
 		padding-block: var(--space-huge);
 	}
 
-	.journey {
-		/* "Start the dive" jumps here; this keeps the fixed header from covering the top. */
-		scroll-margin-top: var(--header-height);
+	.zone {
 		display: grid;
-		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-		gap: var(--space-large);
-		align-items: start;
+		/* minmax(0, 1fr) lets the column shrink to the screen, so the cards can wrap. */
+		grid-template-columns: minmax(0, 1fr);
+		gap: var(--space-medium);
+		/* "Start the dive" jumps to the first zone; this keeps the fixed header off it. */
+		scroll-margin-top: var(--header-height);
 	}
 
-	/* Holds the sentence still, just below the header, while the chapters scroll past it. */
-	.pinned {
-		position: sticky;
-		top: calc(var(--header-height) + var(--space-small));
-	}
-
-	.stop {
-		/* About a quarter of the screen per chapter, so three or so are in view at once: the
-		   dive still moves, but a skimmer sees the whole journey in a couple of scrolls. */
-		min-height: 26svh;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: var(--space-tiny);
-	}
-
-	.stop h3 {
-		font-size: var(--size-stop);
-		line-height: 1.1;
-	}
-
-	.stop a {
-		color: inherit;
-		text-underline-offset: var(--underline-offset);
-	}
-
-	/* The years sit beside the place, small, so the timeline reads at a glance. */
-	.years {
-		display: block;
-		margin-top: var(--space-tiny);
-		font-family: var(--font-text);
+	/* The small label naming the ocean zone, like the depth markings on a diver's line. */
+	.zone-name {
 		font-size: var(--size-small);
-		font-weight: 500;
-		font-variant-numeric: tabular-nums;
+		font-weight: 700;
 		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+	}
+
+	.lead {
+		font-size: var(--size-intro);
+		line-height: 1.35;
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+		gap: var(--space-small);
+		max-width: var(--wide-length);
+		margin-top: var(--space-small);
+	}
+
+	.sub {
+		margin-top: var(--space-large);
+		font-size: var(--size-row);
+	}
+
+	.map {
+		max-width: var(--wide-length);
+		margin-block: var(--space-medium);
+	}
+
+	.onward a {
+		font-weight: 500;
 	}
 
 	.rows {
@@ -304,19 +292,4 @@ const latestPost = (await getPosts())[0];
 		padding-bottom: 0;
 	}
 
-	/* No room for two columns on a phone, and a sentence pinned above moving text would
-	   cover it, so the sentence just scrolls away like everything else. */
-	@media (width < 48em) {
-		.journey {
-			grid-template-columns: minmax(0, 1fr);
-		}
-
-		.pinned {
-			position: static;
-		}
-
-		.stop {
-			min-height: 10rem;
-		}
-	}
 </style>

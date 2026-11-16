@@ -121,6 +121,11 @@ const experience = defineCollection({
 		// When it started, used only for the order, newest first. Left out for a note,
 		// which then comes after the dated entries in its chapter.
 		date: z.coerce.date({ error: 'Needs a date written like 2026-11-04' }).optional(),
+		// Shows this role as a proof card on the home page and on Work. Keep it to the four
+		// or so strongest, because a pitch with ten highlights has none.
+		featured: z.boolean().default(false),
+		// The one line on its proof card: the result, ideally with a number in it.
+		result: z.string().optional(),
 		draft: z.boolean().default(false),
 	}),
 });
@@ -140,7 +145,17 @@ const site = defineCollection({
 		contactLabel: z.string(),
 		diveLabel: z.string(),
 		glanceHeading: z.string(),
-		glance: z.array(z.object({ text: z.string(), href: z.string() })).max(4),
+		glance: z.array(z.object({ text: z.string(), href: z.string().optional() })).max(4),
+		// The home page is a dive through the ocean's real zones, one part of the site in
+		// each. The zone names are the small labels above each section.
+		workZone: z.string(),
+		journeyZone: z.string(),
+		writingZone: z.string(),
+		proofHeading: z.string(),
+		journeyHeading: z.string(),
+		journeyLink: z.string(),
+		journeyTitle: z.string(),
+		projectsHeading: z.string(),
 		firstLine: z.string(),
 		description: z.string(),
 		pinnedSentence: z.string(),
@@ -156,7 +171,6 @@ const site = defineCollection({
 		nav: z.array(z.object({ label: z.string(), href: z.string() })),
 		workTitle: z.string(),
 		workIntro: z.string(),
-		workMore: z.string(),
 		allWork: z.string(),
 		projectLink: z.string(),
 		writingTitle: z.string(),

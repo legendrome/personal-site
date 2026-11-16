@@ -31,14 +31,22 @@ The placeholder project and post can simply be deleted once you have real ones.
 | Field | Where it appears |
 |---|---|
 | `name` | Your name on the first screen and in the browser tab |
-| `firstLine` | The sentence under your name |
+| `heroLine` | The plain sentence under your name: what you studied and what you are looking for |
+| `firstLine` | The boat line, smaller and in italics under `heroLine` |
+| `contactLabel`, `diveLabel` | The two buttons on the first screen: the orange one goes to your LinkedIn, the other jumps to the first zone |
+| `glanceHeading`, `glance` | The "At a glance" panel: up to four short facts, each `{ "text": "..." }`, with an optional `"href"` to make it a link |
+| `workZone`, `journeyZone`, `writingZone` | The small ocean-zone labels above each section of the home page |
+| `proofHeading`, `projectsHeading` | The headings above the proof cards and the projects, on the home page and Work |
+| `journeyHeading`, `journeyLink` | The heading of the journey section on the home page and its link to the Journey page |
+| `journeyTitle` | The title of the Journey page |
 | `description` | Search results and link previews |
-| `pinnedSentence` | The sentence that stays still while the journey drifts past |
-| `workHeading`, `writingHeading` | The headings above your projects and writing on the home page |
+| `pinnedSentence` | The sentence under "Where I've been" on the home page, and at the top of the Journey page |
+| `writingHeading` | The heading above your latest post on the home page |
+| `workHeading` | The link to Work at the end of the last chapter page |
 | `floorHeading`, `floorLine` | The heading and last line at the bottom of the dive |
-| `markerStart` | What the corner marker says before the first chapter |
+| `markerStart` | Not shown at the moment: the corner marker is off while the redesign is in progress |
 | `chapterLink` | The link under a chapter that has a full write-up |
-| `workTitle`, `workIntro`, `workMore` | The title and sentence at the top of the Work page, and the line under its list |
+| `workTitle`, `workIntro` | The title and sentence at the top of the Work page |
 | `allWork`, `projectLink` | On a project page, the link back to all projects and the link to a project's `link` address |
 | `writingTitle`, `writingIntro`, `allWriting` | The title and sentence at the top of the Writing page, and the link back to it from a post |
 | `keepDiving`, `journeyEnd`, `backUpTo` | The words at the end of a chapter page |
@@ -229,6 +237,15 @@ One or two sentences about what you did.
 `chapter` is the name of a file in `journey/` without `.md`, such as `"malmo"` or `"now"`. A name that matches no chapter fails the build, which tells you which file to fix.
 
 `when` is the dates as shown on the page, so `"Summer 2025"` works. `date` is when it started, and only sets the order, newest first.
+
+To make a role one of the proof cards on the home page and Work, add two lines to its frontmatter. Keep it to about four, because a pitch with ten highlights has none:
+
+```markdown
+featured: true
+result: "Cut the preparation before each meeting from five hours to under one"
+```
+
+`result` is the big line on the card: the outcome, ideally with a number in it. The card links to the role's chapter.
 
 Every field except `chapter` is optional. A file with no `title` is a plain note that shows just its writing, like the tools line under Warwick, and a file with no `date` comes after the dated ones in its chapter. Add `draft: true` to hide one.
 

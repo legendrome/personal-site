@@ -1,12 +1,16 @@
 ---
-// Starts in mid water, where Work sits in the home page dive.
+// Work is the showcase: the strongest roles as proof cards, then the projects. A role
+// becomes a card with "featured: true" in its file in src/content/experience/, and a
+// project is a file in src/content/projects/.
 import { getEntry } from 'astro:content';
 import ArrowRow from '../../components/ArrowRow.astro';
 import PageHead from '../../components/PageHead.astro';
+import ProofCard from '../../components/ProofCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getProjects } from '../../lib/content';
+import { getFeaturedExperience, getProjects } from '../../lib/content';
 
 const { data: site } = await getEntry('site', 'site');
+const proof = await getFeaturedExperience();
 const projects = await getProjects();
 ---
 
@@ -18,31 +22,56 @@ const projects = await getProjects();
 >
 	<PageHead title={site.workTitle} intro={site.workIntro} labelled />
 
-	<div class="rows">
-		{
-			projects.map((project) => (
-				<ArrowRow
-					href={`/work/${project.id}`}
-					title={project.data.title}
-					detail={project.data.summary}
-					large
-					heading="h2"
-				/>
-			))
-		}
-	</div>
+	<section class="part">
+		<h2>{site.proofHeading}</h2>
+		<div class="cards">
+			{proof.map((entry) => <ProofCard entry={entry} />)}
+		</div>
+	</section>
 
-	<p class="more">{site.workMore}</p>
+	{
+		projects.length > 0 && (
+			<section class="part">
+				<h2>{site.projectsHeading}</h2>
+				<div class="rows">
+					{projects.map((project) => (
+						<ArrowRow
+							href={`/work/${project.id}`}
+							title={project.data.title}
+							detail={project.data.summary}
+							large
+							heading="h3"
+						/>
+					))}
+				</div>
+			</section>
+		)
+	}
 </BaseLayout>
 
 <style>
+	.part {
+		display: grid;
+		/* minmax(0, 1fr) lets the column shrink to the screen, so the cards can wrap. */
+		grid-template-columns: minmax(0, 1fr);
+		gap: var(--space-medium);
+		padding-bottom: var(--space-huge);
+	}
+
+	.part h2 {
+		font-size: var(--size-stop);
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+		gap: var(--space-small);
+		max-width: var(--wide-length);
+	}
+
 	.rows {
 		display: grid;
 		gap: var(--space-large);
 		max-width: var(--list-length);
-	}
-
-	.more {
-		padding-block: var(--space-large);
 	}
 </style>

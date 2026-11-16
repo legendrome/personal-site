@@ -1,0 +1,103 @@
+---
+// Every place Sujith has lived, in order: the route on one side, lighting up as you scroll,
+// and each chapter's line and link on the other. It reads the chapters in
+// src/content/journey/, so a new chapter appears here and on the route by itself.
+import { getEntry } from 'astro:content';
+import PageHead from '../../components/PageHead.astro';
+import VoyageMap from '../../components/VoyageMap.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { chapterYears, getChapters, hasFullChapter } from '../../lib/content';
+
+const { data: site } = await getEntry('site', 'site');
+const chapters = await getChapters();
+---
+
+<BaseLayout
+	title={`${site.journeyTitle} | ${site.name}`}
+	description={site.pinnedSentence}
+	opening="water"
+	water="var(--water-gradient)"
+>
+	<PageHead title={site.journeyTitle} intro={site.pinnedSentence} labelled />
+
+	<div class="journey">
+		<div class="route">
+			<VoyageMap chapters={chapters} follow down />
+		</div>
+		<div class="chapters">
+			{
+				chapters.map((chapter) => {
+					const years = chapterYears(chapter);
+					return (
+						<section class="chapter" data-chapter-stop={chapter.id}>
+							<h2>{chapter.data.title}</h2>
+							{years && <p class="years">{years}</p>}
+							<p class="line">{chapter.data.line}</p>
+							{hasFullChapter(chapter) && (
+								<p>
+									<a href={`/journey/${chapter.id}`}>{site.chapterLink}</a>
+								</p>
+							)}
+						</section>
+					);
+				})
+			}
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+	.journey {
+		display: grid;
+		gap: var(--space-large);
+		padding-bottom: var(--space-huge);
+	}
+
+	/* On a phone the route is a list at the top, which already links to every chapter. */
+	.route {
+		padding-bottom: var(--space-medium);
+	}
+
+	.chapter {
+		display: grid;
+		gap: var(--space-tiny);
+		padding-block: var(--space-large);
+		border-top: 1px solid var(--colour-rope);
+	}
+
+	.chapter h2 {
+		font-size: var(--size-stop);
+	}
+
+	.years {
+		font-size: var(--size-small);
+		font-weight: 500;
+		font-variant-numeric: tabular-nums;
+		letter-spacing: var(--tracking-label);
+	}
+
+	.line {
+		font-size: var(--size-intro);
+		line-height: 1.35;
+	}
+
+	/* From laptop width the route holds still beside the chapters, so you can watch it
+	   light up as you scroll. */
+	@media (min-width: 60em) {
+		.journey {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+			gap: var(--space-huge);
+			align-items: start;
+		}
+
+		.route {
+			position: sticky;
+			top: calc(var(--header-height) + var(--space-large));
+		}
+
+		.chapter {
+			min-height: 40svh;
+			align-content: center;
+		}
+	}
+</style>

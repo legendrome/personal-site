@@ -1,0 +1,76 @@
+---
+// One highlight of what Sujith has done: the result first, in large type, then the role
+// and when. The whole card links to the chapter where the story is told, or to About if
+// that chapter has no page. Which roles become cards is set by "featured: true" in the
+// role's file in src/content/experience/.
+import { getEntry, type CollectionEntry } from 'astro:content';
+import { hasFullChapter } from '../lib/content';
+
+interface Props {
+	entry: CollectionEntry<'experience'>;
+}
+
+const { entry } = Astro.props;
+const { title, organisation, when, result } = entry.data;
+const chapter = await getEntry(entry.data.chapter);
+const href = chapter && hasFullChapter(chapter) ? `/journey/${chapter.id}` : '/about#experience';
+---
+
+<a class="card" href={href}>
+	<p class="result">{result ?? title}</p>
+	<p class="role">
+		{title}
+		{organisation && <span> · {organisation}</span>}
+	</p>
+	{when && <p class="when">{when}</p>}
+</a>
+
+<style>
+	.card {
+		display: grid;
+		align-content: start;
+		gap: var(--space-tiny);
+		padding: var(--space-medium);
+		border-radius: var(--radius);
+		/* A faint panel of lighter water, so the cards read as one set on any shade of blue. */
+		background: color-mix(in srgb, var(--colour-on-water) 8%, transparent);
+		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--colour-on-water) 22%, transparent);
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* The reading font in bold rather than the wide title font, so a full sentence of
+	   result stays easy to read in a narrow card. */
+	.result {
+		font-weight: 700;
+		font-size: var(--size-intro);
+		line-height: 1.3;
+	}
+
+	.role {
+		font-weight: 500;
+	}
+
+	.when {
+		font-size: var(--size-small);
+		font-variant-numeric: tabular-nums;
+		opacity: 0.85;
+	}
+
+	.card:hover .result,
+	.card:focus-visible .result {
+		text-decoration: underline;
+		text-decoration-thickness: var(--line-thin);
+		text-underline-offset: var(--underline-offset);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.card {
+			transition: background-color 0.2s ease;
+		}
+
+		.card:hover {
+			background: color-mix(in srgb, var(--colour-on-water) 14%, transparent);
+		}
+	}
+</style>

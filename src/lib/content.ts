@@ -62,6 +62,13 @@ export async function getProof(chapter: CollectionEntry<'journey'>) {
 	);
 }
 
+// The roles marked featured, for the proof cards on the home page and Work, newest first.
+export async function getFeaturedExperience() {
+	await checkExperienceChapters();
+	const entries = await getCollection('experience', ({ data }) => !data.draft && data.featured);
+	return entries.sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
+}
+
 // A chapter with only its one line has no page of its own to link to.
 export function hasFullChapter(chapter: CollectionEntry<'journey'>) {
 	return Boolean(chapter.body?.trim());
