@@ -184,6 +184,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **Under water, the mouse moves through water.** In Chrome and Edge the cursor leaves a wake below the waterline: a small rimless patch of rippled water just behind it, stretched along its direction and stronger the faster it moves, so the cursor feels like an object dragged through water (an SVG displacement filter applied with backdrop-filter). A first version, a 120px lens with an outline, felt like a bubble rather than a wake. It stays small because the cost grows with the area: measured while moving, frames stayed at about 6ms with none over 33ms. Safari and Firefox cannot filter what is behind an element, so there the cursor leaves a short trail of rising bubbles. It is mouse only, off with reduced motion, fades when the mouse stops, and never blocks clicks. A full-page distortion was ruled out as too heavy for ordinary laptops. Alongside it, the header bar now lets clicks through (only its links catch them) and the photo in the sun sits under the menu, because in Firefox the photo had covered About.
 
+**Each section's page opens in the water of its home page zone.** The 2026-11-05 rule (each inner page opens at its dive depth) still holds, but the home page's order changed, so the depths moved with it: Work opens in sunlit water (shallow to mid), Journey in twilight water (mid to deep) and Writing in midnight water (deep to the floor). The gradients are named after the zones in `tokens.css`.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

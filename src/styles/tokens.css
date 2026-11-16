@@ -61,11 +61,14 @@
 		var(--colour-water-deep) 62%,
 		var(--colour-water-floor)
 	);
-	/* Each section's own stretch of the dive. Chapter depths are worked out from the
-	   same colours by chapterWater in src/lib/content.ts, so adding a chapter just works. */
+	/* Each page's own stretch of the dive, matching the ocean zone it sits in on the home
+	   page, so following a link feels like swimming down to that part of the sea. About sits
+	   on the boat, so only its footer is in the water. Chapter depths are worked out from
+	   the same colours by chapterWater in src/lib/content.ts, so adding a chapter just works. */
 	--water-deck: linear-gradient(var(--colour-water-shallow), var(--colour-water-mid));
-	--water-work: linear-gradient(var(--colour-water-mid), var(--colour-water-deep));
-	--water-writing: linear-gradient(var(--colour-water-deep), var(--colour-water-floor));
+	--water-sunlit: linear-gradient(var(--colour-water-shallow), var(--colour-water-mid));
+	--water-twilight: linear-gradient(var(--colour-water-mid), var(--colour-water-deep));
+	--water-midnight: linear-gradient(var(--colour-water-deep), var(--colour-water-floor));
 
 	/* Fonts */
 	--font-title: var(--font-unbounded), 'Arial Black', sans-serif;

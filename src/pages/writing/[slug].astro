@@ -20,7 +20,7 @@ const { Content } = await render(post);
 	description={post.data.description}
 	published={post.data.date}
 	opening="water"
-	water="var(--water-writing)"
+	water="var(--water-midnight)"
 >
 	<PageHead title={post.data.title} small back={{ href: '/writing', label: site.allWriting }}>
 		<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
