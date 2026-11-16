@@ -71,6 +71,8 @@ const journey = defineCollection({
 					end: z.string().regex(/^\d+(:\d{2}){1,2}$/, 'Write the time like 49:06'),
 					label: z.string(),
 					quote: z.string().optional(),
+					// A still from the video, shown behind the play button until someone presses it.
+					poster: image().optional(),
 				})
 				.optional(),
 			draft: z.boolean().default(false),

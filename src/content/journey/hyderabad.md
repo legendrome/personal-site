@@ -9,6 +9,7 @@ video:
   start: "42:15"
   end: "49:06"
   label: "Watch my high school graduation speech as student council president"
+  poster: "../../assets/hyderabad-speech.webp"
   quote: "We are the batch of 2023. We own our freedom and we own our happiness, and no matter what happens, we will succeed. Good, now you just have to believe it."
 ---
 

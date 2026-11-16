@@ -8,6 +8,12 @@
 //
 // Embedded rather than downloaded, because the recording belongs to whoever uploaded it,
 // and embedding is the use YouTube allows.
+//
+// The optional poster is a screenshot kept in the site, not YouTube's thumbnail, because
+// YouTube cannot give the frame at the start time, and loading its thumbnail would reach
+// YouTube for every visitor.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
 	youtube: string;
@@ -15,9 +21,10 @@ interface Props {
 	end: string;
 	label: string;
 	quote?: string;
+	poster?: ImageMetadata;
 }
 
-const { youtube, start, end, label, quote } = Astro.props;
+const { youtube, start, end, label, quote, poster } = Astro.props;
 
 // "42:15" to seconds, which is what YouTube's addresses use.
 const seconds = (time: string) => time.split(':').reduce((total, part) => total * 60 + Number(part), 0);
@@ -32,11 +39,15 @@ const embedUrl = `https://www.youtube-nocookie.com/embed/${youtube}?start=${from
 <figure class="video-moment" id="speech">
 	{quote && <blockquote>{quote}</blockquote>}
 	<div class="frame">
-		<a class="play" href={watchUrl} data-embed={embedUrl} data-title={label}>
+		{/* The label sits under the panel, so the button names itself for screen readers. */}
+		<a class:list={['play', { 'has-poster': poster }]} href={watchUrl} data-embed={embedUrl} data-title={label} aria-label={`${label} (${minutes} minutes)`}>
+			{/* Empty alt: the label already says what the video is, so describing the still would repeat it. */}
+			{poster && <Image class="poster" src={poster} alt="" widths={[640, 1000, 1600]} sizes="(width < 48em) 100vw, 48rem" />}
 			<span class="icon" aria-hidden="true"></span>
-			<span>{label} ({minutes} minutes)</span>
 		</a>
 	</div>
+	{/* Under the panel rather than on it, so it stays out of the picture and remains after the player loads. */}
+	<figcaption>{label} ({minutes} minutes)</figcaption>
 </figure>
 
 <script>
@@ -89,17 +100,16 @@ const embedUrl = `https://www.youtube-nocookie.com/embed/${youtube}?start=${from
 		height: 100%;
 		padding: var(--space-small);
 		color: inherit;
-		font-weight: 500;
-		text-align: center;
-		text-decoration: underline;
-		text-underline-offset: var(--underline-offset);
 	}
 
-	/* Centred items in a column size to their text, so a long label would run past the
-	   panel's edge without this. */
-	.play span:last-child {
-		max-width: 100%;
-		text-wrap: balance;
+	/* Faded and small, like the photo captions in chapters, so it reads as a note on the video. */
+	figcaption {
+		font-size: var(--size-small);
+		font-style: italic;
+		line-height: 1.5;
+		color: color-mix(in srgb, currentColor 75%, transparent);
+		/* Avoids a lone word such as "minutes)" on the last line. */
+		text-wrap: pretty;
 	}
 
 	/* A plain play triangle in a circle, drawn with CSS so there is no image to load. */
@@ -126,6 +136,32 @@ const embedUrl = `https://www.youtube-nocookie.com/embed/${youtube}?start=${from
 	.play:hover .icon,
 	.play:focus-visible .icon {
 		background-color: color-mix(in srgb, var(--colour-sky) 20%, transparent);
+	}
+
+	/* With a poster, the still fills the panel and the play button sits on top of it. */
+	.has-poster {
+		position: relative;
+		/* Keeps the still and its shading behind the button but inside the panel. */
+		isolation: isolate;
+		color: var(--colour-on-water);
+	}
+
+	.has-poster .poster {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.has-poster .icon {
+		background-color: color-mix(in srgb, var(--colour-water-floor) 45%, transparent);
+	}
+
+	.has-poster:hover .icon,
+	.has-poster:focus-visible .icon {
+		background-color: color-mix(in srgb, var(--colour-water-floor) 70%, transparent);
 	}
 
 	/* :global because the player is added by the script after the page loads, so Astro

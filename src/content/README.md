@@ -198,9 +198,10 @@ video:
   end: "49:06"
   label: "Watch my high school graduation speech as student council president"
   quote: "Optional: a line from the video, shown above it."
+  poster: "../../assets/hyderabad-speech.webp"
 ```
 
-The page shows the quote and a play button with the length worked out for you, and YouTube only loads when someone presses it. To link to it from elsewhere, use the chapter's address followed by `#speech`, such as `/journey/hyderabad#speech`. Only embed videos that YouTube allows to be shared, and check that nobody in them would mind.
+The page shows the quote, the video panel with a play button, and the label underneath with the length worked out for you. YouTube only loads when someone presses play. `poster` is optional: a picture shown in the panel until then. To make one, pause the video at the start time, go fullscreen, take a screenshot (Windows + Shift + S) and save it in `src/assets/`. YouTube cannot supply that frame itself, which is why it is a file in the site. To link to it from elsewhere, use the chapter's address followed by `#speech`, such as `/journey/hyderabad#speech`. Only embed videos that YouTube allows to be shared, and check that nobody in them would mind.
 
 ## The About page
 
