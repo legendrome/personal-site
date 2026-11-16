@@ -146,6 +146,8 @@ const site = defineCollection({
 		// Describes the photo in the sun for people who cannot see it. The photo itself is
 		// src/assets/portrait.webp.
 		portraitAlt: z.string(),
+		// The word under the photo in the sun, which links to About on the home page.
+		aboutLabel: z.string(),
 		diveLabel: z.string(),
 		glanceHeading: z.string(),
 		glance: z.array(z.object({ text: z.string(), href: z.string().optional() })).max(4),

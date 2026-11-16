@@ -13,6 +13,11 @@ interface Props {
 const { tone } = Astro.props;
 const { data: site } = await getEntry('site', 'site');
 const path = Astro.url.pathname;
+// On the home page the sky has a sun in its top-right corner, and About lives inside it
+// (see src/pages/index.astro). So this copy of the header leaves About out and keeps its
+// other links clear of the sun. The water copy, below the waves, has every link.
+const sunRoom = tone === 'sky' && path === '/';
+const links = sunRoom ? site.nav.filter(({ href }) => href !== '/about') : site.nav;
 // On a phone there is no room for the full name beside four links, so it shows initials.
 const initials = site.name
 	.split(' ')
@@ -20,14 +25,14 @@ const initials = site.name
 	.join('');
 ---
 
-<header class:list={['site-header', tone]}>
+<header class:list={['site-header', tone, { 'sun-room': sunRoom }]}>
 	<a href="/" class="home">
 		<span class="full">{site.name}</span>
 		<span class="short" aria-hidden="true">{initials}</span>
 	</a>
 	<nav aria-label="Main">
 		{
-			site.nav.map(({ label, href }) => (
+			links.map(({ label, href }) => (
 				// A project page counts as being in Work, so Work stays marked there too.
 				<a href={href} aria-current={path === href || path.startsWith(`${href}/`) ? 'true' : undefined}>
 					{label}
@@ -90,17 +95,17 @@ const initials = site.name
 		display: none;
 	}
 
-	/* On the home page, while the sun is on screen, the About link sits on it and turns deep
-	   amber: different from the sun and from the other links, so it stands out without a
-	   second bright colour. The home page sets sun-in-view. */
-	:global(html.sun-in-view) .sky a[href='/about'] {
-		color: var(--colour-on-sun);
-		font-weight: 700;
+	/* Leaves the sun's width free at the right, so no link ever lands on the sun. The links
+	   cannot reach it at any screen width, because the sun and this gap use one size. */
+	.sun-room {
+		padding-right: calc(var(--sun-size) + var(--space-tiny));
 	}
 
-	@media (prefers-reduced-motion: no-preference) {
-		.sky a {
-			transition: color 0.3s ease;
+	/* Beside the sun on a phone, tighter gaps keep three links and the initials on one line. */
+	@media (width < 48em) {
+		.sun-room,
+		.sun-room nav {
+			gap: var(--space-tiny);
 		}
 	}
 
