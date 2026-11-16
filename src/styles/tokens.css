@@ -43,7 +43,7 @@
 	   competing with the orange button, and a deep amber for the menu link that sits on it. */
 	--colour-sun: #fbefc4;
 	/* The width of the sun's visible quarter, also kept clear beside the name. */
-	--sun-size: clamp(5.75rem, 16vw, 14rem);
+	--sun-size: clamp(6.25rem, 14vw + 3rem, 14rem);
 	--colour-sun-halo: color-mix(in srgb, var(--colour-sun) 45%, transparent);
 	--colour-on-sun: #6b3e00;
 	--colour-sunlight: color-mix(in srgb, #ffffff 55%, transparent);

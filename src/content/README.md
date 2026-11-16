@@ -33,7 +33,6 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `name` | Your name on the first screen and in the browser tab |
 | `heroLine` | The plain sentence under your name: what you studied and what you are looking for |
 | `firstLine` | The boat line, smaller and in italics under `heroLine` |
-| `aboutLabel` | The word under your photo in the sun on the home page, which links to About |
 | `portraitAlt` | A description of your photo in the sun, read out to people who cannot see it. To change the photo, replace `src/assets/portrait.webp` with a square picture of the same name |
 | `contactLabel`, `diveLabel` | The two buttons on the first screen: the orange one goes to your LinkedIn, the other jumps to the first zone |
 | `glanceHeading`, `glance` | The "At a glance" panel: up to four short facts, each `{ "text": "..." }`, with an optional `"href"` to make it a link |

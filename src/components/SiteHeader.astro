@@ -13,11 +13,9 @@ interface Props {
 const { tone } = Astro.props;
 const { data: site } = await getEntry('site', 'site');
 const path = Astro.url.pathname;
-// On the home page the sky has a sun in its top-right corner, and About lives inside it
-// (see src/pages/index.astro). So this copy of the header leaves About out and keeps its
-// other links clear of the sun. The water copy, below the waves, has every link.
+// On the home page the sky has a sun in its top-right corner (see src/pages/index.astro).
+// About, last in the menu, sits on it, and the other links are kept clear of it.
 const sunRoom = tone === 'sky' && path === '/';
-const links = sunRoom ? site.nav.filter(({ href }) => href !== '/about') : site.nav;
 // On a phone there is no room for the full name beside four links, so it shows initials.
 const initials = site.name
 	.split(' ')
@@ -32,7 +30,7 @@ const initials = site.name
 	</a>
 	<nav aria-label="Main">
 		{
-			links.map(({ label, href }) => (
+			site.nav.map(({ label, href }) => (
 				// A project page counts as being in Work, so Work stays marked there too.
 				<a href={href} aria-current={path === href || path.startsWith(`${href}/`) ? 'true' : undefined}>
 					{label}
@@ -95,17 +93,32 @@ const initials = site.name
 		display: none;
 	}
 
-	/* Leaves the sun's width free at the right, so no link ever lands on the sun. The links
-	   cannot reach it at any screen width, because the sun and this gap use one size. */
-	.sun-room {
-		padding-right: calc(var(--sun-size) + var(--space-tiny));
+	/* About takes a box as wide as the sun, minus the page margin, and sits at its right
+	   end. So About is always on the sun and every other link always stops short of it,
+	   at any screen width, because the box and the sun use the same size. */
+	.sun-room a[href='/about'] {
+		flex: 0 0 calc(var(--sun-size) - var(--page-gutter));
+		text-align: right;
 	}
 
-	/* Beside the sun on a phone, tighter gaps keep three links and the initials on one line. */
+	/* While the sun is on screen, About turns deep amber: it stands apart from the sun and
+	   from the navy links. The home page sets sun-in-view. */
+	:global(html.sun-in-view) .sun-room a[href='/about'] {
+		color: var(--colour-on-sun);
+		font-weight: 700;
+	}
+
+	/* Beside the sun on a phone, tighter gaps keep every link on one line. */
 	@media (width < 48em) {
 		.sun-room,
 		.sun-room nav {
 			gap: var(--space-tiny);
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.sun-room a {
+			transition: color 0.3s ease;
 		}
 	}
 

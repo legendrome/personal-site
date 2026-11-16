@@ -32,8 +32,8 @@ const latestPost = (await getPosts())[0];
 ---
 
 <BaseLayout title={site.name}>
-	{/* The sun, a quarter of it in the corner. Its photo and label are the About link on
-	   the home page, which is why the header here leaves About out of its menu.
+	{/* The sun, a quarter of it in the corner. The menu's About link sits on it, and the
+	   photo under it links to About too.
 	   Its rays cross the sky here and carry on into the water in DiveScenery.astro. */}
 	<div slot="surface" class="sunlight" aria-hidden="true">
 		<svg viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -43,11 +43,10 @@ const latestPost = (await getPosts())[0];
 			<path d="M100 0 L92 100 L97 100 Z"></path>
 		</svg>
 	</div>
-	<div slot="surface" class="sun">
+	<div slot="surface" class="sun" data-sun>
 		<span class="disc" aria-hidden="true"></span>
-		<a class="about" href="/about">
+		<a class="portrait" href="/about">
 			<Image src={portrait} alt={site.portraitAlt} width={240} height={240} loading="eager" />
-			<span>{site.aboutLabel}</span>
 		</a>
 	</div>
 
@@ -158,6 +157,16 @@ const latestPost = (await getPosts())[0];
 </BaseLayout>
 
 <script>
+	// Tells the header when the sun is on screen, so About can turn amber while it sits on it.
+	const sun = document.querySelector('[data-sun]');
+	if (sun) {
+		new IntersectionObserver(([entry]) => {
+			document.documentElement.classList.toggle('sun-in-view', entry.isIntersecting);
+		}).observe(sun);
+	}
+</script>
+
+<script>
 	// Remembers how far down the page you were when you left, and goes back there when
 	// you return with "Back to the dive". Any other way here, such as clicking the name
 	// in the header, still starts at the boat. See src/components/BackToDive.astro.
@@ -191,8 +200,9 @@ const latestPost = (await getPosts())[0];
 	   never makes the page scroll sideways. */
 	.sun {
 		position: absolute;
-		/* In front of the header, which is see-through here, so the About link can be clicked. */
-		z-index: 6;
+		/* In front of the solid bar behind the header, behind the header's links, so About
+		   shows on top of the sun. The photo sits below the menu row, so it can be clicked. */
+		z-index: 4;
 		top: 0;
 		right: 0;
 		width: var(--sun-size);
@@ -212,23 +222,16 @@ const latestPost = (await getPosts())[0];
 		box-shadow: 0 0 0 calc(var(--sun-size) * 0.12) var(--colour-sun-halo);
 	}
 
-	/* The About link: the photo tucked into the corner, with the word under it in deep
-	   amber, which stands apart from both the sun and the navy menu links. */
-	.about {
+	/* The photo, just under the menu row and inside the sun's curve. */
+	.portrait {
 		position: absolute;
-		top: calc(var(--sun-size) * 0.08);
-		right: calc(var(--sun-size) * 0.1);
-		width: calc(var(--sun-size) * 0.5);
-		display: grid;
-		justify-items: center;
-		gap: calc(var(--sun-size) * 0.03);
-		color: var(--colour-on-sun);
-		font-weight: 700;
-		text-decoration: none;
+		top: calc(var(--header-height) + var(--sun-size) * 0.02);
+		right: calc(var(--sun-size) * 0.12);
+		width: calc(var(--sun-size) * 0.4);
 		pointer-events: auto;
 	}
 
-	.about img {
+	.portrait img {
 		display: block;
 		width: 100%;
 		height: auto;
@@ -238,17 +241,11 @@ const latestPost = (await getPosts())[0];
 		box-shadow: 0 0 0 3px var(--colour-sun-halo);
 	}
 
-	.about span {
-		line-height: 1.2;
-		text-decoration: underline;
-		text-decoration-thickness: var(--line-thin);
-		text-underline-offset: var(--underline-offset);
-	}
-
-	/* A small sun on a phone still needs a readable label. */
+	/* On a phone the sun is small and the menu row fills most of it, so the photo would
+	   spill out of the curve. It stays on bigger screens. */
 	@media (width < 48em) {
-		.about span {
-			font-size: var(--size-small);
+		.portrait {
+			display: none;
 		}
 	}
 
