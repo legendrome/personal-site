@@ -61,10 +61,12 @@ const chapters = await getChapters();
 		padding-bottom: var(--space-medium);
 	}
 
+	/* One step smaller than the page's headline above it, so it reads as the line under
+	   the heading rather than a second heading. */
 	.pinned {
 		font-family: var(--font-title);
 		font-weight: 800;
-		font-size: var(--size-chapter);
+		font-size: var(--size-stop);
 		line-height: 1.05;
 		text-wrap: balance;
 	}
