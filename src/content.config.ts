@@ -134,6 +134,13 @@ const site = defineCollection({
 	}),
 	schema: z.object({
 		name: z.string(),
+		// The first screen: one plain sentence about Sujith, the two buttons, and a few
+		// headline facts, so someone with half a minute knows who he is and how to reach him.
+		heroLine: z.string(),
+		contactLabel: z.string(),
+		diveLabel: z.string(),
+		glanceHeading: z.string(),
+		glance: z.array(z.object({ text: z.string(), href: z.string() })).max(4),
 		firstLine: z.string(),
 		description: z.string(),
 		pinnedSentence: z.string(),

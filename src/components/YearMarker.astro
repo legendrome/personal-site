@@ -46,4 +46,10 @@ const { start } = Astro.props;
 		font-size: var(--size-small);
 		font-weight: 500;
 	}
+
+	/* While the boat is still on screen there is no chapter to report, so the marker waits
+	   until the dive starts. BaseLayout sets at-surface. */
+	:global(html.at-surface) .year-marker {
+		display: none;
+	}
 </style>

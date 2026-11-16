@@ -1,5 +1,14 @@
 {
 	"name": "Sujith Bandaru",
+	"heroLine": "I studied economics, psychology and philosophy at Warwick, and I’m looking for my first role in consulting or at a scale-up.",
+	"contactLabel": "Get in touch",
+	"diveLabel": "Start the dive",
+	"glanceHeading": "At a glance",
+	"glance": [
+		{ "text": "Built an AI strategy for ReAll with my team, named among the top 2% of 180 Degrees Consulting projects worldwide", "href": "/about#experience" },
+		{ "text": "Raised more than $40,000 for scholarships with a team of students", "href": "/about#experience" },
+		{ "text": "Elected student council president at school", "href": "/journey/hyderabad" }
+	],
 	"firstLine": "I’ve never liked the phrase ‘not in the same boat’. Why can’t I just invite you onto mine?",
 	"description": "My home on the internet: where I have been, what I am building and what I am thinking about.",
 	"pinnedSentence": "Wherever I landed, I made the most of it.",

@@ -5,6 +5,7 @@
 import { getEntry } from 'astro:content';
 import AnchorLine from '../components/AnchorLine.astro';
 import ArrowRow from '../components/ArrowRow.astro';
+import ButtonLink from '../components/ButtonLink.astro';
 import YearMarker from '../components/YearMarker.astro';
 import SeaFloor from '../components/SeaFloor.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -26,10 +27,29 @@ const latestPost = (await getPosts())[0];
 <BaseLayout title={site.name}>
 	<div slot="surface" class="hello">
 		<h1>{site.name}</h1>
-		<p class="intro">{site.firstLine}</p>
+		<div class="who">
+			<p class="intro">{site.heroLine}</p>
+			<p class="boat-line">{site.firstLine}</p>
+			<div class="actions">
+				{site.linkedin && <ButtonLink href={site.linkedin} kind="main">{site.contactLabel}</ButtonLink>}
+				<ButtonLink href="#journey">{site.diveLabel}</ButtonLink>
+			</div>
+		</div>
+		<section class="glance" aria-labelledby="glance-heading">
+			<h2 id="glance-heading">{site.glanceHeading}</h2>
+			<ul>
+				{
+					site.glance.map((item) => (
+						<li>
+							<a href={item.href}>{item.text}</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
 	</div>
 
-	<section class="section journey">
+	<section class="section journey" id="journey">
 		<div class="pinned">
 			<h2>{site.pinnedSentence}</h2>
 		</div>
@@ -42,8 +62,10 @@ const latestPost = (await getPosts())[0];
 							class="stop"
 							data-when={years ? `${chapter.data.title}, ${years}` : chapter.data.title}
 						>
-							<h3>{chapter.data.title}</h3>
-							{years && <p class="years">{years}</p>}
+							<h3>
+								{chapter.data.title}
+								{years && <span class="years">{years}</span>}
+							</h3>
 							<p>{chapter.data.line}</p>
 							{hasFullChapter(chapter) && (
 								<p>
@@ -92,6 +114,13 @@ const latestPost = (await getPosts())[0];
 	<section class="section floor">
 		<h2>{site.floorHeading}</h2>
 		<p>{site.floorLine}</p>
+		{
+			site.linkedin && (
+				<div class="actions">
+					<ButtonLink href={site.linkedin} kind="main">{site.contactLabel}</ButtonLink>
+				</div>
+			)
+		}
 	</section>
 
 	<div slot="at-waterline" class="rope-to-hull" aria-hidden="true"></div>
@@ -130,15 +159,86 @@ const latestPost = (await getPosts())[0];
 		background: var(--colour-rope);
 	}
 
+	/* The first screen. On a phone everything stacks; from laptop width the facts sit in a
+	   panel to the right of the name, so the whole first impression fits on one screen. */
 	.hello {
 		display: grid;
+		gap: var(--space-large);
+		padding-block: var(--space-large) var(--space-medium);
+	}
+
+	.who {
+		display: grid;
 		gap: var(--space-medium);
-		padding-block: var(--space-huge) 0;
+		align-content: start;
 	}
 
 	.intro {
 		font-size: var(--size-intro);
 		line-height: 1.35;
+		font-weight: 500;
+	}
+
+	.boat-line {
+		color: var(--colour-on-sky-soft);
+		font-style: italic;
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-small);
+		margin-top: var(--space-tiny);
+	}
+
+	.glance {
+		align-self: end;
+		max-width: 26rem;
+		padding: var(--space-medium);
+		border-radius: var(--radius);
+		background: var(--colour-water-deep);
+		color: var(--colour-on-water);
+	}
+
+	.glance h2 {
+		font-family: var(--font-text);
+		font-size: var(--size-small);
+		font-weight: 700;
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+	}
+
+	.glance ul {
+		display: grid;
+		gap: var(--space-small);
+		margin: var(--space-small) 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.glance li {
+		padding-left: var(--space-small);
+		border-left: var(--line-thin) solid var(--colour-accent);
+		line-height: 1.4;
+	}
+
+	.glance a {
+		text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+	}
+
+	/* From laptop width the name runs across the top, with the sentence and buttons on the
+	   left and the facts on the right, so the boat and the waves still show below them. */
+	@media (min-width: 60em) {
+		.hello {
+			grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+			column-gap: var(--space-large);
+			row-gap: var(--space-medium);
+			align-items: end;
+		}
+
+		.hello h1 {
+			grid-column: 1 / -1;
+		}
 	}
 
 	.section {
@@ -146,6 +246,8 @@ const latestPost = (await getPosts())[0];
 	}
 
 	.journey {
+		/* "Start the dive" jumps here; this keeps the fixed header from covering the top. */
+		scroll-margin-top: var(--header-height);
 		display: grid;
 		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
 		gap: var(--space-large);
@@ -159,9 +261,9 @@ const latestPost = (await getPosts())[0];
 	}
 
 	.stop {
-		/* Two fifths of the screen per chapter: enough for the dive to feel slow, without
-		   long stretches of empty water between chapters on a computer. */
-		min-height: 40svh;
+		/* About a quarter of the screen per chapter, so three or so are in view at once: the
+		   dive still moves, but a skimmer sees the whole journey in a couple of scrolls. */
+		min-height: 26svh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -178,15 +280,15 @@ const latestPost = (await getPosts())[0];
 		text-underline-offset: var(--underline-offset);
 	}
 
-	/* Sighted visitors see the years in the corner marker, which screen readers skip,
-	   so this keeps the years in the page for them without showing them twice. */
+	/* The years sit beside the place, small, so the timeline reads at a glance. */
 	.years {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip-path: inset(50%);
-		white-space: nowrap;
+		display: block;
+		margin-top: var(--space-tiny);
+		font-family: var(--font-text);
+		font-size: var(--size-small);
+		font-weight: 500;
+		font-variant-numeric: tabular-nums;
+		letter-spacing: var(--tracking-label);
 	}
 
 	.rows {
@@ -214,7 +316,7 @@ const latestPost = (await getPosts())[0];
 		}
 
 		.stop {
-			min-height: 12.5rem;
+			min-height: 10rem;
 		}
 	}
 </style>
