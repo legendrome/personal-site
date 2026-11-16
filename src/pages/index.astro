@@ -5,6 +5,8 @@
 // been, then his writing, then the sea floor with how to reach him. All the words come
 // from src/content/.
 import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.webp';
 import AnchorLine from '../components/AnchorLine.astro';
 import ArrowRow from '../components/ArrowRow.astro';
 import ButtonLink from '../components/ButtonLink.astro';
@@ -30,6 +32,23 @@ const latestPost = (await getPosts())[0];
 ---
 
 <BaseLayout title={site.name}>
+	{/* The sun, a quarter of it in the corner, with Sujith's photo in it linking to About.
+	   Its rays cross the sky here and carry on into the water in DiveScenery.astro. */}
+	<div slot="surface" class="sunlight" aria-hidden="true">
+		<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+			<path d="M100 0 L18 100 L30 100 Z"></path>
+			<path d="M100 0 L46 100 L54 100 Z"></path>
+			<path d="M100 0 L70 100 L80 100 Z"></path>
+			<path d="M100 0 L92 100 L97 100 Z"></path>
+		</svg>
+	</div>
+	<div slot="surface" class="sun" data-sun>
+		<span class="disc" aria-hidden="true"></span>
+		<a class="portrait" href="/about">
+			<Image src={portrait} alt={site.portraitAlt} width={160} height={160} loading="eager" />
+		</a>
+	</div>
+
 	<div slot="surface" class="hello">
 		<h1>{site.name}</h1>
 		<div class="who">
@@ -137,6 +156,16 @@ const latestPost = (await getPosts())[0];
 </BaseLayout>
 
 <script>
+	// Tells the header when the sun is on screen, so the About link on it can change colour.
+	const sun = document.querySelector('[data-sun]');
+	if (sun) {
+		new IntersectionObserver(([entry]) => {
+			document.documentElement.classList.toggle('sun-in-view', entry.isIntersecting);
+		}).observe(sun);
+	}
+</script>
+
+<script>
 	// Remembers how far down the page you were when you left, and goes back there when
 	// you return with "Back to the dive". Any other way here, such as clicking the name
 	// in the header, still starts at the boat. See src/components/BackToDive.astro.
@@ -166,12 +195,99 @@ const latestPost = (await getPosts())[0];
 		background: var(--colour-rope);
 	}
 
+	/* The sun's visible quarter. Everything outside this box is cut off, so the full circle
+	   never makes the page scroll sideways. */
+	.sun {
+		position: absolute;
+		/* In front of the solid bar behind the header, behind the header's links. */
+		z-index: 4;
+		top: 0;
+		right: 0;
+		width: var(--sun-size);
+		height: var(--sun-size);
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	.disc {
+		position: absolute;
+		top: calc(var(--sun-size) * -1);
+		right: calc(var(--sun-size) * -1);
+		width: calc(var(--sun-size) * 2);
+		height: calc(var(--sun-size) * 2);
+		border-radius: 50%;
+		background: var(--colour-sun);
+		box-shadow: 0 0 0 calc(var(--sun-size) * 0.12) var(--colour-sun-halo);
+	}
+
+	/* The photo, below the header so it never sits under a menu link. */
+	.portrait {
+		position: absolute;
+		right: calc(var(--sun-size) * 0.2);
+		top: calc(var(--header-height) + var(--sun-size) * 0.08);
+		width: calc(var(--sun-size) * 0.42);
+		aspect-ratio: 1;
+		border-radius: 50%;
+		overflow: hidden;
+		box-shadow: 0 0 0 3px var(--colour-sun-halo);
+		pointer-events: auto;
+	}
+
+	.portrait img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	/* Rays across the sky from the sun's corner, faint, behind the text. */
+	.sunlight {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.sunlight svg {
+		width: 100%;
+		height: 100%;
+		fill: var(--colour-sunlight);
+		mask-image: linear-gradient(to bottom left, black 10%, transparent 85%);
+		opacity: 0.55;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.sunlight svg path {
+			animation: sun-shimmer 8s ease-in-out infinite alternate;
+		}
+
+		.sunlight svg path:nth-child(2n) {
+			animation-duration: 11s;
+			animation-delay: -4s;
+		}
+
+		@keyframes sun-shimmer {
+			from {
+				opacity: 0.5;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+	}
+
 	/* The first screen. On a phone everything stacks; from laptop width the facts sit in a
 	   panel to the right of the name, so the whole first impression fits on one screen. */
 	.hello {
 		display: grid;
 		gap: var(--space-large);
 		padding-block: var(--space-large) var(--space-medium);
+	}
+
+	/* Keeps the name clear of the photo in the sun, wrapping it sooner if it would reach. */
+	.hello h1 {
+		padding-right: calc(var(--sun-size) * 0.55);
 	}
 
 	.who {

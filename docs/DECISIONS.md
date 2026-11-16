@@ -170,6 +170,8 @@ Every lasting choice and why. Newest at the bottom. Before changing anything cov
 
 **The scenery was redrawn and given life, with no new dependencies.** The sea floor is now three layers, palest at the back (atmospheric perspective), with kelp, a sea fan, brain coral, a drifting school of fish and the basketball half buried in rippled sand. The anchor swings as it falls and settles as it lands (a scroll-driven animation; browsers without it show it still), with bubbles rising from it. Light rays near the surface, a jellyfish in the dark middle and marine snow lower down fill the dive. At the sea floor an anglerfish's glowing lure hangs beside "Get in touch", the one light in the dark. All movement is transform or opacity, the cheapest things for a browser to draw, and all of it stops for visitors whose device asks for less motion.
 
+**A pale sun in the home page's corner holds Sujith's photo, and its rays reach into the water.** The rays needed a source, so a quarter of a sun sits top right, and its rays cross the sky and carry on below the waves, dimming until they are gone by the twilight zone. The sun is pale gold rather than orange, because the orange "Get in touch" button should stay the one standout on the first screen. The photo in it (his Warwick graduation, cropped to head and shoulders, with no location data in the file) links to About. While the sun is on screen, the About link in the menu sits on it in deep amber, so it stands out from the sun and from the other links without adding a second bright colour; it stays in the menu so people find it where they expect it.
+
 ## Open questions
 
 **Domain.** “2026-11-03 - Registered sujithbandaru.com at Cloudflare, auto-renew on.”

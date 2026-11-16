@@ -90,6 +90,20 @@ const initials = site.name
 		display: none;
 	}
 
+	/* On the home page, while the sun is on screen, the About link sits on it and turns deep
+	   amber: different from the sun and from the other links, so it stands out without a
+	   second bright colour. The home page sets sun-in-view. */
+	:global(html.sun-in-view) .sky a[href='/about'] {
+		color: var(--colour-on-sun);
+		font-weight: 700;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.sky a {
+			transition: color 0.3s ease;
+		}
+	}
+
 	@media (width < 48em) {
 		.full {
 			/* Hidden from sight but still read out, so the link keeps its real name. */

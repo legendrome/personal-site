@@ -39,6 +39,15 @@
 	--colour-rock: color-mix(in srgb, var(--colour-water-mid) 55%, var(--colour-water-floor));
 	--colour-seaweed: var(--colour-water-mid);
 	--colour-shell: var(--colour-sky);
+	/* The sun in the corner of the home page's sky: pale, so it lights the scene without
+	   competing with the orange button, and a deep amber for the menu link that sits on it. */
+	--colour-sun: #fbefc4;
+	/* The width of the sun's visible quarter, also kept clear beside the name. */
+	--sun-size: clamp(8rem, 18vw, 14rem);
+	--colour-sun-halo: color-mix(in srgb, var(--colour-sun) 45%, transparent);
+	--colour-on-sun: #6b3e00;
+	--colour-sunlight: color-mix(in srgb, #ffffff 55%, transparent);
+
 	/* The far back of the floor, half lost in the water, so it reads as distance. */
 	--colour-haze: color-mix(in srgb, var(--colour-sand-back) 45%, var(--colour-water-deep));
 	--colour-rock-light: color-mix(in srgb, var(--colour-rock) 80%, var(--colour-on-water));

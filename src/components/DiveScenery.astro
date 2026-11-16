@@ -1,6 +1,6 @@
 ---
 // Life in the water on the way down the home page, placed by how far down the page it is:
-// light rays near the surface, a jellyfish glowing in the dark middle, and "marine snow",
+// the sun's rays carrying on below the waves and dimming with depth, a jellyfish glowing in the dark middle, and "marine snow",
 // the specks that drift down through the deep ocean, lower still. It sits behind the text
 // and screen readers skip it. With reduced motion everything stays, still.
 ---
@@ -37,8 +37,9 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 22%;
-		mask-image: linear-gradient(black, transparent);
+		height: 30%;
+		/* Strongest at the top right under the sun, gone by the twilight zone. */
+		mask-image: linear-gradient(to bottom left, black, transparent 75%);
 	}
 
 	.rays span {
@@ -51,23 +52,24 @@
 		transform: skewX(-18deg);
 	}
 
+	/* Spaced to carry on the sky's rays, which fan out from the top right. */
 	.rays span:nth-child(1) {
-		left: 18%;
+		left: 30%;
 	}
 
 	.rays span:nth-child(2) {
-		left: 36%;
+		left: 52%;
 		width: 5%;
 	}
 
 	.rays span:nth-child(3) {
-		left: 58%;
-		width: 12%;
+		left: 70%;
+		width: 10%;
 	}
 
 	.rays span:nth-child(4) {
-		left: 80%;
-		width: 6%;
+		left: 90%;
+		width: 5%;
 	}
 
 	/* The jellyfish, glowing faintly, in the darker water partway down. */

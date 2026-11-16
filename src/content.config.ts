@@ -143,6 +143,9 @@ const site = defineCollection({
 		// headline facts, so someone with half a minute knows who he is and how to reach him.
 		heroLine: z.string(),
 		contactLabel: z.string(),
+		// Describes the photo in the sun for people who cannot see it. The photo itself is
+		// src/assets/portrait.webp.
+		portraitAlt: z.string(),
 		diveLabel: z.string(),
 		glanceHeading: z.string(),
 		glance: z.array(z.object({ text: z.string(), href: z.string().optional() })).max(4),
