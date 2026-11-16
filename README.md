@@ -22,6 +22,7 @@ My home on the internet: who I am, where I have been, what I am building, and wh
 | Change the proof cards' look | `src/components/ProofCard.astro` |
 | Change the route of places on the home and Journey pages | `src/components/VoyageMap.astro` |
 | Change the list of pages for search engines | `src/pages/sitemap.xml.js` |
+| Change how far into the water the underwater menu's solid bar appears | `--header-bar-delay` in `src/styles/tokens.css` |
 | Change the margin down each side of every page | `--page-gutter` in `src/styles/tokens.css` |
 | Redraw the tab icons or link preview image (it includes my photo) | `scripts/make-images.mjs`, then run `node scripts/make-images.mjs` |
 | Replace my CV | `public/` |

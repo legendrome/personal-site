@@ -120,6 +120,10 @@
 
 	/* The size of the waves and boat at the waterline */
 	--wave-height: 5.5rem;
+	/* How far into the water the top of the screen must be before the solid bar behind the
+	   underwater menu fills in. Bigger means the bar appears later, leaving the sun's rays
+	   uncut for longer. 0rem makes it appear as soon as the water reaches the menu. */
+	--header-bar-delay: 5.5rem;
 	--waterline-overlap: calc(var(--wave-height) / 4);
 	--boat-width: clamp(6rem, 13vw, 10.5rem);
 	--boat-width-adrift: 3.5rem;
