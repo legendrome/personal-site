@@ -1,6 +1,6 @@
 ---
-// Every place Sujith has lived, in order: the route on one side, lighting up as you scroll,
-// and each chapter's line and link on the other. It reads the chapters in
+// The journey as a dive: the sentence and the route hold still on one side, the route
+// lighting up place by place, while each chapter's line and link drift past on the other. It reads the chapters in
 // src/content/journey/, so a new chapter appears here and on the route by itself.
 import { getEntry } from 'astro:content';
 import PageHead from '../../components/PageHead.astro';
@@ -18,10 +18,11 @@ const chapters = await getChapters();
 	opening="water"
 	water="var(--water-gradient)"
 >
-	<PageHead title={site.journeyTitle} intro={site.pinnedSentence} labelled />
+	<PageHead title={site.journeyTitle} intro={site.journeyHeading} labelled />
 
 	<div class="journey">
 		<div class="route">
+			<p class="pinned">{site.pinnedSentence}</p>
 			<VoyageMap chapters={chapters} follow down />
 		</div>
 		<div class="chapters">
@@ -53,9 +54,19 @@ const chapters = await getChapters();
 		padding-bottom: var(--space-huge);
 	}
 
-	/* On a phone the route is a list at the top, which already links to every chapter. */
+	/* On a phone the sentence and route are a list at the top, which links to every chapter. */
 	.route {
+		display: grid;
+		gap: var(--space-large);
 		padding-bottom: var(--space-medium);
+	}
+
+	.pinned {
+		font-family: var(--font-title);
+		font-weight: 800;
+		font-size: var(--size-chapter);
+		line-height: 1.05;
+		text-wrap: balance;
 	}
 
 	.chapter {
@@ -85,14 +96,14 @@ const chapters = await getChapters();
 	   light up as you scroll. */
 	@media (min-width: 60em) {
 		.journey {
-			grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+			grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
 			gap: var(--space-huge);
 			align-items: start;
 		}
 
 		.route {
 			position: sticky;
-			top: calc(var(--header-height) + var(--space-large));
+			top: calc(var(--header-height) + var(--space-medium));
 		}
 
 		.chapter {

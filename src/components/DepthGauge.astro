@@ -1,0 +1,94 @@
+---
+// A slim gauge on the right edge, like the one a diver watches, naming the ocean zone
+// you are in. It reads the zones from the page: any section with data-zone="Sunlit zone"
+// counts as one. Hidden at the surface and on phones, where there is no spare edge.
+// It repeats the zone labels already on the page, so screen readers skip it.
+---
+
+<div class="gauge" aria-hidden="true" hidden>
+	<div class="track"><span class="fill"></span></div>
+	<p class="zone"></p>
+</div>
+
+<script>
+	const gauge = document.querySelector<HTMLElement>('.gauge');
+	const fill = gauge?.querySelector<HTMLElement>('.fill');
+	const label = gauge?.querySelector<HTMLElement>('.zone');
+	const zones = [...document.querySelectorAll<HTMLElement>('[data-zone]')];
+
+	function update() {
+		if (!gauge || !fill || !label) return;
+		const depth = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
+		fill.style.transform = `scaleY(${depth})`;
+		let name = '';
+		zones.forEach((zone) => {
+			if (zone.getBoundingClientRect().top < innerHeight * 0.5) name = zone.dataset.zone ?? '';
+		});
+		label.textContent = name;
+		gauge.classList.toggle('active', name !== '');
+	}
+
+	if (gauge && zones.length) {
+		gauge.hidden = false;
+		addEventListener('scroll', update, { passive: true });
+		addEventListener('resize', update);
+		update();
+	}
+</script>
+
+<style>
+	.gauge {
+		position: fixed;
+		z-index: 6;
+		right: var(--space-small);
+		top: 50%;
+		translate: 0 -50%;
+		display: grid;
+		justify-items: end;
+		gap: var(--space-tiny);
+		color: var(--colour-on-water);
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.gauge.active {
+		opacity: 1;
+	}
+
+	.track {
+		width: 3px;
+		height: 30vh;
+		border-radius: var(--radius-pill);
+		background: var(--colour-rope);
+		overflow: hidden;
+	}
+
+	.fill {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: var(--colour-accent);
+		transform-origin: top;
+		transform: scaleY(0);
+	}
+
+	.zone {
+		writing-mode: vertical-rl;
+		font-size: var(--size-small);
+		font-weight: 700;
+		letter-spacing: var(--tracking-label);
+		text-transform: uppercase;
+	}
+
+	@media (width < 48em) {
+		.gauge {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.gauge {
+			transition: opacity 0.4s ease;
+		}
+	}
+</style>

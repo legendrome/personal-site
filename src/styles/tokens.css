@@ -39,6 +39,13 @@
 	--colour-rock: color-mix(in srgb, var(--colour-water-mid) 55%, var(--colour-water-floor));
 	--colour-seaweed: var(--colour-water-mid);
 	--colour-shell: var(--colour-sky);
+	/* The far back of the floor, half lost in the water, so it reads as distance. */
+	--colour-haze: color-mix(in srgb, var(--colour-sand-back) 45%, var(--colour-water-deep));
+	--colour-rock-light: color-mix(in srgb, var(--colour-rock) 80%, var(--colour-on-water));
+	--colour-coral: color-mix(in srgb, var(--colour-water-shallow) 55%, var(--colour-water-floor));
+	--colour-ripple: color-mix(in srgb, var(--colour-sand) 70%, var(--colour-on-water));
+	/* Soft light in the water: light rays, bubbles and the glow of a jellyfish. */
+	--colour-glow: color-mix(in srgb, var(--colour-on-water) 35%, transparent);
 	--water-gradient: linear-gradient(
 		var(--colour-water-shallow),
 		var(--colour-water-mid) 32%,

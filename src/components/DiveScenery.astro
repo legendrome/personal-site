@@ -1,0 +1,180 @@
+---
+// Life in the water on the way down the home page, placed by how far down the page it is:
+// light rays near the surface, a jellyfish glowing in the dark middle, and "marine snow",
+// the specks that drift down through the deep ocean, lower still. It sits behind the text
+// and screen readers skip it. With reduced motion everything stays, still.
+---
+
+<div class="scenery" aria-hidden="true">
+	<div class="rays">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+	<svg class="jelly" viewBox="0 0 80 140">
+		<path class="bell" d="M8 40 C 8 16, 24 4, 40 4 C 56 4, 72 16, 72 40 C 64 44, 56 40, 48 44 C 42 40, 38 40, 32 44 C 24 40, 16 44, 8 40 Z"></path>
+		<path class="tentacles" d="M18 44 C 14 70, 24 90, 16 120 M30 46 C 28 76, 36 96, 30 132 M44 46 C 46 74, 38 98, 44 128 M58 44 C 62 72, 54 92, 62 118"></path>
+	</svg>
+
+	<div class="snow"></div>
+</div>
+
+<style>
+	.scenery {
+		position: absolute;
+		inset: 0;
+		/* Behind the text but in front of the water, because the sea is its own layer. */
+		z-index: -1;
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	/* Soft beams slanting down from the surface, fading out as the water gets deeper. */
+	.rays {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 22%;
+		mask-image: linear-gradient(black, transparent);
+	}
+
+	.rays span {
+		position: absolute;
+		top: -5%;
+		width: 9%;
+		height: 110%;
+		background: linear-gradient(var(--colour-glow), transparent 85%);
+		opacity: 0.35;
+		transform: skewX(-18deg);
+	}
+
+	.rays span:nth-child(1) {
+		left: 18%;
+	}
+
+	.rays span:nth-child(2) {
+		left: 36%;
+		width: 5%;
+	}
+
+	.rays span:nth-child(3) {
+		left: 58%;
+		width: 12%;
+	}
+
+	.rays span:nth-child(4) {
+		left: 80%;
+		width: 6%;
+	}
+
+	/* The jellyfish, glowing faintly, in the darker water partway down. */
+	.jelly {
+		position: absolute;
+		top: 48%;
+		right: 7%;
+		width: clamp(3rem, 6vw, 5rem);
+		filter: drop-shadow(0 0 0.75rem var(--colour-glow));
+	}
+
+	.bell {
+		fill: color-mix(in srgb, var(--colour-on-water) 22%, transparent);
+		stroke: var(--colour-glow);
+		stroke-width: 2;
+	}
+
+	.tentacles {
+		fill: none;
+		stroke: var(--colour-glow);
+		stroke-width: 2;
+		stroke-linecap: round;
+	}
+
+	/* Marine snow: two layers of tiny dots, repeated, so it costs one element. */
+	.snow {
+		position: absolute;
+		top: 62%;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-image:
+			radial-gradient(circle, var(--colour-glow) 1px, transparent 1.6px),
+			radial-gradient(circle, var(--colour-glow) 0.8px, transparent 1.3px);
+		background-size:
+			140px 160px,
+			90px 110px;
+		background-position:
+			0 0,
+			40px 60px;
+		mask-image: linear-gradient(transparent, black 20%, black 80%, transparent);
+		opacity: 0.7;
+	}
+
+	/* On a phone there is no spare space beside the text, so the jellyfish stays out. */
+	@media (width < 48em) {
+		.jelly {
+			display: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.rays span {
+			animation: shimmer 7s ease-in-out infinite alternate;
+		}
+
+		.rays span:nth-child(2n) {
+			animation-duration: 9s;
+			animation-delay: -3s;
+		}
+
+		.jelly {
+			animation: bob 7s ease-in-out infinite;
+		}
+
+		.snow {
+			animation: fall 40s linear infinite;
+		}
+
+		@keyframes shimmer {
+			from {
+				opacity: 0.15;
+			}
+
+			to {
+				opacity: 0.45;
+			}
+		}
+
+		/* A pulse up, then a slow sink, the way jellyfish swim. */
+		@keyframes bob {
+			0%,
+			100% {
+				transform: translateY(0) scaleY(1);
+			}
+
+			20% {
+				transform: translateY(-1.5rem) scaleY(0.92);
+			}
+
+			60% {
+				transform: translateY(-0.5rem) scaleY(1.03);
+			}
+		}
+
+		@keyframes fall {
+			from {
+				background-position:
+					0 0,
+					40px 60px;
+			}
+
+			to {
+				background-position:
+					30px 480px,
+					70px 390px;
+			}
+		}
+	}
+</style>

@@ -8,6 +8,8 @@ import { getEntry } from 'astro:content';
 import AnchorLine from '../components/AnchorLine.astro';
 import ArrowRow from '../components/ArrowRow.astro';
 import ButtonLink from '../components/ButtonLink.astro';
+import DepthGauge from '../components/DepthGauge.astro';
+import DiveScenery from '../components/DiveScenery.astro';
 import ProofCard from '../components/ProofCard.astro';
 import VoyageMap from '../components/VoyageMap.astro';
 import SeaFloor from '../components/SeaFloor.astro';
@@ -50,7 +52,7 @@ const latestPost = (await getPosts())[0];
 		</section>
 	</div>
 
-	<section class="section zone" id="journey">
+	<section class="section zone" id="journey" data-zone={site.workZone}>
 		<p class="zone-name">{site.workZone}</p>
 		<h2>{site.proofHeading}</h2>
 		<div class="cards">
@@ -75,7 +77,7 @@ const latestPost = (await getPosts())[0];
 		<p class="onward"><a href="/work">{site.allWork}</a></p>
 	</section>
 
-	<section class="section zone">
+	<section class="section zone" data-zone={site.journeyZone}>
 		<p class="zone-name">{site.journeyZone}</p>
 		<h2>{site.journeyHeading}</h2>
 		<p class="lead">{site.pinnedSentence}</p>
@@ -87,7 +89,7 @@ const latestPost = (await getPosts())[0];
 
 	{
 		latestPost && (
-			<section class="section zone">
+			<section class="section zone" data-zone={site.writingZone}>
 				<p class="zone-name">{site.writingZone}</p>
 				<h2>{site.writingHeading}</h2>
 				<div class="rows">
@@ -102,13 +104,26 @@ const latestPost = (await getPosts())[0];
 		)
 	}
 
-	<section class="section floor">
+	<section class="section floor" data-zone={site.floorZone}>
 		<h2>{site.floorHeading}</h2>
 		<p>{site.floorLine}</p>
 		{
 			site.linkedin && (
-				<div class="actions">
+				<div class="lure-row">
 					<ButtonLink href={site.linkedin} kind="main">{site.contactLabel}</ButtonLink>
+					{/* An anglerfish, whose glowing lure hangs beside the button: in the dark of
+					    the deep sea, the one light is the one thing to follow. Scenery only. */}
+					<svg class="angler" viewBox="0 0 140 110" aria-hidden="true">
+						<path class="rod" d="M70 40 C 60 10, 30 6, 14 22"></path>
+						<circle class="lure" cx="12" cy="28" r="6"></circle>
+						<path
+							class="body"
+							d="M40 66 C 40 40, 66 30, 92 36 C 112 40, 124 56, 132 50 C 136 62, 136 76, 132 86 C 124 80, 112 92, 92 94 C 64 98, 40 90, 40 66 Z"
+						></path>
+						<path class="mouth" d="M42 70 C 54 64, 66 66, 74 74 C 64 82, 52 82, 42 70 Z"></path>
+						<path class="teeth" d="M48 68 l3 5 l3 -5 l3 5 l3 -5 l3 5 l3 -5"></path>
+						<circle class="eye" cx="70" cy="52" r="5"></circle>
+					</svg>
 				</div>
 			)
 		}
@@ -116,6 +131,8 @@ const latestPost = (await getPosts())[0];
 
 	<div slot="at-waterline" class="rope-to-hull" aria-hidden="true"></div>
 	<AnchorLine slot="underwater" />
+	<DiveScenery slot="underwater" />
+	<DepthGauge slot="overlay" />
 	<SeaFloor slot="seafloor" />
 </BaseLayout>
 
@@ -284,6 +301,84 @@ const latestPost = (await getPosts())[0];
 		gap: var(--space-medium);
 		max-width: var(--list-length);
 		margin-top: var(--space-large);
+	}
+
+	/* The contact button with the anglerfish's lure glowing beside it. */
+	.lure-row {
+		display: flex;
+		align-items: center;
+		gap: var(--space-small);
+		margin-top: var(--space-tiny);
+	}
+
+	.angler {
+		width: clamp(6rem, 12vw, 9rem);
+		overflow: visible;
+	}
+
+	.angler .body {
+		fill: var(--colour-rock);
+		stroke: var(--colour-rock-light);
+		stroke-width: 2;
+	}
+
+	.angler .rod {
+		fill: none;
+		stroke: var(--colour-rock-light);
+		stroke-width: 2.5;
+		stroke-linecap: round;
+	}
+
+	.angler .lure {
+		fill: var(--colour-accent);
+		filter: drop-shadow(0 0 6px var(--colour-accent));
+	}
+
+	.angler .mouth {
+		fill: var(--colour-water-floor);
+	}
+
+	.angler .teeth {
+		fill: none;
+		stroke: var(--colour-on-water);
+		stroke-width: 1.5;
+		stroke-linejoin: round;
+	}
+
+	.angler .eye {
+		fill: var(--colour-on-water);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.angler .lure {
+			animation: lure-glow 2.4s ease-in-out infinite;
+		}
+
+		.angler {
+			animation: hover-in-place 6s ease-in-out infinite;
+		}
+
+		@keyframes lure-glow {
+			0%,
+			100% {
+				opacity: 0.55;
+			}
+
+			50% {
+				opacity: 1;
+			}
+		}
+
+		@keyframes hover-in-place {
+			0%,
+			100% {
+				transform: translateY(0);
+			}
+
+			50% {
+				transform: translateY(-0.4rem);
+			}
+		}
 	}
 
 	.floor {

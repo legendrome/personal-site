@@ -1,53 +1,97 @@
 ---
-// The bottom of the dive, drawn in the same flat shapes as the boat so it looks like the
-// same world. All its colours come from tokens.css. It is scenery, so screen readers skip
-// it. "slice" crops the sides on a narrow screen instead of squashing the shapes, so
-// the things worth seeing are kept near the middle.
+// The bottom of the dive, drawn in three layers like a stage set. The back layer is pale
+// and close to the water's colour, the front is darkest and most detailed: painters call
+// this atmospheric perspective, and it is what makes the floor feel deep rather than flat.
+// All colours come from tokens.css. It is scenery, so screen readers skip it. "slice"
+// crops the sides on a narrow screen instead of squashing the shapes, so the things worth
+// seeing are kept near the middle.
 ---
 
-<svg class="sea-floor" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-	<path class="sand-back" d="M0 150 C 240 110, 480 170, 760 135 S 1200 105, 1440 150 V260 H0 Z"></path>
-
-	<g class="fish" transform="translate(90 -8)">
-		<path d="M930 70 C 942 60, 962 60, 974 70 C 962 80, 942 80, 930 70 Z M974 70 L990 60 V80 Z"></path>
-		<path d="M985 96 C 995 88, 1011 88, 1021 96 C 1011 104, 995 104, 985 96 Z M1021 96 L1034 88 V104 Z"></path>
-		<path d="M890 104 C 899 97, 913 97, 922 104 C 913 111, 899 111, 890 104 Z M922 104 L933 97 V111 Z"></path>
+<svg class="sea-floor" viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+	<!-- Back: distant ridges and kelp, faint -->
+	<g class="back">
+		<path
+			class="haze"
+			d="M0 170 C 120 140, 200 150, 290 128 C 360 112, 420 140, 500 132 C 620 118, 700 92, 820 110 C 930 126, 1010 100, 1120 112 C 1240 126, 1330 104, 1440 120 V320 H0 Z"
+		></path>
+		<path class="haze-kelp sway slow" d="M180 170 C 170 140, 195 120, 182 90 S 192 50, 184 30"></path>
+		<path class="haze-kelp sway" d="M196 172 C 190 150, 210 132, 198 108"></path>
+		<path class="haze-kelp sway slow" d="M1010 150 C 1000 120, 1026 98, 1012 66 S 1022 30, 1014 14"></path>
+		<path class="haze-kelp sway" d="M1240 160 C 1232 135, 1252 118, 1242 92"></path>
 	</g>
 
-	<g class="rocks">
-		<path d="M240 218 L262 170 L300 150 L345 165 L372 218 Z"></path>
-		<path d="M372 218 L388 190 L420 184 L445 218 Z"></path>
-		<path d="M640 218 L662 185 L705 175 L745 190 L770 218 Z"></path>
-		<path d="M1060 214 L1085 165 L1130 148 L1178 170 L1200 214 Z"></path>
+	<!-- A small school of fish drifting across the middle distance -->
+	<g class="school">
+		<g class="fish-set">
+			<path d="M640 92 c8 -7 22 -7 30 0 c-8 7 -22 7 -30 0 Z m30 0 l11 -7 v14 Z"></path>
+			<path d="M690 74 c7 -6 19 -6 26 0 c-7 6 -19 6 -26 0 Z m26 0 l9 -6 v12 Z"></path>
+			<path d="M700 108 c7 -6 19 -6 26 0 c-7 6 -19 6 -26 0 Z m26 0 l9 -6 v12 Z"></path>
+			<path d="M740 88 c6 -5 16 -5 22 0 c-6 5 -16 5 -22 0 Z m22 0 l8 -5 v10 Z"></path>
+			<path d="M612 112 c6 -5 16 -5 22 0 c-6 5 -16 5 -22 0 Z m22 0 l8 -5 v10 Z"></path>
+			<path d="M752 120 c5 -4 13 -4 18 0 c-5 4 -13 4 -18 0 Z m18 0 l6 -4 v8 Z"></path>
+		</g>
 	</g>
 
-	<g class="seaweed">
-		<path class="sway" d="M520 215 C 500 170, 545 140, 522 100 S 540 40, 525 15"></path>
-		<path class="sway slow" d="M545 215 C 530 180, 570 155, 548 120 S 560 80, 550 60"></path>
-		<path class="sway" d="M495 215 C 480 185, 510 165, 492 135"></path>
-		<path class="sway slow" d="M900 212 C 885 175, 925 145, 905 105 S 920 60, 908 40"></path>
-		<path class="sway" d="M925 212 C 915 185, 945 165, 928 135"></path>
-		<path class="sway" d="M1320 215 C 1300 170, 1345 140, 1322 95 S 1340 45, 1325 25"></path>
-		<path class="sway slow" d="M1345 215 C 1330 180, 1370 155, 1348 120"></path>
-		<path class="sway slow" d="M120 212 C 105 175, 145 145, 125 105 S 140 65, 128 50"></path>
+	<!-- Middle: dunes, boulders, coral and kelp -->
+	<g class="middle">
+		<path
+			class="dune"
+			d="M0 214 C 160 186, 300 206, 470 192 C 640 178, 760 202, 930 188 C 1100 174, 1260 196, 1440 184 V320 H0 Z"
+		></path>
+
+		<g class="boulders">
+			<path d="M226 230 C 220 196, 252 168, 292 166 C 336 164, 372 190, 376 230 Z"></path>
+			<path class="lit" d="M246 186 C 262 172, 300 168, 330 176"></path>
+			<path d="M362 230 C 364 210, 384 196, 408 198 C 430 200, 446 214, 446 230 Z"></path>
+			<path d="M1058 228 C 1054 188, 1090 156, 1136 156 C 1184 156, 1214 190, 1212 228 Z"></path>
+			<path class="lit" d="M1080 176 C 1100 162, 1146 158, 1180 172"></path>
+			<path d="M1200 228 C 1204 212, 1222 202, 1240 204 C 1258 206, 1268 216, 1268 228 Z"></path>
+		</g>
+
+		<!-- A sea fan: one trunk branching into a fan, as flat coral grows -->
+		<path
+			class="coral"
+			d="M820 226 V190 M820 204 C 806 190, 790 180, 782 158 M806 190 C 800 176, 804 162, 798 148 M820 194 C 836 182, 852 170, 858 150 M840 180 C 848 170, 846 158, 852 146 M820 190 C 818 172, 824 156, 820 140 M790 170 L778 166 M852 160 L866 156"
+		></path>
+		<!-- Brain coral, a low dome -->
+		<path class="coral-dome" d="M930 226 C 930 204, 950 192, 972 192 C 994 192, 1012 204, 1012 226 Z"></path>
+		<path class="coral-lines" d="M942 214 C 954 204, 966 210, 976 202 C 986 196, 996 204, 1004 212 M946 222 C 958 214, 972 220, 984 212"></path>
+
+		<g class="kelp">
+			<path class="sway" d="M520 228 C 500 182, 545 150, 522 108 S 540 46, 525 18"></path>
+			<path class="sway slow" d="M545 228 C 530 190, 570 162, 548 126 S 560 84, 550 62"></path>
+			<path class="sway" d="M496 228 C 482 196, 510 174, 492 142"></path>
+			<path class="sway slow" d="M1320 228 C 1300 182, 1345 150, 1322 104 S 1340 50, 1325 28"></path>
+			<path class="sway" d="M1346 228 C 1332 192, 1370 164, 1348 128"></path>
+			<path class="sway slow" d="M118 228 C 104 188, 144 156, 124 114 S 140 70, 128 52"></path>
+		</g>
 	</g>
 
-	<path
-		class="coral"
-		d="M820 215 V170 M820 190 L795 160 L785 140 M795 160 L808 140 M820 175 L845 150 L835 130 M845 150 L860 132 M820 170 L822 135"
-	></path>
-
-	<!-- A basketball half sunk in the sand, a nod to Sujith's years as captain. It sits
-	     before the front sand in the file so the sand is drawn over its lower half. -->
+	<!-- The basketball, half sunk, a nod to Sujith's years as captain. It comes before the
+	     front sand in the file, so the sand is drawn over its lower half. -->
 	<g class="ball">
-		<circle cx="610" cy="198" r="17"></circle>
-		<path d="M593 198 H627 M610 181 V215 M598 186 C 606 192, 606 204, 598 210 M622 186 C 614 192, 614 204, 622 210"></path>
+		<circle cx="640" cy="250" r="20"></circle>
+		<path d="M620 250 H660 M640 230 V270 M626 236 C 635 243, 635 257, 626 264 M654 236 C 645 243, 645 257, 654 264"></path>
 	</g>
 
-	<path class="sand" d="M0 200 C 220 175, 430 215, 720 195 S 1180 170, 1440 205 V260 H0 Z"></path>
-
-	<g class="shells">
-		<path d="M1000 232 C 1000 218, 1026 218, 1026 232 L1018 238 H1008 Z"></path>
+	<!-- Front: the sand you would stand on, with ripples, pebbles and a shell -->
+	<g class="front">
+		<path
+			class="sand"
+			d="M0 254 C 200 236, 380 262, 600 252 C 820 242, 1000 266, 1220 250 C 1320 243, 1390 248, 1440 252 V320 H0 Z"
+		></path>
+		<path
+			class="ripples"
+			d="M60 284 C 120 276, 180 286, 240 280 M320 296 C 380 288, 450 298, 520 292 M760 286 C 820 278, 890 290, 960 282 M1080 300 C 1150 292, 1220 302, 1290 296 M1180 274 C 1230 268, 1280 276, 1330 272"
+		></path>
+		<g class="pebbles">
+			<ellipse cx="410" cy="270" rx="9" ry="5"></ellipse>
+			<ellipse cx="428" cy="274" rx="5" ry="3"></ellipse>
+			<ellipse cx="1110" cy="268" rx="8" ry="4"></ellipse>
+			<ellipse cx="860" cy="276" rx="6" ry="3.5"></ellipse>
+		</g>
+		<path class="shell" d="M1000 280 C 1000 264, 1030 264, 1030 280 L1021 287 H1009 Z"></path>
+		<path class="shell-lines" d="M1015 268 V284 M1006 272 L1011 284 M1024 272 L1019 284"></path>
 	</g>
 </svg>
 
@@ -55,37 +99,64 @@
 	.sea-floor {
 		display: block;
 		width: 100%;
-		height: clamp(11rem, 18vw, 16rem);
+		height: clamp(12rem, 22vw, 20rem);
 		/* Tucks up behind the footer's spare space, so the page does not gain an empty gap. */
 		margin-top: calc(var(--space-large) * -1);
 	}
 
-	.sand-back {
+	.haze {
+		fill: var(--colour-haze);
+	}
+
+	.haze-kelp {
+		fill: none;
+		stroke: var(--colour-haze);
+		stroke-width: 7;
+		stroke-linecap: round;
+		filter: brightness(1.15);
+	}
+
+	.school {
+		fill: var(--colour-coral);
+	}
+
+	.dune {
 		fill: var(--colour-sand-back);
 	}
 
-	.sand {
-		fill: var(--colour-sand);
-	}
-
-	.rocks {
+	.boulders {
 		fill: var(--colour-rock);
-		stroke: var(--colour-rock);
-		stroke-width: 8;
-		stroke-linejoin: round;
 	}
 
-	.fish {
-		fill: var(--colour-seaweed);
-	}
-
-	.seaweed path,
-	.coral {
+	.boulders .lit {
 		fill: none;
-		stroke: var(--colour-seaweed);
-		stroke-width: 9;
+		stroke: var(--colour-rock-light);
+		stroke-width: 4;
+		stroke-linecap: round;
+	}
+
+	.coral,
+	.kelp path {
+		fill: none;
+		stroke: var(--colour-coral);
+		stroke-width: 8;
 		stroke-linecap: round;
 		stroke-linejoin: round;
+	}
+
+	.coral {
+		stroke-width: 6;
+	}
+
+	.coral-dome {
+		fill: var(--colour-coral);
+	}
+
+	.coral-lines {
+		fill: none;
+		stroke: var(--colour-rock);
+		stroke-width: 3;
+		stroke-linecap: round;
 	}
 
 	.ball circle {
@@ -99,14 +170,35 @@
 		stroke-linecap: round;
 	}
 
-	.shells {
-		fill: var(--colour-shell);
-		stroke: var(--colour-shell);
-		stroke-width: 3;
-		stroke-linejoin: round;
+	.sand {
+		fill: var(--colour-sand);
 	}
 
-	/* Only the seaweed moves, slowly, so the floor feels alive without asking for attention. */
+	.ripples {
+		fill: none;
+		stroke: var(--colour-ripple);
+		stroke-width: 2;
+		stroke-linecap: round;
+		opacity: 0.6;
+	}
+
+	.pebbles {
+		fill: var(--colour-rock);
+	}
+
+	.shell {
+		fill: var(--colour-shell);
+	}
+
+	.shell-lines {
+		fill: none;
+		stroke: var(--colour-sand);
+		stroke-width: 1.5;
+		stroke-linecap: round;
+	}
+
+	/* Slow movement only: kelp leaning in the current and the school drifting back and
+	   forth, so the floor feels alive without asking for attention. */
 	@media (prefers-reduced-motion: no-preference) {
 		.sway {
 			/* Rooted at its own base, so it bends from the sand and not from the page's corner. */
@@ -116,16 +208,30 @@
 		}
 
 		.slow {
-			animation-duration: 8s;
+			animation-duration: 9s;
+		}
+
+		.fish-set {
+			animation: drift 26s ease-in-out infinite alternate;
 		}
 
 		@keyframes sway {
 			from {
-				transform: rotate(-2.5deg);
+				transform: rotate(-3deg);
 			}
 
 			to {
-				transform: rotate(2.5deg);
+				transform: rotate(3deg);
+			}
+		}
+
+		@keyframes drift {
+			from {
+				transform: translate(-140px, 6px);
+			}
+
+			to {
+				transform: translate(140px, -6px);
 			}
 		}
 	}

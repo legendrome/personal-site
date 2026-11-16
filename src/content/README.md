@@ -35,7 +35,7 @@ The placeholder project and post can simply be deleted once you have real ones.
 | `firstLine` | The boat line, smaller and in italics under `heroLine` |
 | `contactLabel`, `diveLabel` | The two buttons on the first screen: the orange one goes to your LinkedIn, the other jumps to the first zone |
 | `glanceHeading`, `glance` | The "At a glance" panel: up to four short facts, each `{ "text": "..." }`, with an optional `"href"` to make it a link |
-| `workZone`, `journeyZone`, `writingZone` | The small ocean-zone labels above each section of the home page |
+| `workZone`, `journeyZone`, `writingZone`, `floorZone` | The ocean-zone names: small labels above each section of the home page, and what the depth gauge on the right shows |
 | `proofHeading`, `projectsHeading` | The headings above the proof cards and the projects, on the home page and Work |
 | `journeyHeading`, `journeyLink` | The heading of the journey section on the home page and its link to the Journey page |
 | `journeyTitle` | The title of the Journey page |

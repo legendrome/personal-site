@@ -151,6 +151,7 @@ const site = defineCollection({
 		workZone: z.string(),
 		journeyZone: z.string(),
 		writingZone: z.string(),
+		floorZone: z.string(),
 		proofHeading: z.string(),
 		journeyHeading: z.string(),
 		journeyLink: z.string(),
